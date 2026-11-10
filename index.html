@@ -452,6 +452,26 @@
 
 <section id="mSet" hidden role="dialog" aria-label="설정"><div class="sheet"><div class="head"><b>설정</b><button type="button" id="mSetClose">닫기</button></div><div class="rows"></div></div></section>
 
+<!-- 관리자 비밀번호 확인 모달 -->
+<section class="overlay" id="quizAuthModal" hidden style="z-index: 35; align-items: center; justify-content: center; background: rgba(6,4,3,.88);">
+  <div class="card win" style="max-width: 360px; text-align: center; padding: 22px 18px;">
+    <div style="font-size: 32px; margin-bottom: 6px;">🔒</div>
+    <h3 style="margin: 0 0 8px; font-family: var(--serif); font-size: 21px; color: var(--acc);">관리자 인증</h3>
+    <p style="color: var(--ink-2); font-size: 13.5px; margin: 0 0 16px; line-height: 1.5;">
+      문제 및 해답 편집은 관리자 전용입니다.<br>비밀번호를 입력해 주세요.
+    </p>
+    <form id="quizAuthForm" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 10px;">
+      <input id="quizAuthInput" type="password" placeholder="비밀번호 입력" autocomplete="off"
+        style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--rim); background: rgba(0,0,0,0.55); color: #fff; font-size: 16px; text-align: center; letter-spacing: 2px;">
+      <div id="quizAuthErr" style="color: var(--bad); font-size: 13px; min-height: 18px; font-weight: 600;"></div>
+      <div style="display: flex; gap: 8px; margin-top: 4px;">
+        <button type="button" id="quizAuthCancel" class="ghost" style="flex: 1; padding: 10px; font-size: 14px;">취소</button>
+        <button type="submit" id="quizAuthSubmit" class="primary" style="flex: 1; padding: 10px; font-size: 14px;">확인</button>
+      </div>
+    </form>
+  </div>
+</section>
+
 <!-- 퀴즈/문제 관리자 모달 -->
 <section class="overlay" id="quizModal" hidden style="z-index: 30; align-items: center; justify-content: center; background: rgba(6,4,3,.88);">
   <div class="card win">
@@ -722,9 +742,14 @@ __m['quiz.js'] = (() => {
       if (res && res.ok) {
         const data = await res.json();
         if (data && data.rooms && Object.keys(data.rooms).length > 0) {
-          currentQuiz = Object.assign({}, DEFAULT_QUIZ, data);
-          saveToLocal();
-          console.log('[Quiz] Synchronized quiz from server/json successfully.');
+          const localTime = new Date(currentQuiz.updatedAt || 0).getTime();
+          const serverTime = new Date(data.updatedAt || 0).getTime();
+          // 서버 데이터가 로컬보다 최신이거나 로컬에 저장된 수정 시간이 없을 때만 갱신
+          if (!currentQuiz.updatedAt || serverTime > localTime) {
+            currentQuiz = Object.assign({}, DEFAULT_QUIZ, data);
+            saveToLocal();
+            console.log('[Quiz] Synchronized quiz from server/json successfully.');
+          }
           return true;
         }
       }
@@ -8826,6 +8851,84 @@ const btnCopyQuizLink = $('btnCopyQuizLink');
 const quizStatusMsg = $('quizStatusMsg');
 const mFpsBtn = $('mFpsBtn');
 
+// 관리자 비밀번호 검증 (SHA-256 해시 비교)
+// 비밀번호 단어는 소스코드에 일체 노출되지 않으며 해시값으로만 일치 여부를 대조합니다.
+const AUTH_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+let isQuizAuth = false;
+
+const quizAuthModal = $('quizAuthModal');
+const quizAuthInput = $('quizAuthInput');
+const quizAuthErr = $('quizAuthErr');
+const quizAuthCancel = $('quizAuthCancel');
+const quizAuthForm = $('quizAuthForm');
+
+async function verifyAuth(pwd) {
+  try {
+    const enc = new TextEncoder().encode(pwd);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    return hash === AUTH_HASH;
+  } catch (e) {
+    return false;
+  }
+}
+
+function requestQuizAuth() {
+  if (isQuizAuth) {
+    openQuizModal();
+    return;
+  }
+  if (quizAuthModal) {
+    quizAuthModal.hidden = false;
+    if (quizAuthInput) {
+      quizAuthInput.value = '';
+      setTimeout(() => quizAuthInput.focus(), 50);
+    }
+    if (quizAuthErr) quizAuthErr.textContent = '';
+  }
+  sfx.ui(camera.position);
+}
+
+if (quizAuthCancel) {
+  quizAuthCancel.addEventListener('click', () => {
+    if (quizAuthModal) quizAuthModal.hidden = true;
+    sfx.ui(camera.position);
+  });
+}
+
+if (quizAuthForm) {
+  quizAuthForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const val = quizAuthInput ? quizAuthInput.value : '';
+    const ok = await verifyAuth(val);
+    if (ok) {
+      isQuizAuth = true;
+      if (quizAuthModal) quizAuthModal.hidden = true;
+      openQuizModal();
+    } else {
+      if (quizAuthErr) quizAuthErr.textContent = '비밀번호가 일치하지 않습니다.';
+      if (quizAuthInput) {
+        quizAuthInput.value = '';
+        quizAuthInput.focus();
+      }
+    }
+  });
+}
+
+function openQuizModal() {
+  populateQuizForm();
+  if (quizModal) quizModal.hidden = false;
+  sfx.ui(camera.position);
+}
+function closeQuizModal() {
+  if (quizModal) quizModal.hidden = true;
+  sfx.ui(camera.position);
+}
+
+if (btnQuizEdit) btnQuizEdit.addEventListener('click', requestQuizAuth);
+if (mQuizBtn) mQuizBtn.addEventListener('click', requestQuizAuth);
+if (quizModalClose) quizModalClose.addEventListener('click', closeQuizModal);
+
 const PRESETS = {
   science: {
     surgery: { q: '과학실 탈출 PIN: 물의 끓는점(°C)은 얼마인가? (4자리: 100도 -> 0100)', c: '실험 보고서: 출구 PIN은 물의 끓는점(100도 -> 0100)이다.', a: '0100' },
@@ -8868,19 +8971,7 @@ function populateQuizForm() {
   $('quizStatusMsg').textContent = '';
 }
 
-function openQuizModal() {
-  populateQuizForm();
-  if (quizModal) quizModal.hidden = false;
-  sfx.ui(camera.position);
-}
-function closeQuizModal() {
-  if (quizModal) quizModal.hidden = true;
-  sfx.ui(camera.position);
-}
 
-if (btnQuizEdit) btnQuizEdit.addEventListener('click', openQuizModal);
-if (mQuizBtn) mQuizBtn.addEventListener('click', openQuizModal);
-if (quizModalClose) quizModalClose.addEventListener('click', closeQuizModal);
 
 document.querySelectorAll('.btn-preset').forEach(btn => {
   btn.addEventListener('click', () => {
