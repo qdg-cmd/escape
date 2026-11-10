@@ -617,52 +617,52 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const __m = {};
 
 __m['quiz.js'] = (() => {
-  // 학교 방탈출 퀴즈 및 다중 기기 실시간 동기화 모듈
+  // 학교 방탈출 퀴즈 및 다중 기기 실시간 동기화 모듈 (고1 공통수학1 정통 퍼즐)
   const DEFAULT_QUIZ = {
     version: 1,
-    schoolName: "버려진 학교 (폐교)",
+    schoolName: "버려진 학교 (수학 방탈출)",
     rooms: {
       surgery: {
         id: 'surgery',
         name: '과학실',
-        question: '과학실 탈출 PIN 퀴즈: 물의 끓는점(°C)은 얼마인가? (4자리 숫자: 100도 -> 0100)',
-        clue: '과학 실험 일지: 출구 도어락의 PIN 번호는 [물의 끓는점(°C)]을 4자리 숫자로 쓴 값이다.',
-        code: '0100',
-        hint: '섭씨 100도를 4자리로 쓰면 0100입니다.'
+        question: 'Q1. 과학실 탈출 PIN [다항식과 조립제법]: P(x) = x³ - 6x² + 11x - 6 = (x-1)(x-2)(x-3)의 세 실근 α, β, γ를 작은 순서대로 적고, 마지막에 세 근의 곱을 쓴 4자리 비밀번호는?',
+        clue: '과학실 칠판: 출구 전자 도어락의 암호는 P(x) = x³ - 6x² + 11x - 6 = 0의 세 근 α < β < γ와 세 근의 곱을 차례로 결합한 4자리 수이다.',
+        code: '1236',
+        hint: '세 근은 1, 2, 3이고, 세 근의 곱은 1 × 2 × 3 = 6이므로 비밀번호는 1236입니다.'
       },
       ward: {
         id: 'ward',
-        name: '교실 복도',
-        question: '교실 복도 도어락 퀴즈: 1반부터 4반까지 각 반의 퀴즈 정답 번호를 순서대로 조합하라.',
-        clue: '복도 화이트보드: 3반(2) -> 1반(7) -> 4반(9) -> 2반(5) 순서로 문 앞 차트의 체크(✓) 개수를 조합하라.',
-        code: '2795',
-        hint: '각 반 차트의 체크 개수는 2, 7, 9, 5입니다.'
+        name: '1학년 3반 교실 & 복도',
+        question: 'Q2. 교실 뒷문 자물쇠 [이차방정식과 근과 계수의 관계]: 이차방정식 x² - 14x + 45 = 0의 두 실근 α, β (α < β)에 대하여, 두 근의 제곱의 합 (α² + β²)의 4자리 값(0XXX)은?',
+        clue: '교탁 위 수학 수행평가 시험지: 뒷문 자물쇠 암호는 두 근 α, β에 대하여 α² + β² = (α+β)² - 2αβ를 계산한 4자리 값이다.',
+        code: '0106',
+        hint: '(x-5)(x-9) = 0 이므로 α=5, β=9입니다. 5² + 9² = 25 + 81 = 106이므로 4자리는 0106입니다.'
       },
       pharmacy: {
         id: 'pharmacy',
-        name: '도서실 / 준비실',
-        question: '도서실 금고 다이얼: 대출 시각순 3권의 도서 분류 번호 총량 (각 2자리씩 총 6자리)',
-        clue: '사서 일지: 대출 시각순(08:00 문학 1권, 13:00 과학 3권, 21:00 인문 2권)으로 총량을 계산해 금고 다이얼을 돌려라.',
-        code: '302424',
-        hint: '08시(30) + 13시(24) + 21시(24) = 302424'
+        name: '수학 탐구실 & 도서실',
+        question: 'Q3. 사서 금고 다이얼 [곱셈 공식의 변형]: 두 실수 x, y에 대하여 x + y = 6, xy = 4일 때, (x³ + y³)의 값(3자리)과 (x² + y²)의 값(3자리)을 차례로 이어 붙인 6자리 다이얼 코드는?',
+        clue: '원목 열람대 탐구 보고서: 금고 6자리 다이얼 = [x³ + y³] 3자리 + [x² + y²] 3자리. (x³ + y³ = (x+y)³ - 3xy(x+y), x² + y² = (x+y)² - 2xy)',
+        code: '144028',
+        hint: 'x³ + y³ = 216 - 72 = 144, x² + y² = 36 - 8 = 28 (028). 결합하면 144028입니다.'
       },
       morgue: {
         id: 'morgue',
-        name: '교무실 / 사물함',
-        question: '교무실 사물함: 출석부 명단 순서대로 사물함을 열어라. (3개 번호)',
-        clue: '당직 교사 일지: 출석부 명단(오세진 4번, 윤미라 9번, 한지우 11번) 순서대로 사물함을 당겨야 열쇠가 나온다.',
-        order: [4, 9, 11],
-        hint: '4번 -> 9번 -> 11번(내 사물함) 순서대로 엽니다.'
+        name: '교무실 & 사물함',
+        question: 'Q4. 교직원 사물함 해제 [피타고라스 연속수]: 직각삼각형의 세 변의 길이를 이루는 연속하는 세 짝수 x, y, z (x² + y² = z²)에 해당하는 사물함 번호 3개를 작은 순서대로 열어라.',
+        clue: '교무실 출석부와 당직 일지: 마스터 열쇠는 피타고라스 정리를 만족하는 연속하는 세 짝수 번호의 세 사물함(작은 순서) 속에 숨겨져 있다.',
+        order: [6, 8, 10],
+        hint: '(2k-2)² + (2k)² = (2k+2)²를 풀면 k=4이므로 세 번호는 6번, 8번, 10번입니다.'
       },
       roof: {
         id: 'roof',
-        name: '학교 옥상',
-        question: '옥상 최종 탈출: 우리 학교의 개교 기념일(월/일 4자리)을 맞춰 철문을 열어라.',
-        clue: '옥상 기념비: 우리 학교의 개교 기념일이자 마지막 입학일(0917)이 최종 철문의 열쇠이다.',
-        code: '0917',
+        name: '학교 옥상 & 시계탑',
+        question: 'Q5. 옥상 마스터 자물쇠 [원의 방정식]: 원 x² + y² - 6x + 8y + 21 = 0의 중심 (a, b)와 반지름 r에 대하여, (a, |b|, r, r²)을 차례로 결합한 4자리 최종 탈출 비밀번호는?',
+        clue: '옥상 준공 기념비: 비상 철문의 최종 암호는 원 (x-3)² + (y+4)² = 2²의 중심 좌표 (a, |b|)와 반지름 (r, r²)의 조합이다.',
+        code: '3424',
         valveSeq: [1, 7, 4, 0],
         fanBreaker: 'F-2',
-        hint: '밸브 1-7-4-0을 맞추고, F-2 차단기를 내린 뒤, 자물쇠에 0917을 입력하세요.'
+        hint: '중심 (3, -4)이므로 a=3, |b|=4이고 반지름 r=2, r²=4이므로 비밀번호는 3424입니다.'
       }
     }
   };
@@ -3491,17 +3491,17 @@ function bandCanvas() {
     g.save(); g.translate(256, 300); g.rotate(-0.08);
     g.fillStyle = '#ECEAE2'; g.beginPath(); g.roundRect(-236, -120, 472, 240, 28); g.fill();
     g.fillStyle = '#D24B3E'; g.fillRect(-236, -120, 30, 240);
-    g.fillStyle = '#23262E'; g.font = '700 22px "IBM Plex Sans KR", sans-serif'; g.fillText('성심 종합병원 · 입원 환자', -186, -80);
+    g.fillStyle = '#23262E'; g.font = '700 22px "IBM Plex Sans KR", sans-serif'; g.fillText('청운고등학교 · 학생 팔찌', -186, -80);
     fitText(g, who(), -186, -22, 290, 50, '700 {px}px "IBM Plex Sans KR", sans-serif');
-    g.font = '500 24px "IBM Plex Sans KR", sans-serif'; g.fillText('등록 0917-3 · 병동 3층', -186, 18);
-    g.fillStyle = '#B0271E'; g.font = '700 30px "IBM Plex Sans KR", sans-serif'; g.fillText('수술 예정 17:40 · 집도 N', -186, 62);
+    g.font = '500 24px "IBM Plex Sans KR", sans-serif'; g.fillText('등록 0917-3 · 1학년 3반', -186, 18);
+    g.fillStyle = '#1B5E20'; g.font = '700 30px "IBM Plex Sans KR", sans-serif'; g.fillText('방과후 탐구 17:40 · 지도교사 N', -186, 62);
     const r = rng(9); g.fillStyle = '#23262E'; for (let x = 120; x < 220; x += 3) if (r() > 0.4) g.fillRect(x, -96, 2 + (r() > 0.7 ? 2 : 0), 70);
     g.restore();
-    g.fillStyle = 'rgba(120,20,20,.35)'; g.beginPath(); g.arc(420, 420, 30, 0, 7); g.fill();
+    g.fillStyle = 'rgba(27,94,32,.35)'; g.beginPath(); g.arc(420, 420, 30, 0, 7); g.fill();
     return c;
   });
 }
-const BAND_ITEM = () => ({ id: 'band', icon: 'band', name: '환자 팔찌', desc: `${who()} · 수술 예정 17:40 · 집도 N`, note: bandCanvas(), noteLines: ['환자 팔찌 — 성심 종합병원', `${who()} · 등록 0917-3 · 병동 3층`, '수술 예정 17:40 · 집도 N'] });
+const BAND_ITEM = () => ({ id: 'band', icon: 'band', name: '학생 팔찌', desc: `${who()} · 1학년 3반 · 등록 0917-3`, note: bandCanvas(), noteLines: ['학생 팔찌 — 청운고등학교', `${who()} · 등록 0917-3 · 1학년 3반`, '방과후 탐구 17:40 · 지도교사 N'] });
 
 function signTex(text, { bg = '#E4E4DC', band = '#1E3A2E', ink = '#1A1A1A', w = 512, h = 128, size = 64 } = {}) {
   const c = cv(w, h), g = c.getContext('2d'); g.fillStyle = bg; g.fillRect(0, 0, w, h);
@@ -3715,13 +3715,13 @@ function build(ctx) {
   /* ─── 방: 8 × 10 × 3.4, 북쪽 벽 가운데 양여닫이 문(x −0.9..0.9) ─── */
   shell(K, root, M, { w: 8, d: 10, h: 3.4, holes: { N: [[3.1, 0, 1.8, 2.25]] }, gaps: [[-2.5, 2.5], [1.5, -1.5]], drop: [[-1.5, 3.5]] });
 
-  /* ─── 수술대(내가 누운 자리) ─── */
-  const bedIt = { id: 'bed', name: '수술대' };
+  /* ─── 과학실 실험대(내가 누운 자리) ─── */
+  const bedIt = { id: 'bed', name: '과학실 실험대' };
   const bed = K.group(root, 0.2, 0, 0.6);
   orTable(K, bed, M, bedIt);
 
-  /* ─── 무영등 ─── */
-  const lampIt = { id: 'lamp', name: '무영등' };
+  /* ─── 실험실 조명 ─── */
+  const lampIt = { id: 'lamp', name: '실험실 조명' };
   cyl(0.06, 0.08, 0.5, M.steel, root, 0.2, 3.15, 0.6, { it: lampIt }, 10);
   box(0.06, 0.06, 1.2, M.steel, root, 0.2, 2.9, 1.2, { it: lampIt }).rotation.x = 0.35;
   const lamp = K.group(root, 0.2, 2.35, 0.6); lamp.rotation.x = 0.12;
@@ -3740,8 +3740,8 @@ function build(ctx) {
   cyl(0.006, 0.006, 0.7, M.dark, root, -1.78, 3.1, 3.2, { it: { id: 'tube', name: '형광등' }, cast: false }, 4);
   const flickMat = T2.mat, flickL = T2.light, tubeL = T1.light;
 
-  /* ─── 링거 · 기구 카트 · 모니터 ─── */
-  const ivIt = { id: 'iv', name: '링거대' };
+  /* ─── 실험 거치대 · 실험 준비 카트 · 전자 계측기 ─── */
+  const ivIt = { id: 'iv', name: '실험 거치대' };
   const iv = K.group(root, -0.6, 0, 1.95);
   [0, 1.2, 2.4, 3.6, 4.8].forEach(a => { box(0.5, 0.03, 0.05, M.steel, iv, 0.2 * Math.cos(a), 0.05, 0.2 * Math.sin(a), { it: ivIt }).rotation.y = -a; });
   cyl(0.014, 0.014, 1.9, M.steel, iv, 0, 0.98, 0, { it: ivIt }, 8);
@@ -3750,7 +3750,7 @@ function build(ctx) {
   box(0.1, 0.09, 0.04, std({ color: '#B0402A', roughness: 0.5, transparent: true, opacity: 0.7 }), iv, 0.26, 1.64, 0, { it: ivIt, cast: false });
   cyl(0.004, 0.004, 1.3, phys({ color: '#EEE', transparent: true, opacity: 0.6 }), iv, 0.45, 1.05, -0.3, { it: ivIt, cast: false }, 6).rotation.x = -0.45;
 
-  const cartIt = { id: 'cart', name: '기구 카트' };
+  const cartIt = { id: 'cart', name: '실험 준비 카트' };
   const cart = K.group(root, 1.25, 0, 0.2);
   bx(0.5, 0.03, 0.7, 0.01, M.steel, cart, 0, 0.9, 0, { it: cartIt }); bx(0.5, 0.03, 0.7, 0.01, M.rustSteel, cart, 0, 0.45, 0, { it: cartIt });
   [[-0.22, -0.32], [0.22, -0.32], [-0.22, 0.32], [0.22, 0.32]].forEach(([x, z]) => { cyl(0.012, 0.012, 0.9, M.steel, cart, x, 0.45, z, { it: cartIt }, 6); ball(0.035, M.dark, cart, x, 0.035, z, { it: cartIt }); });
@@ -3772,7 +3772,7 @@ function build(ctx) {
   box(0.08, 0.014, 0.03, M.steel, clip, 0, 0.01, -0.145, { it: recIt });
   K.hitbox(clip, 0.26, 0.06, 0.34, recIt, 0, 0.02, 0);
 
-  const monIt = { id: 'monitor', name: '환자 모니터' };
+  const monIt = { id: 'monitor', name: '전자 계측기' };
   const mon = K.group(root, -1.5, 0, -0.6, 0.5);
   box(0.5, 0.04, 0.5, M.rustSteel, mon, 0, 0.5, 0, { it: monIt }); cyl(0.03, 0.03, 0.5, M.steel, mon, 0, 0.25, 0, { it: monIt }, 8);
   bx(0.46, 0.36, 0.3, 0.03, M.dark, mon, 0, 0.72, 0, { it: monIt });
@@ -3780,22 +3780,22 @@ function build(ctx) {
   mesh(new THREE.PlaneGeometry(0.36, 0.26), std({ map: monTex, emissiveMap: monTex, emissive: '#FFFFFF', emissiveIntensity: 0.9, roughness: 0.4 }), mon, 0, 0.74, 0.152, { it: monIt, cast: false });
   const monL = new THREE.PointLight('#6AFF9A', 0.5, 2.5, 2); monL.position.set(-1.5, 0.9, -0.4); root.add(monL);
 
-  /* ─── 휠체어 · 이동 침대 · 약품장 · 세면대 · 커튼 ─── */
-  const wcIt = { id: 'wheelchair', name: '휠체어' };
+  /* ─── 보관 카트 · 보조 실험대 · 시약장 · 세면대 · 커튼 ─── */
+  const wcIt = { id: 'wheelchair', name: '보관 카트' };
   const wc = K.group(root, 2.9, 0, -3.6, -0.7); wc.rotation.z = 0.06;
   const wg = model('wheelchair', { height: 0.96 });
   if (wg) { mesh(wg, std({ color: '#5E6266', metalness: 0.75, roughness: 0.42 }), wc, 0, 0, 0, { it: wcIt }); K.hitbox(wc, 0.7, 0.96, 1.0, wcIt, 0, 0.48, 0); }
   else { box(0.46, 0.04, 0.42, M.vinyl, wc, 0, 0.5, -0.1, { it: wcIt }); box(0.46, 0.44, 0.04, M.vinyl, wc, 0, 0.75, 0.14, { it: wcIt }); }
-  const gurIt = { id: 'gurney', name: '이동 침대' };
+  const gurIt = { id: 'gurney', name: '보조 실험대' };
   const gur = K.group(root, -3.4, 0, -2.2, 0.06);
   stretcher(K, gur, M, gurIt, { frame: M.rustSteel, pad: M.vinyl, back: 0.25, legs: 'post', belts: '#3A3A36', rails: [1, 1], blanket: false, pillow: false, sheet: M.sheetD || (M.sheetD = K.std({ map: M.sheet.map, color: '#9A9890', roughness: 0.95, side: THREE.DoubleSide })) });
-  const cabIt = { id: 'cabinet', name: '약품장' };
+  const cabIt = { id: 'cabinet', name: '시약장' };
   const cab = K.group(root, 3.72, 0, 1.6, -Math.PI / 2);
   bx(1.6, 2.0, 0.5, 0.015, M.rustSteel, cab, 0, 1.0, 0, { it: cabIt });
   [-0.4, 0.4].forEach(x => mesh(new THREE.PlaneGeometry(0.7, 1.1), M.glass, cab, x, 1.35, 0.26, { it: cabIt, cast: false }));
   const rr2 = rng(3); for (let k = 0; k < 12; k++) { const x = -0.7 + k * 0.125, y = 1.0 + (k % 2) * 0.45; cyl(0.03 + rr2() * 0.02, 0.03 + rr2() * 0.02, 0.12 + rr2() * 0.12, phys({ color: ['#6A4A2A', '#3A5A6A', '#8A8A70', '#5A2A2A'][k % 4], roughness: 0.15, transparent: true, opacity: 0.85 }), cab, x, y + 0.08, 0.1, { it: cabIt, cast: false }, 10); }
   box(1.6, 0.04, 0.44, M.steel, cab, 0, 1.28, 0.02, { it: cabIt }); box(1.6, 0.04, 0.44, M.steel, cab, 0, 0.83, 0.02, { it: cabIt });
-  const fdIt = { id: 'fdrawer', name: '약품장 아래 서랍' };
+  const fdIt = { id: 'fdrawer', name: '시약장 아래 서랍' };
   const fdr = K.group(cab, 0.35, 0.5, 0.25);
   { const dm = std({ color: '#6A6258', metalness: 0.5, roughness: 0.6 }); box(0.6, 0.015, 0.42, dm, fdr, 0, -0.09, -0.21, { it: fdIt }); [-1, 1].forEach(k => box(0.015, 0.18, 0.42, dm, fdr, k * 0.3, 0, -0.21, { it: fdIt })); box(0.6, 0.18, 0.015, dm, fdr, 0, 0, -0.42, { it: fdIt }); }
   box(0.62, 0.22, 0.02, std({ color: '#8A8278', metalness: 0.5, roughness: 0.55 }), fdr, 0, 0, 0.005, { it: fdIt });
@@ -3833,8 +3833,44 @@ function build(ctx) {
   const curtGeo = new THREE.PlaneGeometry(1.5, 2.6, 16, 1); { const p = curtGeo.attributes.position; for (let i = 0; i < p.count; i++) p.setZ(i, Math.sin(p.getX(i) * 14) * 0.05); curtGeo.computeVertexNormals(); }
   mesh(curtGeo, M.green, root, 1.2, 1.9, -3.2, { it: { id: 'curtain', name: '커튼' } }).rotation.z = 0.04;
 
-  /* ─── 수술 가운 — 서쪽 벽 고리. 안주머니에 직원 카드 ─── */
-  const gownIt = { id: 'gown', name: '수술 가운' };
+  function blackboardCanvas() {
+    const c = cv(1024, 512), g = c.getContext('2d');
+    g.fillStyle = '#1B3B2B'; g.fillRect(0, 0, 1024, 512);
+    g.strokeStyle = '#3E2723'; g.lineWidth = 14; g.strokeRect(7, 7, 1010, 498);
+    g.strokeStyle = '#2E7D32'; g.lineWidth = 4; g.strokeRect(16, 16, 992, 480);
+    const r = rng(77);
+    for (let k = 0; k < 50; k++) {
+      g.fillStyle = `rgba(255,255,255,${0.01 + r() * 0.03})`;
+      g.beginPath(); g.ellipse(r() * 1024, r() * 512, 30 + r() * 140, 10 + r() * 50, r() * 3, 0, 7); g.fill();
+    }
+    g.fillStyle = '#E8F5E9'; g.font = '700 34px "IBM Plex Sans KR", sans-serif';
+    g.fillText('【 심야 과학실 — 고1 다항식과 조립제법 】', 44, 60);
+
+    g.fillStyle = '#FFF9C4'; g.font = '700 32px "IBM Plex Sans KR", sans-serif';
+    g.fillText('Q. P(x) = x³ - 6x² + 11x - 6 = 0', 50, 130);
+
+    g.fillStyle = '#FFFFFF'; g.font = '500 27px "IBM Plex Sans KR", sans-serif';
+    g.fillText('• 조립제법: P(1) = 1 - 6 + 11 - 6 = 0  =>  (x - 1) 인수', 60, 190);
+    g.fillText('• 인수분해: P(x) = (x - 1)(x² - 5x + 6) = (x - 1)(x - 2)(x - 3)', 60, 240);
+    g.fillText('• 세 실근: α = 1,  β = 2,  γ = 3  (오름차순)', 60, 290);
+    g.fillText('• 세 실근의 곱: α × β × γ = 1 × 2 × 3 = 6', 60, 340);
+
+    g.fillStyle = '#80CBC4'; g.font = '700 30px "IBM Plex Sans KR", sans-serif';
+    g.fillText('★ 출구 도어락 PIN: 세 실근(1, 2, 3) + 곱(6) => [ 1 2 3 6 ]', 50, 430);
+    return c;
+  }
+
+  /* ─── 과학실 칠판 — 동쪽 벽 ─── */
+  const bbIt = { id: 'blackboard', name: '과학실 칠판' };
+  const bbC = blackboardCanvas();
+  const bb = K.group(root, 3.92, 1.85, -0.6, -Math.PI / 2);
+  bx(2.8, 1.4, 0.04, 0.01, std({ color: '#5A3D28', roughness: 0.8 }), bb, 0, 0, 0, { it: bbIt });
+  mesh(new THREE.PlaneGeometry(2.68, 1.28), std({ map: toTex(bbC, { wrap: false }), roughness: 0.4 }), bb, 0, 0, 0.022, { it: bbIt, cast: false });
+  box(2.68, 0.04, 0.1, std({ color: '#4A2F1C', roughness: 0.8 }), bb, 0, -0.66, 0.05, { it: bbIt });
+  K.hitbox(bb, 2.8, 1.4, 0.2, bbIt, 0, 0, 0.05);
+
+  /* ─── 과학 교사 가운 — 서쪽 벽 고리. 안주머니에 교직원 카드 ─── */
+  const gownIt = { id: 'gown', name: '교사 가운' };
   const gown = K.group(root, -3.93, 0, -0.2, Math.PI / 2);
   box(0.04, 0.03, 0.08, M.steel, gown, 0, 1.92, 0.02, { it: gownIt });
   cyl(0.008, 0.008, 0.08, M.steel, gown, 0, 1.9, 0.06, { it: gownIt }, 6).rotation.x = Math.PI / 2;
@@ -3843,21 +3879,21 @@ function build(ctx) {
     for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), k = (0.6 - y) / 1.2; p.setX(i, x * (0.55 + 0.45 * k)); p.setZ(i, 0.05 + Math.sin(x * 22 + y * 3) * 0.02 * k + 0.05 * k * k); }
     gownGeo.computeVertexNormals();
   }
-  const gownC = cv(256, 512); { const g = gownC.getContext('2d'); g.fillStyle = '#5E8A7C'; g.fillRect(0, 0, 256, 512); const r = rng(21); for (let k = 0; k < 900; k++) { g.fillStyle = `rgba(20,40,34,${r() * 0.12})`; g.fillRect(r() * 256, r() * 512, 2, 8 + r() * 30); } for (let k = 0; k < 6; k++) { const x = 40 + r() * 170, y = 220 + r() * 260, s = 14 + r() * 40; const gr = g.createRadialGradient(x, y, 0, x, y, s); gr.addColorStop(0, 'rgba(70,10,12,.8)'); gr.addColorStop(1, 'rgba(70,10,12,0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, s, 0, 7); g.fill(); } g.fillStyle = 'rgba(30,50,44,.5)'; g.fillRect(150, 150, 70, 60); }
+  const gownC = cv(256, 512); { const g = gownC.getContext('2d'); g.fillStyle = '#4A6B5D'; g.fillRect(0, 0, 256, 512); const r = rng(21); for (let k = 0; k < 900; k++) { g.fillStyle = `rgba(20,40,34,${r() * 0.12})`; g.fillRect(r() * 256, r() * 512, 2, 8 + r() * 30); } g.fillStyle = 'rgba(30,50,44,.5)'; g.fillRect(150, 150, 70, 60); }
   mesh(gownGeo, std({ map: toTex(gownC, { wrap: false }), roughness: 0.95, side: THREE.DoubleSide }), gown, 0, 1.3, 0, { it: gownIt });
   const card = K.group(gown, 0.12, 1.42, 0.12);
-  const cardC = cv(256, 160); { const g = cardC.getContext('2d'); g.fillStyle = '#F2F2EC'; g.fillRect(0, 0, 256, 160); g.fillStyle = '#1F3D33'; g.fillRect(0, 0, 256, 34); g.fillStyle = '#FFF'; g.font = '700 20px "IBM Plex Sans KR", sans-serif'; g.fillText('성심 종합병원  STAFF', 12, 24); g.fillStyle = '#9AA'; g.fillRect(14, 48, 70, 90); g.fillStyle = '#222'; g.font = '700 26px "IBM Plex Sans KR", sans-serif'; g.fillText('마취과', 100, 80); g.font = '500 20px "IBM Plex Sans KR", sans-serif'; g.fillText('출입 등급 A', 100, 112); g.fillStyle = '#C9A24A'; g.fillRect(100, 124, 40, 22); }
+  const cardC = cv(256, 160); { const g = cardC.getContext('2d'); g.fillStyle = '#F2F2EC'; g.fillRect(0, 0, 256, 160); g.fillStyle = '#1B3B2B'; g.fillRect(0, 0, 256, 34); g.fillStyle = '#FFF'; g.font = '700 18px "IBM Plex Sans KR", sans-serif'; g.fillText('청운고등학교  STAFF', 12, 24); g.fillStyle = '#8AB'; g.fillRect(14, 48, 70, 90); g.fillStyle = '#222'; g.font = '700 24px "IBM Plex Sans KR", sans-serif'; g.fillText('과학교과', 100, 80); g.font = '500 18px "IBM Plex Sans KR", sans-serif'; g.fillText('출입 보안 A', 100, 112); g.fillStyle = '#C9A24A'; g.fillRect(100, 124, 40, 22); }
   mesh(new THREE.BoxGeometry(0.085, 0.054, 0.002), std({ map: toTex(cardC, { wrap: false }), roughness: 0.4 }), card, 0, 0, 0, { it: gownIt, cast: false });
   card.visible = false;
-  const cardNote = cv(512, 640); { const g = cardNote.getContext('2d'); g.fillStyle = '#1A1C1E'; g.fillRect(0, 0, 512, 640); g.drawImage(cardC, 56, 30, 400, 250); g.fillStyle = '#E8E8E0'; g.fillRect(56, 320, 400, 250); g.fillStyle = '#7A7A70'; g.font = '500 18px "IBM Plex Sans KR", sans-serif'; g.fillText('뒷면', 70, 346); g.save(); g.translate(256, 452); g.rotate(-0.04); g.fillStyle = '#F0E070'; g.fillRect(-180, -108, 360, 212); g.fillStyle = '#23263A'; const pen = '{px}px "Nanum Pen Script", cursive'; fitText(g, '배전반 열쇠 — 거울 뒤', -160, -50, 320, 44, pen); fitText(g, '리더기 PIN =', -160, 6, 320, 44, pen); fitText(g, '오늘 수술 시각', -160, 56, 320, 44, pen); g.fillStyle = '#A02020'; fitText(g, '(4자리)', 60, 84, 100, 40, pen); g.restore(); }
-  const cardLines = ['직원 카드 — 마취과 · 출입 등급 A', '뒷면 쪽지: "배전반 열쇠 — 거울 뒤"', '"리더기 PIN = 오늘 수술 시각 (4자리)"'];
-  const cardItem = { id: 'card', icon: 'card', name: '직원 카드', desc: '직원 카드 — 뒷면 쪽지: 배전반 열쇠는 거울 뒤, PIN은 오늘 수술 시각.', note: cardNote, noteLines: cardLines };
+  const cardNote = cv(512, 640); { const g = cardNote.getContext('2d'); g.fillStyle = '#1A1C1E'; g.fillRect(0, 0, 512, 640); g.drawImage(cardC, 56, 30, 400, 250); g.fillStyle = '#E8E8E0'; g.fillRect(56, 320, 400, 250); g.fillStyle = '#7A7A70'; g.font = '500 18px "IBM Plex Sans KR", sans-serif'; g.fillText('뒷면 메모', 70, 346); g.save(); g.translate(256, 452); g.rotate(-0.04); g.fillStyle = '#F0E070'; g.fillRect(-180, -108, 360, 212); g.fillStyle = '#23263A'; const pen = '{px}px "Nanum Pen Script", cursive'; fitText(g, '배전반 열쇠 — 거울 뒤', -160, -50, 320, 44, pen); fitText(g, '출구 PIN =', -160, 6, 320, 44, pen); fitText(g, '칠판 삼차방정식 P(x)', -160, 56, 320, 44, pen); g.fillStyle = '#A02020'; fitText(g, '세 실근+곱 (1236)', -160, 96, 320, 38, pen); g.restore(); }
+  const cardLines = ['교직원 카드 — 청운고 과학교과 · 출입 보안 A', '뒷면 쪽지: "배전반 열쇠 — 거울 뒤"', '"출구 PIN = 칠판 P(x) = (x-1)(x-2)(x-3) 세 실근(1,2,3)과 곱(6) -> 1236"'];
+  const cardItem = { id: 'card', icon: 'card', name: '교직원 카드', desc: '과학 교사 신분증 카드 — 뒷면 메모: 배전반 열쇠는 거울 뒤, 출구 PIN은 칠판 P(x) 해답(1236).', note: cardNote, noteLines: cardLines };
 
   /* ─── 바닥의 흔적 ─── */
-  const papIt = { id: 'papers', name: '흩어진 서류' };
+  const papIt = { id: 'papers', name: '흩어진 시험지' };
   [[-1.4, 2.4, 0.4, 1], [-1.1, 2.9, -0.8, 2], [1.9, -1.3, 1.9, 3], [0.5, -2.6, 0.3, 4], [2.4, 1.1, -1.1, 5]].forEach(([x, z, r, s]) => { decal(0.21, 0.28, std({ map: paperTex(s), roughness: 0.9 }), root, x, 0.006, z, -Math.PI / 2, { it: papIt, cast: false }).rotation.z = r; });
-  const bloodM = std({ color: '#3A0808', roughness: 0.25, transparent: true, opacity: 0.85 });
-  [[0.6, 0.0, 0.5, 0.25, 0.3], [0.9, -1.4, 0.35, 0.9, -0.4], [1.6, -2.8, 0.3, 0.5, 0.2], [-0.3, -0.5, 0.2, 0.15, 1]].forEach(([x, z, sx, sz, r]) => { const b = mesh(new THREE.CircleGeometry(1, 20), bloodM, root, x, 0.004, z, { it: { id: 'stain', name: '얼룩' }, cast: false, recv: false }); b.rotation.x = -Math.PI / 2; b.rotation.z = r; b.scale.set(sx, sz, 1); });
+  const bloodM = std({ color: '#2A1810', roughness: 0.4, transparent: true, opacity: 0.75 });
+  [[0.6, 0.0, 0.5, 0.25, 0.3], [0.9, -1.4, 0.35, 0.9, -0.4], [1.6, -2.8, 0.3, 0.5, 0.2], [-0.3, -0.5, 0.2, 0.15, 1]].forEach(([x, z, sx, sz, r]) => { const b = mesh(new THREE.CircleGeometry(1, 20), bloodM, root, x, 0.004, z, { it: { id: 'stain', name: '시약 얼룩' }, cast: false, recv: false }); b.rotation.x = -Math.PI / 2; b.rotation.z = r; b.scale.set(sx, sz, 1); });
   const puddle = mesh(new THREE.CircleGeometry(0.55, 24), phys({ color: '#4A5A50', roughness: 0.02, metalness: 0.1, transparent: true, opacity: 0.7 }), root, -2.5, 0.003, 2.5, { it: { id: 'puddle', name: '고인 물' }, cast: false }); puddle.rotation.x = -Math.PI / 2; puddle.scale.set(1.4, 1, 1);
   const drips = K.particles(root, { N: 10, origin: new V3(-2.5, 3.5, 2.5), spread: [0.03, 0.02, 0.03], vel: [0, -2.4, 0], jitter: 0.01, life: [1.3, 1.5], size: [0.03, 0.03], c0: '#C8D8D0', c1: '#C8D8D0', op: 0.8, gravity: 4 });
   drips.rate = 0.12;
@@ -3866,7 +3902,7 @@ function build(ctx) {
   const clkIt = { id: 'clock', name: '멈춘 벽시계' };
   cyl(0.2, 0.2, 0.04, std({ color: '#E8E8E0', roughness: 0.5 }), clk, 0, 0, 0, { it: clkIt }, 32).rotation.x = Math.PI / 2;
   box(0.01, 0.12, 0.004, M.dark, clk, 0.03, 0.05, 0.022, { it: clkIt, cast: false }).rotation.z = -1.6; box(0.008, 0.16, 0.004, M.dark, clk, -0.02, 0.06, 0.024, { it: clkIt, cast: false }).rotation.z = 0.4;
-  mesh(new THREE.PlaneGeometry(0.7, 0.175), std({ map: signTex('수술실 3'), roughness: 0.7 }), root, 2.0, 2.55, -4.97, { it: { id: 'sign', name: '표지판' }, cast: false });
+  mesh(new THREE.PlaneGeometry(0.7, 0.175), std({ map: signTex('과학실 1'), roughness: 0.7 }), root, 2.0, 2.55, -4.97, { it: { id: 'sign', name: '표지판' }, cast: false });
 
   /* ─── 천장 환풍구 — 떨어진 패널 자리. 4:30부터 연기가 쏟아진다 ─── */
   const ventIt = { id: 'vent', name: '천장 환풍구' };
@@ -3879,7 +3915,7 @@ function build(ctx) {
   haze.intensity = 0;
 
   /* ─── 문 · 붉은 타이머 · 비상구 표시 ─── */
-  const doorIt = { id: 'door', name: '수술실 문' };
+  const doorIt = { id: 'door', name: '과학실 문' };
   bx(0.12, 2.4, 0.16, 0.01, M.rustSteel, root, -0.97, 1.2, -4.96, { it: doorIt }); bx(0.12, 2.4, 0.16, 0.01, M.rustSteel, root, 0.97, 1.2, -4.96, { it: doorIt }); bx(2.06, 0.14, 0.16, 0.01, M.rustSteel, root, 0, 2.32, -4.96, { it: doorIt });
   const leaves = [-1, 1].map(s => {
     const piv = K.group(root, s * 0.9, 0, -4.93);
@@ -3939,7 +3975,7 @@ function build(ctx) {
   const fuseIn = fuseMesh(30, fsIt); fuseIn.position.set(0, 0, 0.04); fuseIn.visible = false; fsl.add(fuseIn);
   K.hitbox(fsl, 0.12, 0.07, 0.06, fsIt, 0, 0, 0.03);
   { const lt = labelTex('비상 E · 퓨즈 30A', { w: 320, h: 64, bg: '#E0B83A', font: '700 34px "IBM Plex Sans KR", sans-serif' }); mesh(new THREE.PlaneGeometry(0.16, 0.032), std({ map: lt, emissiveMap: lt, emissive: '#FFFFFF', emissiveIntensity: 0.35, roughness: 0.8 }), pn, 0.1, 0.265, 0.124, { it: fsIt, cast: false }); }
-  const BRK = [{ label: '수술실 3', col: '#D8D4C4' }, { label: '복도', col: '#D8D4C4' }, { label: '비상 E', col: '#E0B83A' }];
+  const BRK = [{ label: '과학실 1', col: '#D8D4C4' }, { label: '복도', col: '#D8D4C4' }, { label: '비상 E', col: '#E0B83A' }];
   const brk = BRK.map((b, k) => {
     const it = { id: 'breaker', value: k, name: `차단기 — ${b.label}` };
     const x = -0.15 + k * 0.15;
@@ -4078,7 +4114,7 @@ function build(ctx) {
     S.awake = true; S.el = 0; S.lastKey = -1;
     A.amb.every(() => 1400, () => sfx.beep(monPos));
     if (!again) {
-      A.say('수술실… 문 위의 붉은 숫자가 줄어들고 있다.', new V3(0, 2.3, -4.6), '손목에 환자 팔찌 — 트레이에 있다', 5200);
+      A.say('과학실… 문 위의 붉은 숫자가 줄어들고 있다.', new V3(0, 2.3, -4.6), '실험대 위 과학 실험 일지부터 확인하자', 5200);
     } else A.say('5분. 이번엔 서두르자.', new V3(0, 2.3, -4.6), null, 3200);
     A.setBusy(false);
   }
@@ -4158,15 +4194,15 @@ function build(ctx) {
   function checkPin(pos) {
     S.checking = false;
     const q = __m['quiz.js'] ? __m['quiz.js'].get('surgery') : null;
-    const target = q ? q.code : '0100';
-    if (S.code === target || S.code === '1740' || S.code === '0100') {
+    const target = q ? q.code : '1236';
+    if (S.code === target || S.code === '1236' || S.code === '1740' || S.code === '0100') {
       kp.draw('OPEN', '#8CFFA8'); kp.led.emissive.set('#36FF6A');
       rdLed.emissive.set('#3AFF6A'); rdL.color.set('#3AFF6A'); drawRd('열림', '#6AFF9A');
       A.cue(pos, sfx.ok, '[삐빅 — 승인]');
       openDoors();
     } else {
       kp.draw('ERROR', '#FF6A55'); A.cue(pos, sfx.error, '[삐익 — 틀림]');
-      A.say(`PIN이 틀렸다. 문제: ${q ? q.hint : '물의 끓는점 4자리(0100)'}`, pos.clone().add(new V3(0, 0.25, 0)), null, 3200);
+      A.say(`PIN이 틀렸다. 문제: ${q ? q.hint : 'P(x) 세 실근과 곱 4자리(1236)'}`, pos.clone().add(new V3(0, 0.25, 0)), null, 3200);
       S.code = ''; S.checking = true;
       setTimeout(() => { kp.draw('- - - -', '#3E7A52'); S.checking = false; }, 900);
     }
@@ -4264,9 +4300,13 @@ function build(ctx) {
         await A.nudge(a.clone().multiplyScalar(-0.03), 160);
       }, { rot: [0, 0, 0], pos: [0.02, -0.01, 0.16], scale: 1.4 });
       S.cardOk = true; drawRd('PIN 4자리', '#FFD060');
-      A.say('카드 확인 — "PIN 4자리를 누르세요". 아래 키패드.', rdPos().add(new V3(0, 0.25, 0)), '카드 뒷면: 오늘 수술 시각', 4200);
+      A.say('카드 확인 — "PIN 4자리를 누르세요". 아래 키패드.', rdPos().add(new V3(0, 0.25, 0)), '칠판 P(x) 세 실근과 곱 (1236)', 4200);
     },
     kpkey(r, direct, n) { const k = kp.keys[r.it.value], p = wpos(k); return A.pokePress(p, n, k, 'z', () => { sfx.key(p); keypadInput(r.it.value, p); }); },
+    blackboard(r) {
+      const q = __m['quiz.js'] ? __m['quiz.js'].get('surgery') : null;
+      A.say(q ? q.clue : '[과학실 칠판 분필 글씨] P(x) = x³ - 6x² + 11x - 6 = (x-1)(x-2)(x-3) = 0. 세 실근은 1, 2, 3이고 세 근의 곱은 6이다. 도어락 PIN: 1236', wpos(bb).add(new V3(-0.3, 0, 0)), null, 5000);
+    },
     door(r, direct, n) {
       if (S.doorOpen) return A.inspect(r, '열려 있다. 복도로.');
       const m = S.said.has('door') ? '여전히 잠겨 있다.' : '잠겨 있다. 문 오른쪽에 카드 리더기와 키패드.';
@@ -4280,6 +4320,7 @@ function build(ctx) {
     const id = r.id;
     const map = {
       record: () => ({ verb: '읽기', icon: 'look', ...(S.readRecord ? { state: '읽음', tone: 'ok' } : {}) }),
+      blackboard: () => ({ verb: '자세히 보기', icon: 'look' }),
       gown: () => S.cardTaken ? { verb: '살펴보기', icon: 'look' } : { verb: '주머니 뒤지기', icon: 'grab' },
       mirror: () => S.mirrorOpen ? { verb: '살펴보기', icon: 'look' } : { verb: '당겨 열기', icon: 'grab' },
       pkey: () => ({ verb: '집기', icon: 'pickup' }),
@@ -4296,18 +4337,18 @@ function build(ctx) {
     return map[id] ? map[id]() : null;
   }
   function hint() {
-    if (!S.readRecord) return [wpos(clip).add(new V3(0, 0.1, 0)), '카트 위의 마취 기록지를 읽자.'];
-    if (!S.cardTaken) return [wpos(gown).add(new V3(0.1, 1.3, 0)), '서쪽 벽 고리의 수술 가운 — 안주머니를 뒤져 보자.'];
+    if (!S.readRecord) return [wpos(clip).add(new V3(0, 0.1, 0)), '카트 위의 과학 실험 일지를 읽자.'];
+    if (!S.cardTaken) return [wpos(gown).add(new V3(0.1, 1.3, 0)), '서쪽 벽 고리의 교사 가운 — 안주머니를 뒤져 보자.'];
     if (!S.panelUnlocked && !S.keyTaken) return S.mirrorOpen ? [wpos(pkey).add(new V3(0.15, 0.1, 0)), '거울 뒤 고리의 작은 열쇠를 집자.'] : [wpos(mir).add(new V3(0.3, 0.3, 0.1)), '카드 뒷면 쪽지 — 배전반 열쇠는 세면대 거울 뒤. 거울을 당겨 열자.'];
     if (!S.coverOpen) return [pnPos(), '문 왼쪽 회색 배전반 — 열쇠로 열자.'];
     if (!S.fuseIn) {
       if (S.holding === 30) return [wpos(fsl).add(new V3(0, 0.12, 0.05)), '30A 퓨즈를 비상 E 퓨즈 칸에 꽂자.'];
-      if (!S.drawerOpen) return [wpos(fdr).add(new V3(-0.2, 0.2, 0)), '기록지: 예비 퓨즈는 약품장 아래 서랍. 당겨 열자.'];
+      if (!S.drawerOpen) return [wpos(fdr).add(new V3(-0.2, 0.2, 0)), '일지 메모: 예비 퓨즈는 시약장 아래 서랍. 당겨 열자.'];
       return [wpos(fuses[30]).add(new V3(0, 0.12, 0)), '퓨즈 칸 라벨은 30A — 노란 띠의 30A를 집자.'];
     }
     if (!S.power) return [wpos(brk[2].lev), '노란 비상 E 차단기만 올리자. 다른 건 불꽃이 튄다.'];
-    if (!S.cardOk) return [rdPos(), '리더기에 직원 카드를 대자.'];
-    if (!S.doorOpen) return [wpos(kp.g).add(new V3(0, 0.2, 0.05)), 'PIN = 오늘 수술 시각 — 팔찌와 기록지의 17:40 → 1 7 4 0.'];
+    if (!S.cardOk) return [rdPos(), '리더기에 교직원 카드를 대자.'];
+    if (!S.doorOpen) return [wpos(kp.g).add(new V3(0, 0.2, 0.05)), 'PIN = 칠판의 P(x) 세 실근(1, 2, 3)과 곱(6) → 1 2 3 6.'];
     return [new V3(0, 0.1, -5.6), '문밖 복도 바닥을 바라보고 클릭해 나가자.'];
   }
 
@@ -4349,23 +4390,24 @@ function build(ctx) {
     INERT: new Set(['stain', 'puddle']),
     ROOM_N: { record: [-1, 0, 0], gown: [1, 0, 0], mirror: [1, 0, 0], pkey: [1, 0, 0], panel: [0, 0, 1], fuseslot: [0, 0, 1], breaker: [0, 0, 1], fdrawer: [-1, 0, 0], fuse: [-1, 0, 0], reader: [0, 0, 1], kpkey: [0, 0, 1], keypadPlate: [0, 0, 1], door: [0, 0, 1] },
     INSPECT: {
+      blackboard: '과학실 대형 칠판. 고1 다항식 P(x) = x³ - 6x² + 11x - 6의 조립제법 풀이와 세 실근(1, 2, 3), 곱(6)이 적혀 있다. PIN: 1236.',
       timer: () => S.done ? '멈췄다. 초록 숫자.' : `남은 시간 ${mmss(Math.ceil(S.remain))}. 0이 되면… 연기가 방을 채운다.`,
-      bed: '녹슨 수술대. 끈이 풀려 있다 — 누군가 풀어 준 걸까.',
-      monitor: '화면에 평평한 선. 가끔 한 번씩 뛴다. 내 맥박은 아니다.',
-      cart: '메스와 겸자. 닦은 지 오래됐다. 서류판 하나.',
-      iv: '링거 주머니에 검붉은 것이 남아 있다.',
-      wheelchair: '먼지 앉은 휠체어. 시트에 마른 얼룩.',
-      gurney: '시트에 사람 모양의 자국.',
-      cabinet: '약병들. 라벨은 전부 벗겨져 있다. 유리문은 녹슬어 붙었다.',
-      sink: '거울 속의 얼굴이 낯설다.',
-      clock: '3시 7분에 멈춘 시계. 문 위 숫자만 살아 있다.',
-      sign: '수술실 3.',
-      papers: '진료 기록 — 이름 칸이 비어 있다.',
-      lamp: '전구 하나가 죽어 간다.',
-      tube: '형광등이 파닥거린다.',
-      curtain: '커튼 뒤에는 아무도 없다. 지금은.',
-      exit: '비상구. 초록 불빛만 멀쩡하다.',
-      vent: () => S.smoke > 0.02 ? '환풍구에서 잿빛 연기가 흘러내린다. 막을 방법은 없다 — 나가야 한다.' : '천장 환풍구. 안쪽에서 바람 소리.',
+      bed: '과학실 실험대. 화학 시약 자국이 남아 있다.',
+      monitor: '전자 계측기. 화면에 약한 파형이 흐르고 있다.',
+      cart: '실험 준비 카트. 과학 실험 일지 클립보드가 놓여 있다.',
+      iv: '실험 거치대. 비커와 튜브가 걸려 있다.',
+      wheelchair: '실험실 보관 카트.',
+      gurney: '과학실 보조 실험대.',
+      cabinet: '과학실 시약장. 비커와 시약병들이 정렬되어 있다.',
+      sink: '과학실 세면대. 거울 속에 창백한 얼굴이 비친다.',
+      clock: '3시 7분에 멈춘 교실 시계. 문 위 카운트다운만 살아 있다.',
+      sign: '과학실 1.',
+      papers: '과학 탐구 평가 시험지들.',
+      lamp: '실험실 조명. 전구 하나가 깜빡거린다.',
+      tube: '천장 형광등이 파닥거린다.',
+      curtain: '실험실 커튼.',
+      exit: '비상구. 초록 불빛만 켜져 있다.',
+      vent: () => S.smoke > 0.02 ? '환풍구에서 잿빛 연기가 흘러내린다. 막을 방법은 없다 — 어서 나가야 한다.' : '천장 환풍구. 안쪽에서 바람 소리.',
       emlamp: () => S.power ? '비상등이 주황빛으로 켜졌다.' : '꺼진 비상등.'
     },
     PRESS: new Set(['breaker', 'kpkey']),
@@ -4450,7 +4492,7 @@ function build(ctx) {
   box(0.5, 0.05, 0.05, M.steel, root, 0.3, 1.0, 7.9, { it: southIt });
 
   /* ─── 시작 카트 위 손전등 ─── */
-  const cartIt = { id: 'cart', name: '간호 카트' };
+  const cartIt = { id: 'cart', name: '청소도구 카트' };
   const cart = K.group(root, 1.25, 0, 6.5, -0.2);
   bx(0.5, 0.03, 0.62, 0.01, M.steel, cart, 0, 0.9, 0, { it: cartIt }); bx(0.5, 0.03, 0.62, 0.01, M.rustSteel, cart, 0, 0.42, 0, { it: cartIt });
   [[-0.22, -0.28], [0.22, -0.28], [-0.22, 0.28], [0.22, 0.28]].forEach(([x, z]) => { cyl(0.012, 0.012, 0.88, M.steel, cart, x, 0.44, z, { it: cartIt }, 6); ball(0.035, M.dark, cart, x, 0.035, z, { it: cartIt }); });
@@ -4476,19 +4518,19 @@ function build(ctx) {
   root.add(beam, beam.target);
   const spill = new THREE.PointLight('#FFF1D8', 0, 3, 2); root.add(spill);
 
-  /* ─── 간호사실 — 서쪽, z 1.2..3.8. 서랍에 건전지 상자 ─── */
-  const stIt = { id: 'station', name: '간호사실' };
+  /* ─── 당직실 안내 데스크 — 서쪽, z 1.2..3.8. 서랍에 건전지 상자 ─── */
+  const stIt = { id: 'station', name: '당직실 안내 데스크' };
   const woodM = std({ color: '#8A7A62', roughness: 0.75 });
   bx(1.1, 1.05, 2.6, 0.02, woodM, root, -1.95, 0.525, 2.5, { it: stIt });
   bx(1.2, 0.05, 2.7, 0.01, std({ color: '#C8C4B4', roughness: 0.5 }), root, -1.95, 1.075, 2.5, { it: stIt });
-  mesh(new THREE.PlaneGeometry(0.8, 0.2), std({ map: signTex('간호사실', { size: 70 }), roughness: 0.7 }), root, -1.39, 0.8, 3.3, { it: stIt, cast: false }).rotation.y = Math.PI / 2;
+  mesh(new THREE.PlaneGeometry(0.8, 0.2), std({ map: signTex('당직실', { size: 70 }), roughness: 0.7 }), root, -1.39, 0.8, 3.3, { it: stIt, cast: false }).rotation.y = Math.PI / 2;
   bx(0.36, 0.28, 0.06, 0.01, M.dark, root, -2.15, 1.3, 2.0, { it: stIt }).rotation.y = Math.PI / 2 + 0.3;
   const phIt = { id: 'phone', name: '전화기' };
   bx(0.2, 0.06, 0.12, 0.02, std({ color: '#D8D0C0', roughness: 0.5 }), root, -2.0, 1.13, 3.1, { it: phIt });
   bx(0.05, 0.04, 0.2, 0.015, std({ color: '#D8D0C0', roughness: 0.5 }), root, -1.3, 0.5, 3.4, { it: phIt }).rotation.set(0.3, 0.6, 1.2);
   cyl(0.003, 0.003, 0.6, M.dark, root, -1.45, 0.8, 3.25, { it: phIt, cast: false }, 4).rotation.z = 0.5;
   [[-2.2, 2.9, 0.3], [-1.8, 2.3, -0.4]].forEach(([x, z, r], i) => { decal(0.21, 0.28, std({ map: paperTex(i + 20), roughness: 0.9 }), root, x, 1.105, z, -Math.PI / 2, { it: stIt, cast: false }).rotation.z = r; });
-  const drIt = { id: 'drawer', name: '간호사실 서랍' };
+  const drIt = { id: 'drawer', name: '당직실 서랍' };
   const DR_X = -1.39;
   const drawer = K.group(root, DR_X, 0.78, 1.8);
   box(0.5, 0.16, 0.5, woodM, drawer, -0.25, 0, 0, { it: drIt });
@@ -4514,8 +4556,8 @@ function build(ctx) {
   box(0.12, 0.05, 0.04, std({ color: '#3A3A3A', roughness: 0.9 }), wb, 0.3, -0.455, 0.05, { it: wbIt });
   const wbPos = new V3(-2.44, 1.6, -1.0);
   const boardLines = () => S.boardSeen
-    ? ['3층 병동 · 야간 회진', '회진 순서: 303 → 301 → 304 → 302', '(지운 자국이 불빛에 비쳐 보인다)', '확인 번호 = 차트의 ✓ 개수(✗는 빼고). 회진이 끝나면 복도 끝 키패드에 순서대로.']
-    : ['3층 병동 · 야간 회진', '회진 순서: ……… (지워져 있다)', '확인 번호 = 차트의 ✓ 개수(✗는 빼고). 회진이 끝나면 복도 끝 키패드에 순서대로.', '지운 자리에 뭔가 남아 있다. 불빛을 가까이 비춰 보자.'];
+    ? ['1학년 복도 화이트보드', '수학 퀴즈: x² - 14x + 45 = 0의 두 실근 α, β에 대하여 α² + β²', '(불빛에 비친 풀이: (x-5)(x-9)=0 => α=5, β=9, 25+81=106)', '=> 뒷문 키패드 4자리: 0106']
+    : ['1학년 복도 화이트보드', '수학 퀴즈: x² - 14x + 45 = 0의 두 실근 α, β에 대하여 α² + β²', '구하는 값: 두 근의 제곱의 합 (α² + β²)', '지운 자리에 풀이가 남아 있다. 불빛을 가까이 비춰 보자.'];
 
   function boardCanvas(ghost) {
     const c = cv(1024, 564), g = c.getContext('2d');
@@ -4523,38 +4565,45 @@ function build(ctx) {
       g.fillStyle = '#E8ECEA'; g.fillRect(0, 0, 1024, 564);
       const r = rng(8);
       for (let k = 0; k < 40; k++) { g.fillStyle = `rgba(120,130,140,${r() * 0.08})`; g.beginPath(); g.ellipse(r() * 1024, r() * 564, 30 + r() * 120, 10 + r() * 40, r() * 3, 0, 7); g.fill(); }
-      g.fillStyle = '#1E3A8A'; g.font = '700 58px "Nanum Pen Script", cursive';
-      g.fillText('3층 병동 · 야간 회진', 40, 80);
-      g.fillStyle = '#2A2A2A'; g.font = '52px "Nanum Pen Script", cursive';
-      g.fillText('회진 순서 :', 40, 190);
-      const gr = g.createLinearGradient(290, 0, 900, 0); gr.addColorStop(0, 'rgba(150,158,162,.0)'); gr.addColorStop(0.15, 'rgba(150,158,162,.35)'); gr.addColorStop(0.85, 'rgba(150,158,162,.3)'); gr.addColorStop(1, 'rgba(150,158,162,0)');
-      g.fillStyle = gr; g.fillRect(290, 130, 620, 90);
-      g.fillStyle = '#A02A2A'; g.font = '46px "Nanum Pen Script", cursive';
-      g.fillText('확인 번호 = 차트의 ✓ 개수 (✗는 빼고)', 40, 300);
-      g.fillText('회진 끝나면 복도 끝 키패드에 순서대로!', 40, 360);
-      g.fillStyle = '#2A2A2A'; g.font = '40px "Nanum Pen Script", cursive';
-      g.fillText(`302 ${who()} — 17:40 수술 대기. 금식.`, 40, 450);
-      g.fillText('정전 시 손전등은 카트에', 40, 510);
+      g.fillStyle = '#1E3A8A'; g.font = '700 50px "IBM Plex Sans KR", sans-serif';
+      g.fillText('【 1학년 복도 · 야간 자율학습 수학 퀴즈 】', 40, 75);
+      g.fillStyle = '#2A2A2A'; g.font = '38px "IBM Plex Sans KR", sans-serif';
+      g.fillText('복도 뒷문 비상 도어락 암호 (4자리 0XXX):', 40, 155);
+      g.fillStyle = '#8B0000'; g.font = '700 42px "IBM Plex Sans KR", sans-serif';
+      g.fillText('이차방정식 x² - 14x + 45 = 0 의 두 실근 α, β (α < β)', 40, 225);
+      g.fillStyle = '#2A2A2A'; g.font = '36px "IBM Plex Sans KR", sans-serif';
+      g.fillText('구하는 값: 두 근의 제곱의 합 (α² + β²)', 40, 290);
+      g.fillStyle = '#6A6E78'; g.font = '30px "IBM Plex Sans KR", sans-serif';
+      g.fillText('※ 손전등 불빛을 가까이 비추면 상세 풀이가 보입니다.', 40, 360);
+      g.fillStyle = '#1E3A8A'; g.font = '32px "IBM Plex Sans KR", sans-serif';
+      g.fillText('1-3반 교실 앞 책상을 치우고 채점표를 확인하세요.', 40, 440);
+      g.fillStyle = '#4A4A4A'; g.font = '26px "IBM Plex Sans KR", sans-serif';
+      g.fillText('정전 시 여분의 건전지는 당직실 데스크 서랍에 있습니다.', 40, 505);
     } else {
       g.clearRect(0, 0, 1024, 564);
-      g.fillStyle = 'rgba(40,60,120,.95)'; g.font = '700 70px "Nanum Pen Script", cursive';
-      g.shadowColor = 'rgba(40,60,120,.8)'; g.shadowBlur = 4;
-      g.fillText('303 → 301 → 304 → 302', 300, 200);
+      g.fillStyle = 'rgba(20,40,160,.95)'; g.font = '700 44px "IBM Plex Sans KR", sans-serif';
+      g.shadowColor = 'rgba(20,40,160,.8)'; g.shadowBlur = 6;
+      g.fillText('인수분해: (x - 5)(x - 9) = 0 => α=5, β=9', 60, 200);
+      g.fillText('α² + β² = 5² + 9² = 25 + 81 = 106', 60, 270);
+      g.fillStyle = 'rgba(180,20,20,.95)';
+      g.fillText('=> 뒷문 4자리 PIN: [ 0 1 0 6 ]', 60, 340);
     }
     return c;
   }
 
-  /* ─── 병실 문 네 개 — 번호판 · 차트 꽂이 ─── */
+  /* ─── 교실 문 네 개 — 번호판 · 수행평가표 꽂이 ─── */
+  const CLASS_NAMES = { 301: '1-1반', 302: '1-2반', 303: '1-3반', 304: '1-4반' };
+  const CLASS_SIGNS = { 301: '1-1', 302: '1-2', 303: '1-3', 304: '1-4' };
   const doors = {};
   [[301, 1, 4.5], [303, 1, -2.5], [302, -1, 5.5], [304, -1, -4.5]].forEach(([no, side, z]) => {
-    const it = { id: 'roomDoor', value: no, name: `병실 ${no}` };
-    const chIt = { id: 'chart', value: no, name: `${no}호 차트` };
+    const it = { id: 'roomDoor', value: no, name: `교실 ${CLASS_NAMES[no]}` };
+    const chIt = { id: 'chart', value: no, name: `${CLASS_NAMES[no]} 수행평가표` };
     const g = K.group(root, side * 2.5, 0, z, side > 0 ? -Math.PI / 2 : Math.PI / 2);
     bx(1.12, 2.2, 0.06, 0.01, std({ color: ['#8A9A8C', '#9A8C7A'][no % 2], roughness: 0.6 }), g, 0, 1.1, 0.03, { it });
     [-1, 1].forEach(s => box(0.08, 2.28, 0.1, M.rustSteel, g, s * 0.6, 1.14, 0.03, { it }));
     box(1.28, 0.08, 0.1, M.rustSteel, g, 0, 2.26, 0.03, { it });
     box(0.3, 0.05, 0.05, M.steel, g, -0.38, 1.0, 0.09, { it });
-    mesh(new THREE.PlaneGeometry(0.34, 0.12), std({ map: signTex(String(no), { size: 90, h: 128, w: 360 }), roughness: 0.6 }), g, 0, 2.05, 0.065, { it, cast: false });
+    mesh(new THREE.PlaneGeometry(0.34, 0.12), std({ map: signTex(CLASS_SIGNS[no], { size: 90, h: 128, w: 360 }), roughness: 0.6 }), g, 0, 2.05, 0.065, { it, cast: false });
     mesh(new THREE.PlaneGeometry(0.2, 0.28), M.glass, g, 0, 1.62, 0.062, { it, cast: false });
     const chartC = chartCanvas(no);
     box(0.25, 0.34, 0.03, phys({ color: '#C8D8D8', roughness: 0.1, transparent: true, opacity: 0.35 }), g, 0.18, 1.2, 0.08, { it: chIt, cast: false });
@@ -4563,32 +4612,31 @@ function build(ctx) {
     g.updateMatrixWorld(true);
     doors[no] = { g, chartC, side, z, pos: g.localToWorld(new V3(0.18, 1.2, 0.09)) };
   });
-  // 차트 — 야간 투약 칸 아홉 개. ✓(투약함)만 세면 확인 번호. ✗(거부)와 빈칸은 세지 않는다
   function chartCanvas(no) {
-    const cells = MARKS[no];
     return docCanvas({
-      head: `${no}호 · 환자 기록`, sub: '3층 병동 · 야간 투약표', seed: no, blood: no === 303 ? 0.8 : 0.3,
+      head: `${CLASS_NAMES[no]} · 수학 수행평가`, sub: '1학년 1학기 · 이차방정식 단원', seed: no, blood: 0,
       lines: [
-        no === 302 ? `환자  ${who()}` : `환자  ${{ 301: '박○○', 303: '이○○', 304: '최○○' }[no]}`,
-        no === 302 ? '17:40 수술 대기 · 금식' : '야간 투약 — 시각별',
-        '✓ 투약   ✗ 거부'
+        no === 303 ? `학생  ${who()} (1학년 3반)` : `학급  ${CLASS_NAMES[no]}`,
+        '문제: x² - 14x + 45 = 0의 두 근 α, β',
+        'α² + β² = 5² + 9² = 106 => 0106'
       ],
       extra: g => {
-        const x0 = 110, y0 = 300, cs = 92;
         g.strokeStyle = '#2A2E3A'; g.lineWidth = 3;
-        for (let i = 0; i < 9; i++) {
-          const x = x0 + (i % 3) * cs, y = y0 + Math.floor(i / 3) * cs;
-          g.strokeRect(x, y, cs - 12, cs - 12);
-          g.font = '500 16px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#6A6E78'; g.fillText(`${String((18 + i) % 24).padStart(2, '0')}:00`, x + 4, y + 16);
-          if (cells[i] !== ' ') { g.font = '64px "Nanum Pen Script", cursive'; g.fillStyle = cells[i] === '✓' ? '#1D3A8A' : '#B0271E'; g.fillText(cells[i], x + 18, y + 62); }
-        }
+        g.strokeRect(80, 280, 300, 160);
+        g.font = '700 24px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#1D3A8A';
+        g.fillText(`[ ${CLASS_NAMES[no]} 수학 채점표 ]`, 100, 320);
+        g.font = '500 20px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#333';
+        g.fillText('이차방정식 x² - 14x + 45 = 0', 100, 360);
+        g.fillText('두 실근: 5 와 9 (크기순)', 100, 395);
+        g.fillStyle = '#B0271E'; g.font = '700 22px "IBM Plex Sans KR", sans-serif';
+        g.fillText('제곱합: 5² + 9² = 106 => 0106', 100, 430);
       }
     });
   }
-  const chartLines = no => [`${no}호 환자 기록 — 야간 투약표`, no === 302 ? `환자 ${who()} · 17:40 수술 대기 · 금식` : '시각별 투약 칸 아홉 개 (✓ 투약 · ✗ 거부)', MARKS[no].map(c => c === ' ' ? '□' : c).join(' ')];
+  const chartLines = no => [`${CLASS_NAMES[no]} 수학 수행평가표`, '이차방정식 x² - 14x + 45 = 0', '두 실근 5, 9 => 5² + 9² = 106 (비밀번호: 0106)'];
 
-  /* ─── 휠체어 — 303 문 앞을 막고 있다(끌거나 눌러서 치운다) ─── */
-  const wcIt = { id: 'wheelchair', name: '휠체어' };
+  /* ─── 책상과 의자 — 1-3반 문 앞을 막고 있다(끌거나 눌러서 치운다) ─── */
+  const wcIt = { id: 'wheelchair', name: '교실 책상과 의자' };
   const WC_Z0 = -2.5, WC_Z1 = -1.2;
   const wc = K.group(root, 1.95, 0, WC_Z0, Math.PI / 2 + 0.1);
   const wg = model('wheelchair', { height: 0.96 });
@@ -4598,8 +4646,8 @@ function build(ctx) {
   mesh(blGeo, std({ color: '#7A5A4A', roughness: 1, side: THREE.DoubleSide }), wc, 0, 0.9, 0.22, { it: wcIt }).rotation.x = -0.2;
   K.hitbox(wc, 0.8, 1.45, 1.0, wcIt, 0, 0.72, 0);
 
-  /* ─── 병원 침대 하나 — 동쪽 벽에 붙어 있다 ─── */
-  const bedIt = { id: 'bed', name: '빈 침대' };
+  /* ─── 복도 캐비닛 사물함 ─── */
+  const bedIt = { id: 'bed', name: '복도 사물함' };
   const bed = K.group(root, 1.95, 0, 1.0);
   bx(0.9, 0.08, 2.0, 0.02, M.steel, bed, 0, 0.55, 0, { it: bedIt }); bx(0.86, 0.14, 1.94, 0.05, M.sheet, bed, 0, 0.66, 0, { it: bedIt });
   [[-0.4, -0.9], [0.4, -0.9], [-0.4, 0.9], [0.4, 0.9]].forEach(([x, z]) => { cyl(0.02, 0.02, 0.5, M.steel, bed, x, 0.28, z, { it: bedIt }, 8); ball(0.045, M.dark, bed, x, 0.045, z, { it: bedIt }); });
@@ -4615,7 +4663,7 @@ function build(ctx) {
   mesh(new THREE.PlaneGeometry(0.5, 0.14), std({ map: signTex('계단 ↓ 지하', { size: 70 }), roughness: 0.7 }), dpiv, 0.6, 1.65, 0.035, { it: doorIt, cast: false });
   const kp = keypad(K, root, M, 0.95, 1.3, -8.0, 0);
   const kpL = new THREE.PointLight('#8CFFA8', 0.35, 1.4, 2); kpL.position.set(0.95, 1.35, -7.8); root.add(kpL);
-  mesh(new THREE.PlaneGeometry(0.3, 0.06), std({ map: labelTex('회진 완료 코드', { w: 320, h: 64, bg: '#1A1C1C', ink: '#8CFFA8', font: '700 34px "IBM Plex Sans KR", sans-serif' }), emissive: '#FFFFFF', emissiveIntensity: 0.2, roughness: 0.6 }), root, 0.95, 1.5, -7.99, { it: { id: 'keypadPlate', name: '키패드' }, cast: false });
+  mesh(new THREE.PlaneGeometry(0.3, 0.06), std({ map: labelTex('비상 도어락 PIN', { w: 320, h: 64, bg: '#1A1C1C', ink: '#8CFFA8', font: '700 34px "IBM Plex Sans KR", sans-serif' }), emissive: '#FFFFFF', emissiveIntensity: 0.2, roughness: 0.6 }), root, 0.95, 1.5, -7.99, { it: { id: 'keypadPlate', name: '키패드' }, cast: false });
   const out = beyond(K, root, M, { z: -8.0, w: 1.3, len: 1.6, dir: -1, h: 2.4 });
 
   /* ─── 바닥 — 흩어진 차트 · 얼룩 · 먼지 ─── */
@@ -4644,11 +4692,11 @@ function build(ctx) {
   function torchUpdate(dt, t) {
     if (S.on) {
       S.batt = Math.max(0, S.batt - dt / BATT_S);
-      if (S.batt < 0.25 && !S.said.has('low')) { S.said.add('low'); A.say('손전등이 깜빡인다 — 배터리가 얼마 없다.', A.ahead(0.8, 0), '간호사실 서랍에 건전지가 있을지도', 3600); }
+      if (S.batt < 0.25 && !S.said.has('low')) { S.said.add('low'); A.say('손전등이 깜빡인다 — 배터리가 얼마 없다.', A.ahead(0.8, 0), '당직실 서랍에 건전지가 있을지도', 3600); }
       if (S.batt <= 0) {
         S.on = false; S.dead = true;
         A.cue(A.ahead(0.4, -0.2), p => A.noise(p, 0.2, 'lowpass', 400, 1, 0.2), '[틱… 손전등이 꺼졌다]');
-        A.say('손전등이 죽었다. 간호사실 서랍에 건전지가 있을지도.', A.ahead(0.8, 0.05), '비상등의 붉은빛 · 비상구의 초록빛을 따라가자', 5200);
+        A.say('손전등이 꺼졌다. 당직실 서랍에 건전지가 있을지도.', A.ahead(0.8, 0.05), '비상등의 붉은빛 · 비상구의 초록빛을 따라가자', 5200);
       }
     }
     const b = S.batt;
@@ -4685,7 +4733,7 @@ function build(ctx) {
     S.checking = false;
     const q = __m['quiz.js'] ? __m['quiz.js'].get('ward') : null;
     const target = q ? q.code : CODE;
-    if (S.code === target || S.code === CODE) {
+    if (S.code === target || S.code === CODE || S.code === '0106' || S.code === '2795') {
       S.unlocked = true; kp.draw('OPEN', '#8CFFA8'); kp.led.emissive.set('#36FF6A');
       A.cue(pos, sfx.ok, '[삐빅 — 열림]');
       setTimeout(async () => {
@@ -4696,16 +4744,16 @@ function build(ctx) {
       }, 300);
     } else {
       kp.draw('ERROR', '#FF6A55'); A.cue(pos, sfx.error, '[삐익 — 틀림]');
-      A.say(S.read.size < 4 ? '틀렸다. 병실 차트 네 장의 ✓ 개수를 회진 순서대로.' : '틀렸다. ✓만 셌는지, 회진 순서대로인지 다시 보자.', pos.clone().add(new V3(0, 0.25, 0)));
+      A.say('틀렸다. 화이트보드의 이차방정식 두 근 5와 9의 제곱합 (0106).', pos.clone().add(new V3(0, 0.25, 0)));
       S.code = ''; S.checking = true;
       setTimeout(() => { kp.draw('- - - -', '#3E7A52'); S.checking = false; }, 900);
     }
   }
 
-  /* ─── 휠체어 치우기 ─── */
+  /* ─── 책상과 의자 치우기 ─── */
   function setChair(z) {
     wc.position.z = clamp(z, WC_Z0, WC_Z1); wc.rotation.y = Math.PI / 2 + 0.1 + (wc.position.z - WC_Z0) * 0.25;
-    if (wc.position.z > WC_Z0 + 0.7 && !S.chairMoved) { S.chairMoved = true; A.say('휠체어를 치웠다. 303호 차트가 보인다.', doors[303].pos.clone().add(new V3(-0.1, 0.35, 0)), null, 3200); }
+    if (wc.position.z > WC_Z0 + 0.7 && !S.chairMoved) { S.chairMoved = true; A.say('책상을 치웠다. 1-3반 수행평가표가 보인다.', doors[303].pos.clone().add(new V3(-0.1, 0.35, 0)), null, 3200); }
   }
   function squeak() { A.cue(wpos(wc).add(new V3(0, 0.3, 0)), p => { sfx.squeak(p); sfx.slide(p, 0.6); }, '[끼익 — 바퀴]'); }
 
@@ -4753,7 +4801,7 @@ function build(ctx) {
     },
     async wheelchair(r, direct, n) {
       const z0 = wc.position.z;
-      if (S.chairMoved) return A.inspect(r, '휠체어는 비켜 두었다. 담요에 마른 얼룩.');
+      if (S.chairMoved) return A.inspect(r, '책상과 의자는 비켜 두었다.');
       squeak();
       const off = wc.worldToLocal(r.point.clone());
       await A.moveWith(direct, () => wc.localToWorld(off.clone()), n, 900, e => setChair(z0 + (WC_Z1 - z0) * e), POSE.grab);
@@ -4763,7 +4811,7 @@ function build(ctx) {
       if (S.doorOpen) return A.inspect(r, '열려 있다. 아래층 계단.');
       return A.rattle(new V3(0.2, 1.0, -7.9), n, direct, S.unlocked ? '잠금이 풀리는 중이다.' : '잠겨 있다. 오른쪽에 숫자 키패드.', () => tween(300, e => { dpiv.rotation.y = 0.01 * Math.sin(e * Math.PI * 4); }));
     },
-    roomDoor(r, direct, n) { return A.rattle(r.point.clone(), n, direct, `${r.it.value}호 — 잠겨 있다. 문에 차트가 꽂혀 있다.`, null); },
+    roomDoor(r, direct, n) { return A.rattle(r.point.clone(), n, direct, `교실 문 — 잠겨 있다. 옆에 수행평가표가 꽂혀 있다.`, null); },
     southDoor(r, direct, n) { return A.rattle(r.point.clone(), n, direct, '들어온 문. 뒤에서 잠겼다.', null); }
   };
   function composite() { const c = cv(1024, 564), g = c.getContext('2d'); g.drawImage(wbC, 0, 0); g.globalAlpha = 0.9; g.drawImage(wbGhost, 0, 0); return c; }
@@ -4795,15 +4843,15 @@ function build(ctx) {
     return map[id] ? map[id]() : null;
   }
   function hint() {
-    if (!S.torch) return [wpos(torchObj).add(new V3(0, 0.08, 0)), '발밑 카트의 손전등을 집자.'];
-    if (S.dead || S.batt < 0.15) return [wpos(bbox).add(new V3(0.2, 0.15, 0)), '손전등이 곧 꺼진다. 간호사실에서 건전지를 찾아보자.', '간호사실 카운터 서랍 — 건전지 상자가 있다.'];
+    if (!S.torch) return [wpos(torchObj).add(new V3(0, 0.08, 0)), '청소도구 카트의 손전등을 집자.'];
+    if (S.dead || S.batt < 0.15) return [wpos(bbox).add(new V3(0.2, 0.15, 0)), '손전등이 곧 꺼진다. 당직실 데스크에서 건전지를 찾아보자.', '당직실 카운터 서랍 — 건전지 상자가 있다.'];
     if (!S.on) return [A.ahead(0.8, -0.1), '소지품 칸의 손전등을 눌러 켜자.'];
-    if (!S.boardSeen) return [wbPos.clone().add(new V3(0.1, 0.5, 0)), '간호사실 옆 화이트보드 — 회진 순서가 지워져 있다. 지운 자국은 빛에 약하다.', '화이트보드에서 1.5m 안으로 다가가 손전등을 똑바로 비추면 지운 글씨가 드러난다.'];
+    if (!S.boardSeen) return [wbPos.clone().add(new V3(0.1, 0.5, 0)), '당직실 옆 화이트보드 — 수학 퀴즈 이차방정식이 적혀 있다. 지운 자국은 빛에 약하다.', '화이트보드에서 1.5m 안으로 다가가 손전등을 똑바로 비추면 지운 풀이가 드러난다.'];
     for (const no of ORDER) if (!S.read.has(no)) {
-      if (no === 303 && !S.chairMoved) return [wpos(wc).add(new V3(0, 0.9, 0)), '303호 차트가 보이지 않는다. 문 앞을 막은 것부터.', '휠체어 담요가 303호 차트를 가린다. 휠체어를 끌어서 치우자.'];
-      return [doors[no].pos.clone().add(new V3(0, 0.3, 0)), `${no}호 문의 차트를 읽자. 화이트보드에 번호 읽는 법이 있다.`, `${no}호 차트 — 투약 칸의 ✓만 센다(✗는 빼고). 그 개수가 확인 번호.`];
+      if (no === 303 && !S.chairMoved) return [wpos(wc).add(new V3(0, 0.9, 0)), '1-3반 수행평가표가 보이지 않는다. 문 앞을 막은 책상부터.', '교실 책상과 의자가 문을 가린다. 책상을 끌어서 치우자.'];
+      return [doors[no].pos.clone().add(new V3(0, 0.3, 0)), `${CLASS_NAMES[no]} 문의 수행평가표를 읽자. 화이트보드에 힌트가 있다.`];
     }
-    if (!S.unlocked) return [wpos(kp.g).add(new V3(0, 0.2, 0.05)), '각 방의 ✓ 개수를 화이트보드의 회진 순서대로 이어 붙여 키패드에.', '회진 순서 303 → 301 → 304 → 302, 각 차트의 ✓ 개수를 그 순서대로 네 자리로.'];
+    if (!S.unlocked) return [wpos(kp.g).add(new V3(0, 0.2, 0.05)), '화이트보드의 이차방정식 x² - 14x + 45 = 0 두 근(5, 9)의 제곱합 106 → 0 1 0 6.'];
     return [new V3(0, 0.1, -8.8), '계단 쪽 바닥을 클릭해 나가자.'];
   }
 
@@ -4832,15 +4880,15 @@ function build(ctx) {
     INERT: new Set(['stain']),
     ROOM_N: { torch: [-1, 0, 0], drawer: [1, 0, 0], battbox: [1, 0, 0], board: [1, 0, 0], wheelchair: [-1, 0, 0], kpkey: [0, 0, 1], keypadPlate: [0, 0, 1], door: [0, 0, 1] },
     INSPECT: {
-      station: '간호사실. 모니터는 꺼졌고, 카운터 서랍 하나가 보인다.',
-      phone: '수화기가 늘어져 있다. 신호음은 없다.',
-      bed: '빈 침대. 시트가 아직 따뜻한 것 같다 — 기분 탓이다.',
-      cart: '간호 카트. 약병 두 개.',
+      station: '교무 당직실 데스크. 모니터는 꺼졌고 카운터 서랍 하나가 보인다.',
+      phone: '학교 인터폰 전화기. 신호음은 없다.',
+      bed: '복도 사물함. 책들이 정돈되어 있다.',
+      cart: '청소도구 카트. 낡은 손전등이 놓여 있다.',
       tube: '형광등은 다 죽었다. 하나가 전선에 매달려 흔들린다.',
       emlamp: '주황 비상등. 이 근처만 겨우 보인다.',
       exit: '비상구. 초록 불빛 — 복도 끝.',
-      keypadPlate: '네 자리 키패드. "회진 완료 코드".',
-      papers: '흩어진 투약 기록. 이름은 번졌다.'
+      keypadPlate: '네 자리 키패드. "비상 도어락 PIN".',
+      papers: '흩어진 수학 연습장과 시험지들.'
     },
     PRESS: new Set(['kpkey']),
     needsHand: r => r.id === 'torch' || r.id === 'drawer' || (r.id === 'battbox' && S.torch) || r.id === 'kpkey',
@@ -4849,13 +4897,13 @@ function build(ctx) {
     center: it => it.id === 'chart' ? doors[it.value].pos.clone() : null,
     itemClick: item => {
       if (item.id !== 'torch') return false;
-      if (S.dead) { A.say('배터리가 다 됐다. 간호사실 서랍의 건전지.', A.ahead(0.8, 0)); sfx.error(A.ahead(0.5, 0)); return true; }
+      if (S.dead) { A.say('배터리가 다 됐다. 당직실 데스크 서랍의 건전지.', A.ahead(0.8, 0)); sfx.error(A.ahead(0.5, 0)); return true; }
       setOn(!S.on); return true;
     },
     describe, TAP, DRAG, hint, update,
     moving: () => S.on || S.boardK > 0.01,
     onEnter() {
-      A.say('정전된 병동. 비상등 아래, 카트에 손전등이 있다.', new V3(1.2, 1.4, 6.3), null, 4600);
+      A.say('정전된 교실 복도. 비상등 아래 카트에 손전등이 있다.', new V3(1.2, 1.4, 6.3), null, 4600);
       A.amb.bed(new V3(0, 2.8, 0), { type: 'lowpass', f: 180, q: 0.5, gain: 0.04, lfo: 0.05, lfoAmt: 0.6 });
       // 멀리서 바퀴 구르는 소리 — 분위기만(진행과 무관). 자막으로도
       A.amb.every(() => 16000 + Math.random() * 14000, () => A.cue(new V3(-1.5, 0.3, -12), p => { sfx.squeak(p); sfx.slide(p, 1.6); }, '[멀리서 바퀴 구르는 소리]'));
@@ -4884,7 +4932,7 @@ const { cv, rng, toTex } = __m['tex.js'];
 const { bevelBox, key: keyGeo, lathe, BOTTLE } = __m['models.js'];
 const { hospMats, shell, tube, docCanvas, signTex, paperTex, labelTex, beyond, drumRow, rollDrum } = __m['hosp.js'];
 
-const __default = { id: 'pharmacy', title: '도서실', stars: 3, build };
+const __default = { id: 'pharmacy', title: '수학 탐구실 & 도서실', stars: 3, build };
 
 const SYM = {
   dia: { ch: '◇', mg: 12, pill: '#F0EEE6', x: -0.5, name: '세도린' },
@@ -4932,8 +4980,8 @@ function build(ctx) {
   const southIt = { id: 'southDoor', name: '들어온 문' };
   bx(1.2, 2.1, 0.07, 0.01, M.paint, root, 0, 1.05, 2.465, { it: southIt });
 
-  /* ─── 북쪽 약장 — 열린 선반 다섯 단. 가운데 단에 기호 병 다섯 ─── */
-  const shIt = { id: 'shelf', name: '약장' };
+  /* ─── 북쪽 수학 서가 — 열린 선반 다섯 단. 가운데 단에 기호 병 다섯 ─── */
+  const shIt = { id: 'shelf', name: '수학 도서 서가' };
   const shelfM = std({ color: '#C8CCC4', metalness: 0.3, roughness: 0.55 });
   const SX0 = -2.8, SX1 = 1.0, SZ = -2.28;
   [-1, 1].forEach(s => box(0.03, 2.3, 0.44, shelfM, root, s > 0 ? SX1 : SX0, 1.15, SZ, { it: shIt }));
@@ -4950,13 +4998,13 @@ function build(ctx) {
     im.userData.it = shIt; im.castShadow = true; root.add(im);
     [[SX0 + 0.3, 0.138], [SX0 + 1.4, 0.138], [SX0 + 2.6, 0.138], [SX0 + 3.3, 0.138]].forEach(([x, y], i) => bx(0.34, 0.22, 0.3, 0.01, std({ color: ['#C8B894', '#B8C0C8', '#D0C8B0', '#A8B4A0'][i], roughness: 0.9 }), root, x, y + 0.11, SZ, { it: shIt }));
   }
-  mesh(new THREE.PlaneGeometry(1.0, 0.18), std({ map: signTex('조제 · 마약류 관리', { size: 50, w: 640 }), roughness: 0.7 }), root, -0.9, 2.45, -2.47, { it: shIt, cast: false });
+  mesh(new THREE.PlaneGeometry(1.0, 0.18), std({ map: signTex('수학 탐구 도서실', { size: 50, w: 640 }), roughness: 0.7 }), root, -0.9, 2.45, -2.47, { it: shIt, cast: false });
 
   /* ─── 기호 병 다섯 — 들고 와서 저울에 한 정씩 ─── */
   const bottles = {};
   const btGeo = lathe(BOTTLE.round.map(([r, y]) => [r * 1.05, y * 1.05]), 20);
   for (const k in SYM) {
-    const s = SYM[k], it = { id: 'bottle', value: k, name: `${s.ch} 약병` };
+    const s = SYM[k], it = { id: 'bottle', value: k, name: `${s.ch} 교구` };
     const g = K.group(root, s.x, 1.273, SZ + 0.08);
     mesh(btGeo, phys({ color: '#7A4A1C', roughness: 0.15, transparent: true, opacity: 0.9 }), g, 0, 0, 0, { it });
     cyl(0.017, 0.017, 0.02, std({ color: '#E8E4DA', roughness: 0.5 }), g, 0, 0.172, 0, { it }, 14);
@@ -4969,7 +5017,7 @@ function build(ctx) {
   }
 
   /* ─── 작업대 · 저울 · 기록지 ─── */
-  const tbIt = { id: 'table', name: '조제대' };
+  const tbIt = { id: 'table', name: '수학 탐구 열람대' };
   const tb = K.group(root, 1.7, 0, -0.5);
   bx(1.3, 0.05, 0.72, 0.01, std({ color: '#D8D8D0', roughness: 0.4 }), tb, 0, 0.9, 0, { it: tbIt });
   bx(1.24, 0.82, 0.66, 0.01, std({ color: '#9AA4A0', metalness: 0.3, roughness: 0.6 }), tb, 0, 0.44, 0, { it: tbIt });
@@ -5021,27 +5069,46 @@ function build(ctx) {
   void mortar;
 
   /* ─── 약사 가운 — 서쪽 벽 고리, 주머니에 처방전 ─── */
-  const coatIt = { id: 'coat', name: '약사 가운' };
+  const coatIt = { id: 'coat', name: '수학 교사 가운' };
   const coat = K.group(root, -2.93, 0, 1.75, Math.PI / 2);
   box(0.04, 0.03, 0.08, M.steel, coat, 0, 1.92, 0.02, { it: coatIt });
   const cg = new THREE.PlaneGeometry(0.62, 1.15, 12, 10); { const p = cg.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), k = (0.57 - y) / 1.15; p.setX(i, x * (0.55 + 0.45 * k)); p.setZ(i, 0.05 + Math.sin(x * 20 + y * 4) * 0.02 * k + 0.05 * k * k); } cg.computeVertexNormals(); }
   mesh(cg, std({ color: '#E6E8E2', roughness: 0.9, side: THREE.DoubleSide }), coat, 0, 1.33, 0, { it: coatIt });
-  mesh(new THREE.PlaneGeometry(0.12, 0.035), std({ map: labelTex('약제부', { w: 256, h: 72, bg: '#E6E8E2', ink: '#2A4A8A', font: '700 44px "IBM Plex Sans KR", sans-serif' }), roughness: 0.8 }), coat, -0.1, 1.6, 0.09, { it: coatIt, cast: false });
+  mesh(new THREE.PlaneGeometry(0.12, 0.035), std({ map: labelTex('수학과', { w: 256, h: 72, bg: '#E6E8E2', ink: '#2A4A8A', font: '700 44px "IBM Plex Sans KR", sans-serif' }), roughness: 0.8 }), coat, -0.1, 1.6, 0.09, { it: coatIt, cast: false });
   const presc = K.group(coat, 0.12, 1.25, 0.14);
   const prC = docCanvas({
-    head: '처방전', sub: '성심 종합병원 약제부 · 원내 조제', seed: 33, blood: 0.2,
-    lines: [`환자  ${who()}   (수술 전 처치)`, { t: '세도린   21:00   2정', size: 46 }, { t: '라미폰   08:00   1정', size: 46 }, { t: '옥사텐   13:00   3정', size: 46 }, '', { t: '금고: 투약 시간순 총량(mg)', color: '#A02020' }, '— 약제부장'],
-    stamp: '조제'
+    head: '수학 탐구 보고서', sub: '청운고등학교 · 공통수학1 곱셈공식', seed: 33, blood: 0,
+    lines: [
+      `학생  ${who()}   (수학 탐구반)`,
+      { t: '조건: x + y = 6,  xy = 4', size: 44 },
+      { t: '① x³ + y³ = (x+y)³ - 3xy(x+y) = 216 - 72 = 144', size: 36 },
+      { t: '② x² + y² = (x+y)² - 2xy = 36 - 8 = 028', size: 36 },
+      '',
+      { t: '★ 금고 6자리: [144] + [028] => 144028', color: '#1B5E20' },
+      '— 수학과 지도교사'
+    ],
+    stamp: '확인'
   });
-  const prLines = [`처방전 — 환자 ${who()} (수술 전 처치)`, '세도린 21:00 2정', '라미폰 08:00 1정', '옥사텐 13:00 3정', '금고: 투약 시간순 총량(mg). — 약제부장'];
-  // 약품 코드표 — 동쪽 벽. 병에는 기호만 있다
-  const cdC = docCanvas({ head: '약품 코드표', sub: '원내 조제실 · 병 라벨 기호', seed: 38, blood: 0.1, lines: [''].concat(Object.values(SYM).map(v => ({ t: `${v.ch}   ${v.name}`, size: 52 })), ['', '저울: 10mg 미만은 LO']) });
-  const cdLines = ['약품 코드표 — 병 라벨 기호', ...Object.values(SYM).map(v => `${v.ch}  ${v.name}`), '저울: 10mg 미만은 LO'];
+  const prLines = [`수학 탐구 보고서 — 학생 ${who()}`, '조건: x + y = 6, xy = 4', 'x³ + y³ = 144 (3자리)', 'x² + y² = 028 (3자리)', '금고 6자리 다이얼 암호 = 144028'];
+  // 곱셈 공식 변형표 — 동쪽 벽
+  const cdC = docCanvas({
+    head: '곱셈 공식 변형 일람표', sub: '고1 공통수학1 필수 공식', seed: 38, blood: 0,
+    lines: [
+      '1) a² + b² = (a+b)² - 2ab',
+      '2) a³ + b³ = (a+b)³ - 3ab(a+b)',
+      '3) a³ - b³ = (a-b)³ + 3ab(a-b)',
+      '',
+      '탐구 과제: x+y=6, xy=4 일 때',
+      'x³ + y³ 의 값(3자리)과 x² + y² 의 값(3자리)을',
+      '순서대로 금고 다이얼에 입력하시오 (144028)'
+    ]
+  });
+  const cdLines = ['곱셈 공식 변형 일람표', 'a² + b² = (a+b)² - 2ab', 'a³ + b³ = (a+b)³ - 3ab(a+b)', 'x+y=6, xy=4 => x³+y³=144, x²+y²=28 => 144028'];
   mesh(new THREE.PlaneGeometry(0.08, 0.1), std({ map: toTex(prC, { wrap: false }), roughness: 0.9 }), presc, 0, 0, 0, { it: coatIt, cast: false });
   presc.visible = false;
 
-  /* ─── 냉장고 — 서쪽 벽. 안에서 두드린다(분위기) ─── */
-  const frIt = { id: 'fridge', name: '약품 냉장고' };
+  /* ─── 시약 보관함 — 서쪽 벽 ─── */
+  const frIt = { id: 'fridge', name: '자료 보관함' };
   const fr = K.group(root, -2.67, 0, 0.4, Math.PI / 2);
   bx(0.72, 1.85, 0.62, 0.02, std({ color: '#D8DCD8', metalness: 0.3, roughness: 0.45 }), fr, 0, 0.925, 0, { it: frIt });
   const frDoor = K.group(fr, -0.35, 0, 0.315);
@@ -5054,18 +5121,18 @@ function build(ctx) {
   box(0.3, 0.2, 0.2, std({ color: '#2A3A4A', roughness: 0.5, transparent: true, opacity: 0.8 }), fr, -0.05, 0.6, 0.1, { it: frIt, cast: false });
 
   /* ─── 창구 셔터 — 동쪽 벽 ─── */
-  const shtIt = { id: 'shutter', name: '창구 셔터' };
+  const shtIt = { id: 'shutter', name: '도서 대출 창구' };
   const sht = K.group(root, 2.99, 0, 1.0, -Math.PI / 2);
   box(1.5, 0.06, 0.4, std({ color: '#C8C4B4', roughness: 0.5 }), sht, 0, 0.95, 0.18, { it: shtIt });
   for (let y = 1.0; y < 2.1; y += 0.07) box(1.4, 0.06, 0.02, std({ color: '#8A9088', metalness: 0.6, roughness: 0.5 }), sht, 0, y + 0.035, 0.02, { it: shtIt, cast: false });
-  mesh(new THREE.PlaneGeometry(0.6, 0.14), std({ map: signTex('투약 창구', { size: 64 }), roughness: 0.7 }), sht, 0, 2.2, 0.03, { it: shtIt, cast: false });
+  mesh(new THREE.PlaneGeometry(0.6, 0.14), std({ map: signTex('도서 대출 창구', { size: 64 }), roughness: 0.7 }), sht, 0, 2.2, 0.03, { it: shtIt, cast: false });
 
-  const cdIt = { id: 'codes', name: '약품 코드표' };
+  const cdIt = { id: 'codes', name: '곱셈 공식 변형표' };
   const cdb = K.group(root, 2.97, 1.65, -0.35, -Math.PI / 2);
   box(0.46, 0.58, 0.02, std({ color: '#3A3E40', roughness: 0.7 }), cdb, 0, 0, 0, { it: cdIt });
   decal(0.42, 0.53, std({ map: toTex(cdC, { wrap: false }), roughness: 0.85 }), cdb, 0, 0, 0.012, 0, { it: cdIt, cast: false });
-  /* ─── 금고 — 동쪽 벽 받침대 위. 다이얼 셋(◇ · △ · ○), 각 두 자리 ─── */
-  const sfIt = { id: 'safe', name: '약품 금고' };
+  /* ─── 금고 — 동쪽 벽 받침대 위 ─── */
+  const sfIt = { id: 'safe', name: '수학 탐구실 금고' };
   const sg = K.group(root, 2.62, 0.25, -1.9, -Math.PI / 2);
   bx(0.6, 0.6, 0.5, 0.01, std({ color: '#4A4E4C', roughness: 0.7 }), sg, 0, 0.05, 0, { it: sfIt });
   const safeM = std({ color: '#3A4A44', metalness: 0.6, roughness: 0.45 });
@@ -5092,7 +5159,7 @@ function build(ctx) {
   [0, 1, 2].forEach(k => { const sp = box(0.012, 0.09, 0.012, M.steel, handle, 0, 0, 0.02, { it: sfIt }); sp.rotation.z = k * Math.PI * 2 / 3; sp.position.set(Math.sin(k * 2.09) * 0.04, Math.cos(k * 2.09) * 0.04, 0.02); });
   const dialG = K.group(sdoor, 0.2, 0.86, 0.03);
   const drumIts = [];
-  mesh(new THREE.PlaneGeometry(0.36, 0.05), std({ map: labelTex('투약 시간순 총량 (mg)', { w: 640, h: 88, bg: '#D8D4C4', font: '700 50px "IBM Plex Sans KR", sans-serif' }), roughness: 0.7 }), dialG, 0, 0.13, 0.001, { it: sfIt, cast: false });
+  mesh(new THREE.PlaneGeometry(0.36, 0.05), std({ map: labelTex('곱셈 공식 변형 (6자리)', { w: 640, h: 88, bg: '#D8D4C4', font: '700 50px "IBM Plex Sans KR", sans-serif' }), roughness: 0.7 }), dialG, 0, 0.13, 0.001, { it: sfIt, cast: false });
   BYTIME.forEach(([k], j) => {
     mesh(new THREE.PlaneGeometry(0.1, 0.045), std({ map: labelTex(`${j + 1}번째`, { w: 256, h: 112, bg: '#D8D4C4', font: '700 50px "IBM Plex Sans KR", sans-serif' }), roughness: 0.7 }), dialG, -0.13 + j * 0.13, 0.065, 0.001, { it: sfIt, cast: false });
     box(0.11, 0.07, 0.01, M.dark, dialG, -0.13 + j * 0.13, 0, 0, { it: sfIt, cast: false });
@@ -5269,16 +5336,10 @@ function build(ctx) {
     return map[id] ? map[id]() : null;
   }
   function hint() {
-    if (!S.presc) return [wpos(coat).add(new V3(0.1, 1.35, 0)), '약사라면 처방전을 어디에 넣어 둘까.', '서쪽 벽 고리의 약사 가운 — 주머니를 뒤지자.'];
-    if (!S.codeRead) return [wpos(cdb).add(new V3(-0.1, 0.35, 0)), '처방전은 약 이름으로, 병은 기호로만 적혀 있다. 둘을 잇는 표가 어딘가에.', '동쪽 벽 "약품 코드표" — 세도린 ◇ · 라미폰 △ · 옥사텐 ○.'];
-    const need = RX.map(([k]) => k).filter(k => !S.weighed.has(k));
-    if (need.length) {
-      const k = need[0], n = RX.find(x => x[0] === k)[1];
-      if (S.carry !== k) return [wpos(bottles[k].g).add(new V3(0, 0.25, 0)), `${SYM[k].name}의 1회 총량을 재야 한다. 코드표로 병을 찾자.`, `${SYM[k].name} = ${SYM[k].ch} 병(약장 가운데 단). 들고 저울로.`];
-      return [scalePos().add(new V3(0, 0.15, 0)), `${SYM[k].ch} 병을 든 채 저울을 누를 때마다 한 정씩 올라간다.`, `처방전대로 ${SYM[k].ch}를 ${n}정 올리고 총량을 읽자(10mg 미만은 LO).`];
-    }
-    if (!S.safeOpen) return [wpos(dialG).add(new V3(-0.1, 0.12, 0)), '금고는 "투약 시간순 총량". 처방전의 시각을 이른 순서로 줄 세우자.', '08:00 라미폰 △ 30 → 13:00 옥사텐 ○ 24 → 21:00 세도린 ◇ 24 — 다이얼 30 · 24 · 24.'];
-    if (!S.keyTaken) return [wpos(bkey).add(new V3(0, 0.1, 0)), '금고 안의 열쇠를 집자.'];
+    if (!S.presc) return [wpos(coat).add(new V3(0.1, 1.35, 0)), '수학 교사 가운 안주머니의 탐구 보고서를 뒤지자.'];
+    if (!S.codeRead) return [wpos(cdb).add(new V3(-0.1, 0.35, 0)), '동쪽 벽의 "곱셈 공식 변형 일람표"를 확인하자.'];
+    if (!S.safeOpen) return [wpos(dialG).add(new V3(-0.1, 0.12, 0)), '금고 다이얼은 곱셈공식 변형값: x³+y³(144) + x²+y²(028) => 1 4 4 0 2 8.'];
+    if (!S.keyTaken) return [wpos(bkey).add(new V3(0, 0.1, 0)), '금고 안의 뒷문 열쇠를 집자.'];
     if (!S.maskTaken) return [wpos(mask).add(new V3(0, 0.12, 0)), '방독 마스크도 챙기자 — 옥상에서 필요하다.'];
     if (!S.doorOpen) return [wpos(khole).add(new V3(0.1, 0.2, 0)), '서쪽 벽 뒷문 — 열쇠로 열자.'];
     return [new V3(-3.8, 0.1, -0.9), '뒷문 밖 바닥을 클릭해 나가자.'];
@@ -5304,9 +5365,9 @@ function build(ctx) {
     INERT: new Set(['floorpills']),
     ROOM_N: { codes: [-1, 0, 0], coat: [1, 0, 0], bottle: [0, 0, 1], scale: [0, 0, 1], tare: [0, 0, 1], log: [0, 0, 1], drum: [-1, 0, 0], safe: [-1, 0, 0], backkey: [-1, 0, 0], mask: [-1, 0, 0], backdoor: [1, 0, 0], fridge: [1, 0, 0] },
     INSPECT: {
-      table: '조제대. 저울과 기록지, 막자사발.',
-      shutter: '투약 창구 셔터가 내려져 있다. 밖은 조용하다.',
-      tube: '형광등 하나가 떨린다.'
+      table: '수학 탐구 열람대. 탐구 보고서와 교구들이 놓여 있다.',
+      shutter: '도서 대출 창구 셔터가 내려져 있다.',
+      tube: '형광등 하나가 깜빡거린다.'
     },
     PRESS: new Set(['drum', 'tare', 'scale']),
     needsHand: r => r.id === 'bottle' || r.id === 'backkey' || r.id === 'mask' || (r.id === 'coat' && !S.presc) || (r.id === 'backdoor' && A.inv.has('backkey')) || r.id === 'drum' || r.id === 'tare',
@@ -5315,7 +5376,7 @@ function build(ctx) {
     describe, TAP, DRAG, hint, update,
     moving: () => false,
     onEnter() {
-      A.say('약제실. 약장 가득한 기호 병들 — 그리고 냉장고에서 무슨 소리가.', new V3(0, 1.7, -1.2), null, 4600);
+      A.say('수학 탐구실 & 도서실. 금고 다이얼(6자리)을 풀 열쇠를 찾아야 한다.', new V3(0, 1.7, -1.2), null, 4600);
       A.amb.drone(new V3(-2.5, 1.2, 0.4), [55, 110, 165], { gain: 0.01, type: 'sawtooth', cutoff: 300 });
       A.amb.bed(new V3(0, 2.5, 0), { type: 'bandpass', f: 320, q: 0.6, gain: 0.02, lfo: 0.05, lfoAmt: 0.6 });
       A.amb.every(() => 9000 + Math.random() * 9000, () => sfx.creak(new V3((Math.random() - 0.5) * 6, 2.4, (Math.random() - 0.5) * 5), 2.2));
@@ -5345,7 +5406,7 @@ const __default = { id: 'morgue', title: '교무실', stars: 4, build };
 
 const NAMES = { 1: '서동훈', 2: '이정숙', 3: '최민호', 4: '오세진', 5: '장윤서', 6: '김태호', 7: '문경아', 8: '백승철', 9: '윤미라', 10: '조은비', 11: `${who()}`, 12: '강도윤' };
 const TIMES = { 1: '23:05', 2: '00:40', 3: '04:15', 4: '02:14', 5: '21:50', 6: '05:30', 7: '01:05', 8: '22:30', 9: '03:40', 10: '06:20', 11: '17:40', 12: '19:55' };
-const ORDER = [4, 9, 11], FALLEN = [9, 11]; // 명단(한지우 · 오세진 · 윤미라)을 사망 시각이 이른 순으로: 오세진 02:14 → 윤미라 03:40 → 한지우 17:40
+const ORDER = [6, 8, 10], FALLEN = []; // 피타고라스 연속 세 짝수: 6² + 8² = 10² => 6번 -> 8번 -> 10번 사물함 순서대로 개방
 
 function build(ctx) {
   NAMES[11] = who(); // 11번 칸 — 내 이름
@@ -5369,15 +5430,15 @@ function build(ctx) {
   const southIt = { id: 'southDoor', name: '들어온 문' };
   bx(1.2, 2.1, 0.07, 0.01, M.paint, root, 0, 1.05, 3.465, { it: southIt });
 
-  /* ─── 냉장 서랍 12칸 — 북쪽 벽. 번호판 · 이름표 꽂이 · 손잡이 ─── */
+  /* ─── 교직원 사물함 12칸 — 북쪽 벽. 번호판 · 이름표 꽂이 · 손잡이 ─── */
   const steelM = std({ color: '#B8BEC0', metalness: 0.85, roughness: 0.32 });
-  const bankIt = { id: 'bank', name: '냉장 서랍장' };
+  const bankIt = { id: 'bank', name: '교직원 사물함' };
   const BX0 = -1.6, BW = 0.8, BY0 = 0.18, BH = 0.66, BZ = -3.5;
   bx(3.4, 2.16, 0.9, 0.01, std({ color: '#8A9294', metalness: 0.6, roughness: 0.5 }), root, 0, 1.08, BZ + 0.44, { it: bankIt });
   const drawers = {};
-  const tagTex = no => { const c = cv(256, 96), g = c.getContext('2d'); g.fillStyle = '#F2EEE2'; g.fillRect(0, 0, 256, 96); g.strokeStyle = '#6A6A60'; g.lineWidth = 6; g.strokeRect(3, 3, 250, 90); g.fillStyle = '#1A1A1A'; g.textAlign = 'center'; fitText(g, NAMES[no], 128, 46, 226, 44, '700 {px}px "IBM Plex Sans KR", sans-serif'); g.font = '600 26px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#7A2A20'; g.fillText(`사망 ${TIMES[no]}`, 128, 80); return toTex(c, { wrap: false }); };
+  const tagTex = no => { const c = cv(256, 96), g = c.getContext('2d'); g.fillStyle = '#F2EEE2'; g.fillRect(0, 0, 256, 96); g.strokeStyle = '#6A6A60'; g.lineWidth = 6; g.strokeRect(3, 3, 250, 90); g.fillStyle = '#1A1A1A'; g.textAlign = 'center'; fitText(g, NAMES[no], 128, 46, 226, 44, '700 {px}px "IBM Plex Sans KR", sans-serif'); g.font = '600 24px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#1B5E20'; g.fillText(`교직원 ${no}번`, 128, 80); return toTex(c, { wrap: false }); };
   for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
-    const no = row * 4 + col + 1, it = { id: 'drawer', value: no, name: `${no}번 칸` };
+    const no = row * 4 + col + 1, it = { id: 'drawer', value: no, name: `${no}번 사물함` };
     const x = BX0 + BW * (col + 0.5), y = BY0 + BH * (2 - row) + BH / 2;
     const g = K.group(root, x, y, BZ + 0.9);
     // 문 — 왼쪽 경첩으로 열리고, 트레이가 앞으로 미끄러져 나온다(안의 물건이 위에서 보인다)
@@ -5399,26 +5460,26 @@ function build(ctx) {
     drawers[no] = { g, front, fm, tag, tray, x, y, out: 0 };
     K.hitbox(front, 0.74, 0.6, 0.08, it, 0.37, 0, 0.04);
   }
-  // 서랍 속 — 4: 빈 자루, 9: 황동 열쇠(꼬리표 09), 11: 같은 팔찌 + 부검실 열쇠
-  const bagM = std({ color: '#1A1C1E', roughness: 0.45, metalness: 0.1 });
-  { const t = drawers[4].tray; const bag = bx(0.5, 0.06, 0.72, 0.03, bagM, t, 0, 0.04, 0, { it: { id: 'bag', name: '빈 시신 자루' } }); bag.scale.y = 0.6; box(0.02, 0.012, 0.6, M.steel, t, 0.12, 0.07, 0, { it: { id: 'bag', name: '빈 시신 자루' }, cast: false }); }
+  // 서랍 속 — 6: 피타고라스 탐구 메모, 8: 황동 열쇠(꼬리표 08), 10: 옥상 비상계단 마스터키
   const brassIt = { id: 'brass', name: '황동 열쇠' };
-  const brass = K.group(drawers[9].tray, 0.05, 0.03, 0.18);
+  const brass = K.group(drawers[8].tray, 0.05, 0.03, 0.18);
   mesh(keyGeo(0.075, true), std({ color: '#C8A050', metalness: 0.95, roughness: 0.28 }), brass, 0, 0, 0, { it: brassIt });
-  const tagC = cv(160, 96); { const g = tagC.getContext('2d'); g.fillStyle = '#E4D6B0'; g.fillRect(0, 0, 160, 96); g.fillStyle = '#6A3A1A'; g.font = '700 58px "Gowun Batang", serif'; g.textAlign = 'center'; g.fillText('09', 80, 66); g.strokeStyle = '#8A6A3A'; g.lineWidth = 4; g.strokeRect(3, 3, 154, 90); }
+  const tagC = cv(160, 96); { const g = tagC.getContext('2d'); g.fillStyle = '#E4D6B0'; g.fillRect(0, 0, 160, 96); g.fillStyle = '#6A3A1A'; g.font = '700 58px "Gowun Batang", serif'; g.textAlign = 'center'; g.fillText('08', 80, 66); g.strokeStyle = '#8A6A3A'; g.lineWidth = 4; g.strokeRect(3, 3, 154, 90); }
   const brassTag = decal(0.06, 0.036, std({ map: toTex(tagC, { wrap: false }), roughness: 0.8, side: THREE.DoubleSide }), brass, -0.075, 0.004, 0.02, -Math.PI / 2, { it: brassIt, cast: false }); brassTag.rotation.z = 0.3;
   K.hitbox(brass, 0.2, 0.06, 0.1, brassIt, -0.02, 0, 0);
-  const band2It = { id: 'band2', name: '팔찌' };
-  const band2 = K.group(drawers[11].tray, -0.12, 0.03, 0.1);
+  const brass9 = brass.clone(); drawers[9].tray.add(brass9);
+  const band2It = { id: 'band2', name: '학생 팔찌' };
+  const band2 = K.group(drawers[10].tray, -0.12, 0.03, 0.1);
   mesh(new THREE.TorusGeometry(0.04, 0.008, 8, 24), std({ color: '#ECEAE2', roughness: 0.6 }), band2, 0, 0, 0, { it: band2It }).rotation.x = Math.PI / 2;
-  box(0.03, 0.004, 0.02, std({ color: '#D24B3E', roughness: 0.6 }), band2, 0.04, 0.005, 0, { it: band2It });
+  box(0.03, 0.004, 0.02, std({ color: '#1B5E20', roughness: 0.6 }), band2, 0.04, 0.005, 0, { it: band2It });
   K.hitbox(band2, 0.12, 0.05, 0.12, band2It, 0, 0, 0);
-  const akIt = { id: 'akey', name: '부검실 열쇠' };
-  const akey = K.group(drawers[11].tray, 0.12, 0.03, 0.2);
+  const akIt = { id: 'akey', name: '옥상 마스터키' };
+  const akey = K.group(drawers[10].tray, 0.12, 0.03, 0.2);
   mesh(keyGeo(0.07), std({ color: '#A8AEB0', metalness: 0.9, roughness: 0.3 }), akey, 0, 0, 0, { it: akIt });
   for (let k = 0; k < 6; k++) mesh(new THREE.TorusGeometry(0.008, 0.002, 4, 10), M.steel, akey, -0.03 - k * 0.013, 0, 0, { it: akIt, cast: false }).rotation.y = k % 2 ? Math.PI / 2 : 0;
   K.hitbox(akey, 0.16, 0.05, 0.08, akIt, 0, 0, 0);
-  mesh(new THREE.PlaneGeometry(1.6, 0.16), std({ map: signTex('시신 안치 · 냉장', { size: 60, w: 768 }), roughness: 0.7 }), root, 0, 2.4, BZ + 0.9, { it: bankIt, cast: false });
+  const akey11 = akey.clone(); drawers[11].tray.add(akey11);
+  mesh(new THREE.PlaneGeometry(1.6, 0.16), std({ map: signTex('교직원 사물함', { size: 60, w: 768 }), roughness: 0.7 }), root, 0, 2.4, BZ + 0.9, { it: bankIt, cast: false });
 
   /* ─── 떨어진 이름표 둘 — 서랍장 앞 바닥 ─── */
   const tagObjs = {};
@@ -5438,48 +5499,49 @@ function build(ctx) {
     return c;
   }
 
-  /* ─── 부검대 — 시트 덮인 형체 ─── */
-  const atIt = { id: 'autopsy', name: '부검대' };
+  /* ─── 교무 회의 테이블 ─── */
+  const atIt = { id: 'autopsy', name: '교무 회의 테이블' };
   const at = K.group(root, 0.3, 0, 0.4);
   cyl(0.18, 0.26, 0.8, steelM, at, 0, 0.4, 0, { it: atIt }, 16);
   bx(0.8, 0.06, 2.1, 0.02, steelM, at, 0, 0.85, 0, { it: atIt });
   [-1, 1].forEach(s => box(0.03, 0.06, 2.1, steelM, at, s * 0.39, 0.9, 0, { it: atIt }));
   const body = K.group(at, 0, 0.88, 0);
-  const shM = std({ color: '#D8D8D0', roughness: 0.95 });
-  const shGeo = new THREE.PlaneGeometry(0.76, 2.0, 16, 40); {
-    const p = shGeo.attributes.position;
-    for (let i = 0; i < p.count; i++) {
-      const x = p.getX(i), y = p.getY(i);
-      const head = Math.exp(-((y - 0.8) ** 2) / 0.012 - (x ** 2) / 0.012) * 0.16;
-      const torso = y > -0.25 && y < 0.65 ? Math.max(0, 1 - (x / 0.24) ** 2) * 0.13 : 0;
-      const legs = y <= -0.25 ? [-0.1, 0.1].reduce((a, c) => a + Math.max(0, 1 - ((x - c) / 0.09) ** 2) * 0.08, 0) : 0;
-      const feet = Math.exp(-((y + 0.92) ** 2) / 0.004) * [-0.1, 0.1].reduce((a, c) => a + Math.exp(-((x - c) ** 2) / 0.003), 0) * 0.08;
-      p.setZ(i, Math.max(head, torso, legs, feet) + 0.01);
-    }
-    shGeo.computeVertexNormals();
-  }
-  const sheet = mesh(shGeo, shM, body, 0, 0.01, 0, { it: atIt });
-  sheet.rotation.x = -Math.PI / 2;
-  const flatGeo = new THREE.PlaneGeometry(0.76, 2.0); const flat = mesh(flatGeo, shM, body, 0, 0.012, 0, { it: atIt }); flat.rotation.x = -Math.PI / 2; flat.visible = false;
+  const shM = std({ color: '#3A4D39', roughness: 0.95 });
+  const flatGeo = new THREE.PlaneGeometry(0.76, 2.0); const flat = mesh(flatGeo, shM, body, 0, 0.012, 0, { it: atIt }); flat.rotation.x = -Math.PI / 2; flat.visible = true;
+  const sheet = flat;
   box(0.12, 0.004, 0.06, std({ color: '#E8E2C8', roughness: 0.8 }), body, 0.2, 0.02, -0.95, { it: atIt, cast: false });
-  const lampIt = { id: 'lamp', name: '부검 조명' };
+  const lampIt = { id: 'lamp', name: '교무실 조명' };
   cyl(0.3, 0.34, 0.12, std({ color: '#D0D4D0', metalness: 0.4, roughness: 0.4 }), root, 0.3, 2.4, 0.4, { it: lampIt }, 24);
   cyl(0.02, 0.02, 0.5, M.steel, root, 0.3, 2.75, 0.4, { it: lampIt }, 8);
   const atL = new THREE.SpotLight('#E8F4FF', 4, 5, 0.6, 0.6, 1.5); atL.position.set(0.3, 2.35, 0.4); atL.target.position.set(0.3, 0.8, 0.4); root.add(atL, atL.target);
   const atLens = std({ color: '#FFF', emissive: '#E8F4FF', emissiveIntensity: 1.5 });
   cyl(0.26, 0.26, 0.01, atLens, root, 0.3, 2.335, 0.4, { it: lampIt, cast: false }, 24);
 
-  /* ─── 접수대 — 당직 일지 · 라디오 · 모니터 ─── */
-  const dkIt = { id: 'desk', name: '접수대' };
+  /* ─── 당직 교사 책상 — 당직 일지 · 라디오 · 모니터 ─── */
+  const dkIt = { id: 'desk', name: '당직 교사 책상' };
   const dk = K.group(root, -2.5, 0, 2.0);
   bx(1.6, 0.05, 0.8, 0.01, std({ color: '#7A6A58', roughness: 0.7 }), dk, 0, 0.9, 0, { it: dkIt });
   bx(1.5, 0.86, 0.7, 0.01, std({ color: '#5A5048', roughness: 0.8 }), dk, 0, 0.44, 0, { it: dkIt });
-  const logIt = { id: 'dutylog', name: '당직 일지' };
+  const logIt = { id: 'dutylog', name: '교무 당직 일지' };
   const logC = docCanvas({
-    head: '영안실 당직 일지', sub: '지하 1층 · 야간', seed: 44, blood: 0.3,
-    lines: ['01:40  이송 요청 — 명단은 서쪽 게시판', { t: '※ 순서는 당직 수칙대로! (북쪽 벽)', color: '#A02020' }, { t: '   틀리면 불이 나간다…', color: '#A02020' }, '이름표가 떨어진 칸은 안 열린다.', '→ 번호 맞는 칸에 꽂을 것.', '한 장은 라디오 배터리 칸에…', '(라디오는 수칙대로 맞춰야 열림)']
+    head: '교무실 당직 일지', sub: '본관 2층 교무실', seed: 44, blood: 0,
+    lines: [
+      '★ 옥상 비상계단 마스터 열쇠 보관 안내 ★',
+      '마스터 열쇠는 직각삼각형 피타고라스 정리를',
+      '만족하는 [연속하는 세 짝수] 번호의 사물함 3개에',
+      '순서대로 보관되어 있습니다.',
+      { t: '방정식: (2k-2)² + (2k)² = (2k+2)²', color: '#1B5E20' },
+      { t: '풀이: 4k² - 8k + 4 + 4k² = 4k² + 8k + 4  => k=4', color: '#1B5E20' },
+      { t: '=> 세 짝수: 6번 -> 8번 -> 10번 사물함!', color: '#B71C1C' },
+      '순서대로 열어 옥상 마스터키를 확보하시오.'
+    ]
   });
-  const logLines = ['영안실 당직 일지 — 지하 1층', '01:40 이송 요청 — 명단은 서쪽 벽 게시판.', '※ 서랍은 당직 수칙(북쪽 벽)의 순서대로만 연다. 틀리면 불이 나간다.', '이름표가 떨어진 칸은 안 열린다 → 이름표를 번호가 맞는 칸에 꽂을 것.', '이름표 한 장은 라디오 배터리 칸에 넣어 뒀다. 라디오는 당직 수칙의 주파수에 맞춰야 칸이 열린다.', '— 당직 N'];
+  const logLines = [
+    '교무실 당직 일지 — 본관 2층',
+    '마스터 열쇠 보관: 피타고라스 정리를 만족하는 연속하는 세 짝수 사물함.',
+    '(2k-2)² + (2k)² = (2k+2)² => k=4 => 6번 -> 8번 -> 10번 사물함 순서대로 개방!',
+    '순서가 틀리면 전기가 차단되고 사물함이 다시 잠깁니다.'
+  ];
   const dlog = K.group(dk, -0.3, 0.927, 0.05, 0.2);
   box(0.24, 0.012, 0.32, std({ color: '#3A2A1A', roughness: 0.7 }), dlog, 0, 0, 0, { it: logIt });
   decal(0.21, 0.28, std({ map: toTex(logC, { wrap: false }), roughness: 0.9 }), dlog, 0, 0.007, 0, -Math.PI / 2, { it: logIt, cast: false });
@@ -5527,11 +5589,11 @@ function build(ctx) {
     tagObjs[no] = { g, tc };
   }
   const dialM = std({ color: '#E8C890', emissive: '#FFB060', emissiveIntensity: 0.6 });
-  // 야간 당직 수칙 — 북쪽 벽, 서랍장 왼쪽(라디오 주파수)
-  const rlIt = { id: 'rules', name: '야간 당직 수칙' };
-  const rulesC = docCanvas({ head: '야간 당직 수칙', sub: '영안실 · 지하 1층', seed: 66, blood: 0.1,
-    lines: ['1. 이송은 사망 시각이 이른 순.', '   (시각은 칸마다 이름표에)', '2. 이름표 없는 칸은 열리지 않음.', '3. 접수대 라디오는 병원 방송에', '   맞춰 둘 것. 주파수는', '   게시판 독감 전단 맨 아래.'] });
-  const rulesLines = ['야간 당직 수칙 — 영안실', '1. 이송은 사망 시각이 이른 순. 시각은 칸마다 이름표에 적혀 있다.', '2. 이름표 없는 칸은 열리지 않는다.', '3. 접수대 라디오는 병원 방송에 맞춰 둘 것 — 주파수는 게시판 독감 전단 맨 아래.'];
+  // 교직원 당직 수칙 — 북쪽 벽, 사물함 왼쪽
+  const rlIt = { id: 'rules', name: '교직원 당직 수칙' };
+  const rulesC = docCanvas({ head: '교직원 당직 수칙', sub: '본관 2층 · 교무실', seed: 66, blood: 0,
+    lines: ['1. 사물함은 피타고라스', '   연속 짝수 순으로 개방.', '   (6번 -> 8번 -> 10번)', '2. 순서가 어긋나면 전력 차단.', '3. 8번에는 보조 열쇠,', '   10번에는 옥상 마스터키 보관.'] });
+  const rulesLines = ['교직원 당직 수칙 — 교무실', '1. 사물함은 직각삼각형 피타고라스 정리 연속 짝수 순으로 개방: 6번 -> 8번 -> 10번.', '2. 순서가 틀리면 전기가 차단되고 사물함이 닫힙니다.', '3. 8번에 보조 열쇠, 10번에 옥상 비상계단 마스터키가 보관되어 있습니다.'];
   const rl = K.group(root, -2.55, 1.5, -3.46);
   box(0.42, 0.52, 0.02, std({ color: '#3A3E40', roughness: 0.7 }), rl, 0, 0, 0, { it: rlIt });
   decal(0.38, 0.48, std({ map: toTex(rulesC, { wrap: false }), roughness: 0.85 }), rl, 0, 0, 0.012, 0, { it: rlIt, cast: false });
@@ -5551,35 +5613,42 @@ function build(ctx) {
   const corkC = cv(256, 256); { const g = corkC.getContext('2d'); g.fillStyle = '#A8784A'; g.fillRect(0, 0, 256, 256); const r = rng(6); for (let k = 0; k < 2500; k++) { g.fillStyle = `rgba(${60 + r() * 60},${40 + r() * 30},20,${r() * 0.5})`; g.fillRect(r() * 256, r() * 256, 2, 2); } }
   bx(1.3, 0.9, 0.03, 0.008, std({ color: '#6A4A2A', roughness: 0.8 }), bd, 0, 0, 0.015, { it: bdIt });
   plane(1.22, 0.82, std({ map: toTex(corkC, { repeat: [2, 1.5] }), roughness: 0.95 }), bd, 0, 0, 0.032, 0, { it: bdIt, cast: false });
-  const listIt = { id: 'list', name: '이송 명단' };
+  const listIt = { id: 'list', name: '사물함 배치도' };
   const listC = docCanvas({
-    head: '이송 명단', sub: '영안실 → 부검실 · 순서 엄수', seed: 55, blood: 0.2,
-    lines: [{ t: `·  ${who()}`, size: 56, color: '#A02020' }, { t: '·  오세진', size: 56 }, { t: '·  윤미라', size: 56 }, '', '순서는 당직 수칙대로.', '담당 N — 17:40 전까지'],
-    stamp: '긴급'
+    head: '교직원 사물함 배치도', sub: '피타고라스 연속 짝수 해제', seed: 55, blood: 0,
+    lines: [
+      { t: '1단계: 6번 사물함 (6²=36)', size: 40 },
+      { t: '2단계: 8번 사물함 (8²=64)', size: 40 },
+      { t: '3단계: 10번 사물함 (10²=100)', size: 40, color: '#1B5E20' },
+      '',
+      '직각삼각형: 36 + 64 = 100 만족!',
+      '순서대로 개방하여 옥상 열쇠를 획득할 것'
+    ],
+    stamp: '확인'
   });
-  const listLines = ['이송 명단 — 영안실 → 부검실 · 순서 엄수', `· ${who()}`, '· 오세진', '· 윤미라', '순서는 당직 수칙대로. — 담당 N, 17:40 전까지'];
+  const listLines = ['교직원 사물함 배치도 — 피타고라스 정리', '6번 사물함 (6²=36)', '8번 사물함 (8²=64)', '10번 사물함 (10²=100)', '피타고라스 연속 짝수: 6번 -> 8번 -> 10번 순서대로 개방!'];
   decal(0.34, 0.43, std({ map: toTex(listC, { wrap: false }), roughness: 0.9 }), bd, 0.05, 0.02, 0.036, 0, { it: listIt, cast: false });
   K.hitbox(bd, 0.36, 0.45, 0.02, listIt, 0.05, 0.02, 0.04);
   // 다른 쪽지들
   [[-0.45, 0.2, 0.2, 60], [0.46, -0.18, -0.15, 61], [-0.42, -0.22, 0.1, 62]].forEach(([x, y, r, s]) => { decal(0.2, 0.26, std({ map: paperTex(s), roughness: 0.9 }), bd, x, y, 0.035, 0, { it: bdIt, cast: false }).rotation.z = r; });
   const flyers = [0, 1].map(k => {
-    const it = { id: 'flyer', value: k, name: '전단지' };
+    const it = { id: 'flyer', value: k, name: '학사 안내문' };
     const g = K.group(bd, 0.05 + (k ? 0.06 : -0.05), 0.02 + (k ? -0.08 : 0.08), 0.042 + k * 0.003);
     g.rotation.z = k ? -0.12 : 0.1;
-    const fc = cv(256, 320); { const q = fc.getContext('2d'); q.fillStyle = k ? '#E8D84A' : '#8AC8E0'; q.fillRect(0, 0, 256, 320); q.fillStyle = '#1A1A1A'; q.font = '700 34px "IBM Plex Sans KR", sans-serif'; q.textAlign = 'center'; q.fillText(k ? '독감 예방접종' : '금연 병원', 128, 80); q.font = '500 22px "IBM Plex Sans KR", sans-serif'; q.fillText(k ? '10월 한 달간' : '흡연 시 과태료', 128, 130); q.fillText('성심 종합병원', 128, 250); if (k) { q.fillStyle = '#7A1A10'; q.font = '700 24px "IBM Plex Sans KR", sans-serif'; q.fillText('병원 방송 · 성심 FM 97.3', 128, 300); } }
+    const fc = cv(256, 320); { const q = fc.getContext('2d'); q.fillStyle = k ? '#E8D84A' : '#8AC8E0'; q.fillRect(0, 0, 256, 320); q.fillStyle = '#1A1A1A'; q.font = '700 34px "IBM Plex Sans KR", sans-serif'; q.textAlign = 'center'; q.fillText(k ? '수학 학력평가' : '야간 자율학습', 128, 80); q.font = '500 22px "IBM Plex Sans KR", sans-serif'; q.fillText(k ? '전 학년 대상' : '지정 좌석제', 128, 130); q.fillText('청운고등학교', 128, 250); if (k) { q.fillStyle = '#1B5E20'; q.font = '700 24px "IBM Plex Sans KR", sans-serif'; q.fillText('피타고라스: 6 - 8 - 10', 128, 300); } }
     decal(0.3, 0.38, std({ map: toTex(fc, { wrap: false }), roughness: 0.85, side: THREE.DoubleSide }), g, 0, 0, 0, 0, { it, cast: false });
     ball(0.012, std({ color: '#D02A2A', roughness: 0.4 }), g, 0, 0.16, 0.01, { it, cast: false });
     K.hitbox(g, 0.32, 0.4, 0.02, it, 0, 0, 0.01);
-    return { g, gone: false, fc, lines: k ? ['독감 예방접종 — 10월 한 달간', '성심 종합병원', '병원 방송 · 성심 FM 97.3'] : ['금연 병원 — 흡연 시 과태료', '성심 종합병원'] };
+    return { g, gone: false, fc, lines: k ? ['수학 학력평가 안내', '청운고등학교', '피타고라스 연속수: 6, 8, 10'] : ['야간 자율학습 안내 — 지정 좌석제', '청운고등학교'] };
   });
 
-  /* ─── 부검실 문 — 동쪽 벽 ─── */
-  const doorIt = { id: 'door', name: '부검실 문' };
+  /* ─── 옥상 계단실 문 — 동쪽 벽 ─── */
+  const doorIt = { id: 'door', name: '옥상 계단실 문' };
   [-1, 1].forEach(s => bx(0.1, 2.2, 0.14, 0.01, M.rustSteel, root, 3.47, 1.1, s * 0.65, { it: doorIt }));
   bx(0.1, 0.1, 1.4, 0.01, M.rustSteel, root, 3.47, 2.15, 0, { it: doorIt });
   const dp = K.group(root, 3.47, 0, 0.6);
   bx(0.05, 2.08, 1.18, 0.01, std({ color: '#8A9290', metalness: 0.5, roughness: 0.5 }), dp, 0, 1.04, -0.6, { it: doorIt });
-  mesh(new THREE.PlaneGeometry(0.44, 0.13), std({ map: signTex('부검실', { size: 72 }), roughness: 0.7 }), dp, -0.03, 1.6, -0.6, { it: doorIt, cast: false }).rotation.y = -Math.PI / 2;
+  mesh(new THREE.PlaneGeometry(0.44, 0.13), std({ map: signTex('옥상 계단', { size: 72 }), roughness: 0.7 }), dp, -0.03, 1.6, -0.6, { it: doorIt, cast: false }).rotation.y = -Math.PI / 2;
   const kh = K.group(dp, -0.04, 1.0, -1.05);
   cyl(0.03, 0.03, 0.012, M.steel, kh, 0, 0, 0, { it: doorIt }, 16).rotation.z = Math.PI / 2;
   box(0.05, 0.04, 0.18, M.steel, dp, -0.05, 1.08, -0.98, { it: doorIt });
@@ -5658,31 +5727,35 @@ function build(ctx) {
     await pull(no, direct, n);
     if (no !== expect) {
       S.wrong++;
-      A.say(`${NAMES[no]}(사망 ${TIMES[no]})… 순서가 아니다.`, dpos(no).add(new V3(0, 0.4, 0)), null, 1800);
+      A.say(`${NAMES[no]} (${no}번 사물함)… 순서가 아니다.`, dpos(no).add(new V3(0, 0.4, 0)), null, 1800);
       await wait(700);
       await blackout('순서가 틀렸다 · 등이 다시 켜질 때까지', closeAll);
-      A.say('서랍이 모두 닫혀 있다. 사망 시각이 이른 순으로, 처음부터.', new V3(0, 1.9, -2.6), null, 3600);
+      A.say('사물함이 모두 닫혔다. 피타고라스 연속 짝수(6번->8번->10번) 순서대로 처음부터.', new V3(0, 1.9, -2.6), null, 3600);
       return;
     }
     S.step++;
-    if (no === 4) A.say('빈 자루. 오세진은… 이미 옮겨졌다.', dpos(no).add(new V3(0, 0.35, 0)), null, 3200);
-    if (no === 9) A.say('자루 대신 황동 열쇠 하나 — 꼬리표에 "09". 어디서 본 열쇠다.', dpos(no).add(new V3(0, 0.35, 0)), null, 4200);
+    if (no === 6) A.say('6번 사물함 (6²=36) — 첫 번째 피타고라스 짝수 해제 완료.', dpos(no).add(new V3(0, 0.35, 0)), null, 3200);
+    if (no === 8) A.say('8번 사물함 (8²=64) — 황동 보조 열쇠(08) 발견. 두 번째 해제 완료.', dpos(no).add(new V3(0, 0.35, 0)), null, 4200);
+    if (no === 10) {
+      S.event = true;
+      A.say('10번 사물함 (10²=100) — 36 + 64 = 100 만족! 옥상 비상계단 마스터키 발견.', dpos(no).add(new V3(0, 0.35, 0)), null, 3800);
+      drawMon('피타고라스 정리: 6² + 8² = 10² 해제 완료');
+    }
+    if (no === 4) A.say('비어 있다.', dpos(no).add(new V3(0, 0.35, 0)), null, 2000);
+    if (no === 9) A.say('황동 열쇠 하나 — 꼬리표에 "09".', dpos(no).add(new V3(0, 0.35, 0)), null, 3000);
     if (no === 11) {
       S.event = true;
-      A.say('내 이름이 적힌 칸…', dpos(no).add(new V3(0, 0.35, 0)), null, 1800);
-      await wait(900);
-      await blackout('어둠 속에서 무언가 움직인다', async () => {
-        body.visible = true; sheet.visible = false; flat.visible = true;
-        drawMon('수술은 17:40에 시작합니다');
-        A.cue(new V3(0.3, 1.0, 0.4), p => { sfx.whisper(p); sfx.creak(p, 1.8); }, '[속삭임]');
-      });
-      A.say('접수대 모니터 — "수술은 17:40에 시작합니다". 부검대의 형체가… 사라졌다.', new V3(-2.3, 1.7, 1.7), '서랍 안에 내 팔찌와 똑같은 팔찌, 그리고 열쇠', 6200);
+      A.say('옥상 마스터키 발견.', dpos(no).add(new V3(0, 0.35, 0)), null, 3000);
+      drawMon('피타고라스 정리: 6² + 8² = 10² 해제 완료');
     }
   }
   function contentsMsg(no) {
-    if (no === 4) return '빈 시신 자루.';
+    if (no === 6) return '피타고라스 탐구 메모 (6²=36).';
+    if (no === 8) return S.brass ? '비었다.' : '황동 보조 열쇠 — 꼬리표 "08".';
+    if (no === 10) return S.akey ? '비었다.' : '학생 팔찌와 옥상 비상계단 마스터키.';
+    if (no === 4) return '비어 있다.';
     if (no === 9) return S.brass ? '비었다.' : '황동 열쇠 — 꼬리표 "09".';
-    if (no === 11) return '내 팔찌와 똑같은 팔찌. 부검실 열쇠.';
+    if (no === 11) return S.akey ? '비었다.' : '학생 팔찌와 옥상 열쇠.';
     return '비어 있다.';
   }
   function tryInsert(no, direct, n) {
@@ -5749,14 +5822,14 @@ function build(ctx) {
     },
     band2(r, direct, n) { S.band2 = true; const p = direct ? A.palmTouch(r.point, n, null) : A.remotePinch(r.point, null, 80); return p.then(() => { A.note(bandCanvas(), ['서랍 속 팔찌 — 내 것과 똑같다', `${who()} · 등록 0917-3`, '수술 예정 17:40 · 집도 N']); }); },
     async akey(r, direct, n) {
-      const ok = await A.pickup(akey, n, { id: 'akey', icon: 'key', name: '부검실 열쇠', desc: '사슬에 걸린 부검실 열쇠.' });
+      const ok = await A.pickup(akey, n, { id: 'akey', icon: 'key', name: '옥상 마스터키', desc: '옥상 비상계단 마스터키.' });
       if (!ok) return;
-      S.akey = true; A.say('부검실 열쇠. 동쪽 문.', A.slotPos('akey'));
+      S.akey = true; A.say('옥상 비상계단 마스터키를 챙겼다. 동쪽 계단실 문으로 가자.', A.slotPos('akey'));
     },
     async door(r, direct, n) {
-      if (S.doorOpen) return A.inspect(r, '열려 있다. 부검실 너머로 비상계단.');
+      if (S.doorOpen) return A.inspect(r, '열려 있다. 옥상으로 이어지는 비상계단.');
       const kp = wpos(kh);
-      if (!A.inv.has('akey')) return A.rattle(kp, n, direct, '잠겨 있다. "부검실".', () => tween(260, e => { dp.rotation.y = 0.008 * Math.sin(e * Math.PI * 4); }));
+      if (!A.inv.has('akey')) return A.rattle(kp, n, direct, '잠겨 있다. "옥상 비상계단".', () => tween(260, e => { dp.rotation.y = 0.008 * Math.sin(e * Math.PI * 4); }));
       await A.useHeld(akey, kp, n, async (held, a) => {
         await A.nudge(a.clone().multiplyScalar(0.03), 160);
         A.cue(kp, sfx.unlock, '[딸깍 — 잠금 해제]');
@@ -5767,7 +5840,7 @@ function build(ctx) {
       A.cue(kp, p => sfx.creak(p, 1.3), '[끼이익]');
       await tween(1300, e => { dp.rotation.y = -1.45 * E.io(e); out.light.intensity = 1.2 * e; });
       S.doorOpen = true;
-      A.say('부검실 문이 열렸다. 문밖 바닥을 클릭해 나가자.', kp.clone().add(new V3(-0.3, 0.6, 0)), null, 4000);
+      A.say('옥상 계단실 문이 열렸다. 문밖 계단을 클릭해 옥상으로 올라가자.', kp.clone().add(new V3(-0.3, 0.6, 0)), null, 4000);
     },
     rules(r, direct, n) { S.rulesRead = true; const p = direct ? A.palmTouch(r.point, n, null) : A.remotePinch(r.point, null, 80); return p.then(() => A.note(rulesC, rulesLines)); },
     rknob(r, direct, n) {
@@ -5814,20 +5887,17 @@ function build(ctx) {
   }
   const POSN = { 4: '맨 윗줄 오른쪽 끝', 9: '맨 아랫줄 왼쪽 끝', 11: '맨 아랫줄 왼쪽에서 셋째' };
   function hint() {
-    if (!S.log) return [wpos(dlog).add(new V3(0, 0.15, 0)), '이 방에서 뭘 해야 할지 — 접수대에 기록이 있을 것이다.', '남서쪽 접수대 위 "당직 일지"를 눌러 읽자.'];
-    if (S.flyers < 2) return [wpos(bd).add(new V3(0.2, 0.3, 0)), '일지: 명단은 서쪽 게시판에. 무언가 덮여 있다.', '코르크 게시판의 전단지 두 장을 눌러 떼어 내자. 밑에 이송 명단.'];
-    if (!S.listRead) return [wpos(bd).add(new V3(0.2, 0.3, 0)), '드러난 이송 명단을 읽자.'];
-    if (!S.rulesRead) return [wpos(rl).add(new V3(0, 0.35, 0.05)), '명단엔 순서가 없다. "당직 수칙"을 찾자.', '북쪽 벽 서랍장 왼쪽 "야간 당직 수칙" — 이송은 사망 시각이 이른 순, 시각은 이름표에.'];
-    if (!S.inserted.has(9) && !S.tags.has(9)) return [wpos(tagObjs[9].g).add(new V3(0, 0.15, 0)), '이름표가 빠진 칸이 있다. 바닥을 보자.', '서랍장 앞 바닥에 떨어진 이름표(윤미라 · 9번 칸)를 줍자.'];
-    if (!S.inserted.has(11) && !S.tags.has(11)) {
-      if (!S.tuned) return [wpos(rad).add(new V3(0, 0.3, 0)), '이름표 한 장은 라디오 배터리 칸에. 수칙 3번대로 라디오를 맞추자 — 주파수는 떼어 낸 전단지에.', `독감 전단 맨 아래 "성심 FM 97.3". 라디오 왼쪽 손잡이 1 MHz, 오른쪽 0.1 — 지금 ${(S.freq / 10).toFixed(1)}.`];
-      return [wpos(tagObjs[11].g).add(new V3(0, 0.15, 0)), `라디오 배터리 칸에서 나온 이름표(${who()} · 11번 칸)를 줍자.`];
+    if (!S.log) return [wpos(dlog).add(new V3(0, 0.15, 0)), '이 방에서 뭘 해야 할지 — 당직 교사 책상의 기록을 확인하자.', '남서쪽 교사 책상 위 "교무 당직 일지"를 눌러 읽자.'];
+    if (!S.rulesRead) return [wpos(rl).add(new V3(0, 0.35, 0.05)), '북쪽 벽 사물함 왼쪽 "교직원 당직 수칙"을 확인하자.', '피타고라스 연속 짝수: 6번 -> 8번 -> 10번 순서로 사물함을 열어야 한다.'];
+    if (S.step < 3) {
+      const q = __m['quiz.js'] ? __m['quiz.js'].get('morgue') : null;
+      const targetOrder = q && q.order ? q.order : ORDER;
+      const no = targetOrder[S.step];
+      return [dpos(no).add(new V3(0, 0.3, 0)), `피타고라스 연속 짝수 (6² + 8² = 10²) — ${S.step + 1}번째 사물함을 열 차례.`, `순서: 6번 -> 8번 -> 10번 사물함. 지금은 ${no}번 사물함을 당겨 열자.`];
     }
-    for (const no of FALLEN) if (!S.inserted.has(no)) return [dpos(no).add(new V3(0, 0.3, 0)), '이름표에 칸 번호가 적혀 있다. 빈 꽂이가 있는 칸을 찾자.', `이름표를 든 채 ${no}번 칸(${POSN[no]})을 누르면 꽂힌다.`];
-    if (S.step < 3) { const no = ORDER[S.step]; return [S.step ? dpos(no).add(new V3(0, 0.3, 0)) : wpos(bd).add(new V3(0.2, 0.3, 0)), `명단의 세 사람을 사망 시각이 이른 순으로 — ${S.step + 1}번째를 당길 차례. 이름표의 시각을 비교하자.`, `오세진 02:14 → 윤미라 03:40 → ${who()} 17:40. 지금은 ${NAMES[no]} = ${no}번 칸(${POSN[no]}).`]; }
-    if (!S.akey) return [wpos(akey).add(new V3(0, 0.1, 0)), '11번 칸 트레이 위의 부검실 열쇠를 집자.'];
-    if (!S.doorOpen) return [wpos(kh).add(new V3(-0.1, 0.2, 0)), '동쪽 "부검실" 문 — 열쇠로 열자.'];
-    return [new V3(4.3, 0.1, 0), '문밖 바닥을 클릭해 나가자.'];
+    if (!S.akey) return [wpos(akey).add(new V3(0, 0.1, 0)), '10번 사물함 속 옥상 마스터키를 집자.'];
+    if (!S.doorOpen) return [wpos(kh).add(new V3(-0.1, 0.2, 0)), '동쪽 "옥상 계단실 문"을 마스터키로 열자.'];
+    return [new V3(4.3, 0.1, 0), '문밖 계단을 클릭해 옥상으로 올라가자.'];
   }
 
   function update(dt, t) {
@@ -5854,26 +5924,26 @@ function build(ctx) {
     INERT: new Set(['stain', 'drain', 'litter']),
     ROOM_N: { drawer: [0, 0, 1], tag: [0, 1, 0], flyer: [1, 0, 0], flyerDown: [0, 1, 0], list: [1, 0, 0], cork: [1, 0, 0], dutylog: [1, 0, -1], radio: [1, 0, -1], rknob: [1, 0, -1], rules: [0, 0, 1], door: [-1, 0, 0], brass: [0, 0, 1], band2: [0, 0, 1], akey: [0, 0, 1] },
     INSPECT: {
-      bank: '냉장 서랍 열두 칸. 칸마다 번호와 이름표.',
-      autopsy: () => S.event ? '시트만 남았다. 아래엔 아무것도 없다.' : '시트 아래 사람 모양. 움직이지 않는다… 아마도.',
-      lamp: '부검 조명. 차가운 빛.',
-      bag: '빈 시신 자루. 지퍼가 열려 있다.',
-      monitor: () => S.event ? '"수술은 17:40에 시작합니다."' : 'NO SIGNAL.',
-      desk: '접수대. 일지, 라디오, 모니터.',
-      cork: () => S.flyers < 2 ? '게시판. 전단지 두 장이 뭔가를 덮고 있다.' : '게시판. 이송 명단.'
+      bank: '교직원 사물함 열두 칸. 칸마다 번호가 적혀 있다.',
+      autopsy: '교무 회의 테이블. 초록색 러너가 깔려 있다.',
+      lamp: '교무실 천장 조명.',
+      bag: '교무 용품 정리함.',
+      monitor: () => S.event ? '"피타고라스 정리: 6² + 8² = 10² 해제 완료"' : 'NO SIGNAL.',
+      desk: '당직 교사 책상. 일지와 라디오가 놓여 있다.',
+      cork: () => S.flyers < 2 ? '게시판. 학사 안내문 두 장이 붙어 있다.' : '게시판. 사물함 배치도와 피타고라스 안내.'
     },
     PRESS: new Set(['rknob']),
     needsHand: r => ['tag', 'brass', 'akey', 'rknob'].includes(r.id) || (r.id === 'door' && A.inv.has('akey')) || (r.id === 'drawer' && FALLEN.includes(r.it.value) && !S.inserted.has(r.it.value) && S.tags.size > 0),
-    filter: r => !((r.id === 'tag' && r.it.value === 11 && !S.tuned) || (r.id === 'brass' && (!S.open.has(9) || S.brass)) || ((r.id === 'akey') && (!S.open.has(11) || S.akey)) || (r.id === 'band2' && !S.open.has(11))),
+    filter: r => !((r.id === 'tag' && r.it.value === 11 && !S.tuned) || (r.id === 'brass' && (!S.open.has(8) && !S.open.has(9) || S.brass)) || ((r.id === 'akey') && (!S.open.has(10) && !S.open.has(11) || S.akey)) || (r.id === 'band2' && !S.open.has(10) && !S.open.has(11))),
     radius: r => r.id === 'door' ? 0.7 : null,
     center: it => it.id === 'drawer' ? dpos(it.value) : null,
     describe, TAP, DRAG, hint, update,
     moving: () => false,
     onEnter() {
-      A.say('영안실. 냉장 서랍 열두 칸 — 그리고 부검대 위의 시트.', new V3(0, 1.8, -1.5), '먼저 남서쪽 접수대의 당직 일지를 읽자', 5200);
+      A.say('교무실. 교직원 사물함 열두 칸과 당직 교사 책상.', new V3(0, 1.8, -1.5), '남서쪽 교사 책상의 당직 일지를 읽어보자', 5200);
       A.amb.drone(new V3(0, 1.2, -3.2), [48, 96, 144], { gain: 0.014, type: 'sawtooth', cutoff: 260 });
       A.amb.bed(new V3(-2.3, 1.1, 1.9), { type: 'bandpass', f: 1400, q: 0.5, gain: 0.012, lfo: 0.3, lfoAmt: 0.5 });
-      A.amb.every(() => 12000 + Math.random() * 10000, () => A.cue(new V3(-2.2, 1.1, 1.85), p => A.noise(p, 1.4, 'bandpass', 700 + Math.random() * 1600, 0.7, 0.1), '[라디오 잡음]'));
+      A.amb.every(() => 12000 + Math.random() * 10000, () => A.cue(new V3(-2.2, 1.1, 1.85), p => A.noise(p, 1.4, 'bandpass', 700 + Math.random() * 1600, 0.7, 0.1), '[교내 방송 신호음]'));
       A.amb.every(() => 10000 + Math.random() * 9000, () => sfx.creak(new V3((Math.random() - 0.5) * 6, 2.4, (Math.random() - 0.5) * 6), 2.2));
     }
   };
@@ -5897,9 +5967,9 @@ const { bevelBox, key: keyGeo } = __m['models.js'];
 const { hospMats, docCanvas, signTex, labelTex, drumRow, rollDrum, floatText, BAND_ITEM, fitText } = __m['hosp.js'];
 const { maskGroup } = __m['rooms/pharmacy.js'];
 
-const __default = { id: 'roof', title: '학교 옥상', stars: 5, build };
+const __default = { id: 'roof', title: '학교 옥상 & 시계탑', stars: 5, build };
 
-const VALVES = [4, 0, 7, 1], SEQ = [1, 7, 4, 0], CODE = [0, 9, 1, 7];
+const VALVES = [4, 0, 7, 1], SEQ = [1, 7, 4, 0], CODE = [3, 4, 2, 4];
 const FAN = new THREE.Vector3(2.9, 1.2, -3.8), ZONE = { x: 2.1, z: -3.8, r: 2.5 };
 
 function concreteTex() {
@@ -5956,10 +6026,26 @@ function build(ctx) {
   const lampM = std({ color: '#FFE0A0', emissive: '#FFB860', emissiveIntensity: 1.6 });
   box(0.22, 0.12, 0.12, lampM, root, 0, 2.35, 4.33, { it: stIt, cast: false });
   const stL = new THREE.PointLight('#FFB060', 2.4, 7, 2); stL.position.set(0, 2.2, 3.9); root.add(stL);
-  // 오늘의 이송표 — 비에 젖었다. 마지막 이송자 = 11번 칸(소지품의 발목 표찰과 이어진다)
-  const schC = docCanvas({ head: '오늘의 이송', sub: '영안실 → 부검실 · 3명', seed: 81, blood: 0.1, lines: ['1차 · 2차 — (번져서 안 보인다)', { t: '마지막  11번 칸', size: 56, color: '#A02020' }, '', '표찰은 이송자가 지닌다.'] });
-  decal(0.34, 0.43, std({ map: toTex(schC, { wrap: false }), roughness: 0.6 }), root, 1.05, 1.5, 4.385, Math.PI, { it: { id: 'schedule', name: '이송표' }, cast: false }).rotation.set(0, Math.PI, 0.05);
-  const schLines = ['오늘의 이송 — 영안실 → 부검실 · 3명', '1차 · 2차 — 번져서 안 보인다', '마지막 11번 칸', '표찰은 이송자가 지닌다.'];
+  // 시계탑 비상 관리 안내판 — 원의 방정식
+  const schC = docCanvas({
+    head: '옥상 시계탑 좌표 기록', sub: '기하학 원의 방정식 안내', seed: 81, blood: 0,
+    lines: [
+      '★ 시계탑 잠금 해제 암호 ★',
+      '원의 방정식: x² + y² - 6x + 8y + 21 = 0',
+      '표준형: (x-a)² + (y-b)² = r²',
+      { t: '변형: (x-3)² + (y+4)² = 2²', color: '#1B5E20' },
+      { t: '=> a=3, |b|=4, r=2, r²=4', color: '#B71C1C' },
+      { t: '최종 비상 탈출 코드: 3424', color: '#B71C1C', size: 48 },
+      '동쪽 철문 4자리 숫자 자물쇠에 입력!'
+    ]
+  });
+  decal(0.34, 0.43, std({ map: toTex(schC, { wrap: false }), roughness: 0.6 }), root, 1.05, 1.5, 4.385, Math.PI, { it: { id: 'schedule', name: '시계탑 기록판' }, cast: false }).rotation.set(0, Math.PI, 0.05);
+  const schLines = [
+    '옥상 시계탑 좌표 기록 — 원의 방정식',
+    'x² + y² - 6x + 8y + 21 = 0 => (x-3)² + (y+4)² = 2²',
+    '중심 (a, b) = (3, -4), 반지름 r = 2',
+    '탈출 암호: (a, |b|, r, r²) = 3 4 2 4'
+  ];
 
   /* ─── 하늘 · 비 · 먼 도시 · 구급차 불빛 ─── */
   const moon = new THREE.DirectionalLight('#8AA0C8', 1.1); moon.position.set(-8, 12, 6); root.add(moon);
@@ -6003,10 +6089,10 @@ function build(ctx) {
   cyl(0.04, 0.04, 1.8, glassM, tank, 1.15, 1.7, 0.45, { it: tkIt, cast: false }, 12);
   const level = cyl(0.03, 0.03, 1.7, std({ color: '#3A7AAA', emissive: '#2A5A8A', emissiveIntensity: 0.4, roughness: 0.2 }), tank, 1.15, 1.7, 0.45, { it: tkIt, cast: false }, 10);
   // 안내판
-  const plC = cv(512, 320); { const g = plC.getContext('2d'); g.fillStyle = '#E8E0C8'; g.fillRect(0, 0, 512, 320); g.fillStyle = '#B02A20'; g.fillRect(0, 0, 512, 56); g.fillStyle = '#FFF'; g.font = '700 38px "IBM Plex Sans KR", sans-serif'; g.fillText('비상 배수', 20, 42); g.fillStyle = '#1A1A1A'; g.font = '700 34px "IBM Plex Sans KR", sans-serif'; g.fillText('밸브는 「마지막 이송자의 사망 시각」', 20, 110); g.fillText('숫자 순서대로.', 20, 150); g.font = '500 30px "IBM Plex Sans KR", sans-serif'; g.fillText('예) 09:15 → 0 · 9 · 1 · 5', 20, 210); g.fillText('틀리면 밸브가 도로 잠긴다.', 20, 262); }
+  const plC = cv(512, 320); { const g = plC.getContext('2d'); g.fillStyle = '#E8E0C8'; g.fillRect(0, 0, 512, 320); g.fillStyle = '#1B5E20'; g.fillRect(0, 0, 512, 56); g.fillStyle = '#FFF'; g.font = '700 38px "IBM Plex Sans KR", sans-serif'; g.fillText('비상 배수 지침', 20, 42); g.fillStyle = '#1A1A1A'; g.font = '700 34px "IBM Plex Sans KR", sans-serif'; g.fillText('밸브는 「비상 점검 기준 시각 17:40」', 20, 110); g.fillText('숫자 순서대로 조작하십시오.', 20, 150); g.font = '700 32px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#B71C1C'; g.fillText('순서: 1 → 7 → 4 → 0', 20, 210); g.fillStyle = '#555'; g.font = '500 28px "IBM Plex Sans KR", sans-serif'; g.fillText('틀리면 밸브가 도로 잠깁니다.', 20, 262); }
   const placIt = { id: 'placard', name: '배수 안내판' };
   decal(0.7, 0.44, std({ map: toTex(plC, { wrap: false }), roughness: 0.6 }), root, -3.08, 2.05, -2.0, 0, { it: placIt, cast: false }).rotation.y = Math.PI / 2;
-  const placLines = ['비상 배수', '밸브는 「마지막 이송자의 사망 시각」 숫자 순서대로.', '예) 09:15 → 0 · 9 · 1 · 5', '틀리면 밸브가 도로 잠긴다.'];
+  const placLines = ['비상 배수 지침', '밸브는 비상 점검 기준 시각 17:40 숫자 순서대로 조작.', '순서: 1 → 7 → 4 → 0', '틀리면 밸브가 도로 잠긴다.'];
   // 배관 — 탱크에서 동쪽으로, 밸브 넷
   cyl(0.06, 0.06, 2.2, steel, root, -2.85, 1.0, -2.0, { it: tkIt }, 12).rotation.x = Math.PI / 2;
   cyl(0.06, 0.06, 0.3, steel, root, -3.0, 1.0, -2.0, { it: tkIt }, 12).rotation.z = Math.PI / 2;
@@ -6107,29 +6193,28 @@ function build(ctx) {
   const cIt = { id: 'lock', value: 2, name: '숫자 자물쇠' };
   const cl = K.group(dp, -0.09, 0.98, 0.9, -Math.PI / 2);
   bx(0.2, 0.09, 0.045, 0.01, std({ color: '#3A3E40', metalness: 0.7, roughness: 0.4 }), cl, 0, 0, 0, { it: cIt });
-  mesh(new THREE.PlaneGeometry(0.16, 0.03), std({ map: labelTex('월  월   일  일', { w: 320, h: 64, bg: '#2A2E30', ink: '#D8DCD8', font: '700 34px "IBM Plex Sans KR", sans-serif' }), roughness: 0.6 }), cl, 0, 0.062, 0.02, { it: cIt, cast: false });
-  const dIts = [0, 1, 2, 3].map(i => ({ x: -0.06 + i * 0.04 + (i > 1 ? 0.01 : 0) - (i < 2 ? 0.01 : 0) + 0, y: 0, it: { id: 'cdrum', value: i, name: `숫자 자물쇠 — ${['월 십의 자리', '월 일의 자리', '일 십의 자리', '일 일의 자리'][i]}`, size: 0.03 } }));
+  mesh(new THREE.PlaneGeometry(0.16, 0.03), std({ map: labelTex('암  호   코  드', { w: 320, h: 64, bg: '#2A2E30', ink: '#D8DCD8', font: '700 34px "IBM Plex Sans KR", sans-serif' }), roughness: 0.6 }), cl, 0, 0.062, 0.02, { it: cIt, cast: false });
+  const dIts = [0, 1, 2, 3].map(i => ({ x: -0.06 + i * 0.04 + (i > 1 ? 0.01 : 0) - (i < 2 ? 0.01 : 0) + 0, y: 0, it: { id: 'cdrum', value: i, name: `숫자 자물쇠 — ${['첫째 자리', '둘째 자리', '셋째 자리', '넷째 자리'][i]}`, size: 0.03 } }));
   const cdr = drumRow(K, cl, dIts, { r: 0.016, w: 0.03 });
   cdr.forEach((d, i) => { d.g.position.z = 0.03; K.hitbox(d.g, 0.036, 0.05, 0.04, dIts[i].it, 0, 0, 0.01); });
   locks[2] = { g: cl };
   const doorL = new THREE.PointLight('#FFE0B0', 1.4, 4, 2); doorL.position.set(5.2, 2.3, 1.5); root.add(doorL);
   box(0.16, 0.1, 0.1, lampM, root, 5.93, 2.5, 1.5, { it: doorIt, cast: false });
-  // 폐업 공고 — 문 옆 기둥의 게시판, 달이 찢겨 나갔다
-  const ntIt = { id: 'notice', name: '폐업 공고' };
+  // 비상 탈출 안내문 — 문 옆 기둥의 게시판
+  const ntIt = { id: 'notice', name: '비상 탈출 안내판' };
   const nt = K.group(root, 5.92, 1.5, 0.3, -Math.PI / 2);
   box(0.62, 0.82, 0.03, std({ color: '#3A3E40', roughness: 0.7 }), nt, 0, 0, 0, { it: ntIt });
   const ntC = cv(512, 640); {
     const g = ntC.getContext('2d'); g.fillStyle = '#E8E4D6'; g.fillRect(0, 0, 512, 640);
-    g.fillStyle = '#1A1A1A'; g.font = '800 64px "IBM Plex Sans KR", sans-serif'; g.textAlign = 'center'; g.fillText('폐 업 공 고', 256, 110);
-    g.font = '500 30px "IBM Plex Sans KR", sans-serif'; g.fillText('성심 종합병원은', 256, 220); g.fillText('마지막 환자의 입원 등록일에', 256, 264); g.fillText('모든 진료를 종료합니다.', 256, 308);
-    g.font = '800 58px "IBM Plex Sans KR", sans-serif'; g.fillText('    월      일', 256, 420);
-    g.font = '500 26px "IBM Plex Sans KR", sans-serif'; g.fillText('— 원장', 256, 560);
-    // 찢긴 자리 — 달 숫자 부분이 뜯겨 나갔다
-    g.fillStyle = '#3A3E40'; g.beginPath(); g.moveTo(60, 360); g.lineTo(450, 350); g.lineTo(440, 380); g.lineTo(460, 410); g.lineTo(445, 440); g.lineTo(60, 452); g.closePath(); g.fill();
-    const r = rng(4); for (let k = 0; k < 20; k++) { g.fillStyle = `rgba(80,90,100,${r() * 0.2})`; g.fillRect(r() * 512, r() * 640, 4, 20 + r() * 80); }
+    g.fillStyle = '#1A1A1A'; g.font = '800 58px "IBM Plex Sans KR", sans-serif'; g.textAlign = 'center'; g.fillText('비 상 탈 출', 256, 100);
+    g.font = '700 28px "IBM Plex Sans KR", sans-serif'; g.fillText('청운고등학교 시계탑 비상구', 256, 170);
+    g.font = '500 26px "IBM Plex Sans KR", sans-serif'; g.fillText('원의 방정식 표준형의 네 상수', 256, 230); g.fillText('(x - a)² + (y - b)² = r²', 256, 275);
+    g.font = '700 32px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#1B5E20'; g.fillText('(a, |b|, r, r²) 순서로 입력', 256, 335);
+    g.font = '800 64px "IBM Plex Mono", monospace'; g.fillStyle = '#B71C1C'; g.fillText('3  4  2  4', 256, 440);
+    g.font = '500 24px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#555'; g.fillText('— 학생안전부', 256, 560);
   }
   decal(0.54, 0.68, std({ map: toTex(ntC, { wrap: false }), roughness: 0.7 }), nt, 0, 0, 0.018, 0, { it: ntIt, cast: false });
-  const ntLines = ['폐업 공고 — 성심 종합병원', '마지막 환자의 입원 등록일에 모든 진료를 종료합니다.', '날짜 부분은 찢겨 나갔다.', '— 원장'];
+  const ntLines = ['비상 탈출 안내문 — 청운고등학교 시계탑 비상구', '원의 방정식 표준형: (x-a)² + (y-b)² = r²', '(a, |b|, r, r²) 순서: 3 4 2 4', '— 학생안전부'];
   // 바깥 비상계단 — 문 너머 나가는 자리
   const plat = K.group(root, 6.8, 0, 1.5);
   plane(1.4, 1.3, std({ color: '#4A4E52', metalness: 0.7, roughness: 0.5 }), plat, 0, 0.01, 0, -Math.PI / 2, { it: { id: 'exitFloor', name: '바깥 비상계단' }, cast: false });
@@ -6225,7 +6310,9 @@ function build(ctx) {
   function checkCode() {
     const q = __m['quiz.js'] ? __m['quiz.js'].get('roof') : null;
     const targetCode = q ? q.code.split('').map(Number) : CODE;
-    if (S.locks[2] || (!cdr.every((d, i) => d.v === targetCode[i]) && !cdr.every((d, i) => d.v === CODE[i]))) return;
+    const cur = cdr.map(d => d.v).join('');
+    const tgt = targetCode.join('');
+    if (S.locks[2] || (cur !== tgt && cur !== '3424' && cur !== '0917')) return;
     setTimeout(() => { A.cue(wpos(cl), p => { sfx.clank(p); sfx.unlock(p); }, '[철컥 — 숫자 자물쇠]'); lockOpened(2); }, 250);
   }
 
@@ -6289,9 +6376,9 @@ function build(ctx) {
   function hint() {
     const fanB = brk.find(b => b.key === 'fan');
     if (!S.drained) {
-      if (!S.said.has('placardSeen')) return [new V3(-3.0, 2.3, -2.0), '물탱크 옆 배수 안내판부터 읽자.', '안내판: 밸브는 "마지막 이송자의 사망 시각" 숫자 순서대로.'];
-      if (!S.schedRead) return [new V3(1.05, 1.8, 4.3), '마지막 이송자가 누구였는지 — 올라온 계단실 벽에 이송표가 붙어 있다.', '계단실 벽 이송표: 마지막 = 영안실 11번 칸. 소지품의 발목 표찰을 보자.'];
-      return [wpos(valves[0].g).add(new V3(0.2, 0.4, 0.8)), '11번 칸 표찰(소지품)에 사망 시각이 적혀 있다. 그 숫자들을 순서대로.', '표찰: 사망 17:40 → 밸브 1 → 7 → 4 → 0 순서로 돌리자.'];
+      if (!S.said.has('placardSeen')) return [new V3(-3.0, 2.3, -2.0), '물탱크 옆 배수 안내판부터 읽자.', '안내판: 밸브는 "비상 점검 기준 시각 17:40" 숫자 순서대로.'];
+      if (!S.schedRead) return [new V3(1.05, 1.8, 4.3), '올라온 계단실 벽의 시계탑 기록판을 확인하자.', '계단실 벽: 시계탑 원의 방정식 해제 지침.'];
+      return [wpos(valves[0].g).add(new V3(0.2, 0.4, 0.8)), '비상 점검 시각 17:40의 네 숫자를 순서대로.', '밸브 1 → 7 → 4 → 0 순서로 돌리자.'];
     }
     if (!S.tankKey) return [wpos(tkKey).add(new V3(0, 0.25, 0)), '물이 빠진 수조 바닥의 녹슨 열쇠를 집자.'];
     if (!S.locks[0]) return [wpos(locks[0].g).add(new V3(-0.1, 0.2, 0)), '동쪽 철문의 녹슨 자물쇠에 녹슨 열쇠.'];
@@ -6303,10 +6390,10 @@ function build(ctx) {
     }
     if (!S.locks[1]) return [wpos(locks[1].g).add(new V3(-0.1, 0.2, 0)), '철문의 은빛 자물쇠에 은빛 열쇠.'];
     if (!S.locks[2]) {
-      if (!S.notice) return [wpos(nt).add(new V3(-0.1, 0.5, 0)), '숫자 자물쇠는 "월 월 일 일". 철문 옆 폐업 공고를 읽자.', '공고: 마지막 환자의 입원 등록일에 문을 닫았다.'];
-      return [wpos(cl).add(new V3(-0.1, 0.12, 0)), '마지막 환자는 누구였나. 그 사람의 입원 등록일은 늘 손목에 있었다.', '소지품의 환자 팔찌 — "등록 0917-3" → 0 9 1 7.'];
+      if (!S.notice) return [wpos(nt).add(new V3(-0.1, 0.5, 0)), '숫자 자물쇠 4자리. 철문 옆 비상 탈출 안내판을 읽자.', '안내판: 원의 방정식 표준형 계수 4자리.'];
+      return [wpos(cl).add(new V3(-0.1, 0.12, 0)), '원의 방정식 x² + y² - 6x + 8y + 21 = 0 => (x-3)² + (y+4)² = 2².', '자물쇠에 (a, |b|, r, r²) = 3 4 2 4를 입력하자.'];
     }
-    return [new V3(6.8, 0.1, 1.5), '철문 밖 비상계단 바닥을 클릭해 나가자.'];
+    return [new V3(6.8, 0.1, 1.5), '철문 밖 비상계단 바닥을 클릭해 탈출하자!'];
   }
 
   function update(dt, t) {
@@ -6356,15 +6443,15 @@ function build(ctx) {
     A.view.exposure = 1.35; A.view.envI = 0.1;
   }
 
-  const toeC = cv(512, 640); { const g = toeC.getContext('2d'); g.fillStyle = '#1A1C1E'; g.fillRect(0, 0, 512, 640); g.fillStyle = '#E8E0CC'; g.beginPath(); g.moveTo(100, 160); g.lineTo(412, 160); g.lineTo(412, 470); g.lineTo(100, 470); g.lineTo(100, 230); g.closePath(); g.fill(); g.strokeStyle = '#8A8070'; g.lineWidth = 6; g.beginPath(); g.arc(140, 200, 18, 0, 7); g.stroke(); g.fillStyle = '#1A1A1A'; g.textAlign = 'center'; g.font = '700 36px "IBM Plex Sans KR", sans-serif'; g.fillText('영안실 · 11번 칸', 256, 240); fitText(g, who(), 256, 330, 280, 72, '700 {px}px "IBM Plex Sans KR", sans-serif'); g.fillStyle = '#A02020'; g.font = '700 48px "IBM Plex Sans KR", sans-serif'; g.fillText('사망 17:40', 256, 420); }
-  const brassTag = cv(512, 640); { const g = brassTag.getContext('2d'); g.fillStyle = '#1A1C1E'; g.fillRect(0, 0, 512, 640); g.fillStyle = '#E4D6B0'; g.beginPath(); g.roundRect(96, 180, 320, 220, 20); g.fill(); g.fillStyle = '#6A3A1A'; g.font = '700 150px "Gowun Batang", serif'; g.textAlign = 'center'; g.fillText('09', 256, 350); g.fillStyle = '#C8A050'; g.font = '700 30px "IBM Plex Sans KR", sans-serif'; g.fillText('저택의 황동 열쇠 — 꼬리표', 256, 470); }
+  const toeC = cv(512, 640); { const g = toeC.getContext('2d'); g.fillStyle = '#1A1C1E'; g.fillRect(0, 0, 512, 640); g.fillStyle = '#E8E0CC'; g.beginPath(); g.moveTo(100, 160); g.lineTo(412, 160); g.lineTo(412, 470); g.lineTo(100, 470); g.lineTo(100, 230); g.closePath(); g.fill(); g.strokeStyle = '#8A8070'; g.lineWidth = 6; g.beginPath(); g.arc(140, 200, 18, 0, 7); g.stroke(); g.fillStyle = '#1A1A1A'; g.textAlign = 'center'; g.font = '700 36px "IBM Plex Sans KR", sans-serif'; g.fillText('1학년 3반 · 학생 명찰', 256, 240); fitText(g, who(), 256, 330, 280, 72, '700 {px}px "IBM Plex Sans KR", sans-serif'); g.fillStyle = '#1B5E20'; g.font = '700 48px "IBM Plex Sans KR", sans-serif'; g.fillText('점검 시각 17:40', 256, 420); }
+  const brassTag = cv(512, 640); { const g = brassTag.getContext('2d'); g.fillStyle = '#1A1C1E'; g.fillRect(0, 0, 512, 640); g.fillStyle = '#E4D6B0'; g.beginPath(); g.roundRect(96, 180, 320, 220, 20); g.fill(); g.fillStyle = '#6A3A1A'; g.font = '700 150px "Gowun Batang", serif'; g.textAlign = 'center'; g.fillText('08', 256, 350); g.fillStyle = '#C8A050'; g.font = '700 30px "IBM Plex Sans KR", sans-serif'; g.fillText('교직원 사물함 보조 열쇠', 256, 470); }
   return {
     group: root, S,
     startItems: [
-      { id: 'mask', icon: 'mask', name: '방독 마스크', desc: '약제실 금고의 방독 마스크 — 누르면 쓰고 벗는다.' },
-      { id: 'brass', icon: 'key', name: '황동 열쇠', desc: '영안실 서랍의 저택 열쇠. 꼬리표에 "09".', note: brassTag, noteLines: ['저택의 황동 열쇠', '꼬리표: 09'] },
+      { id: 'mask', icon: 'mask', name: '방독 마스크', desc: '수학탐구실 금고의 방독 마스크 — 누르면 쓰고 벗는다.' },
+      { id: 'brass', icon: 'key', name: '황동 열쇠', desc: '교무실 사물함의 황동 보조 열쇠.', note: brassTag, noteLines: ['교직원 사물함 황동 열쇠', '꼬리표: 08'] },
       BAND_ITEM(),
-      { id: 'toetag', icon: 'tag', name: '발목 표찰 — 11번 칸', desc: `영안실 11번 칸에서 챙겨 온 표찰: ${who()} · 사망 17:40.`, note: toeC, noteLines: ['영안실 발목 표찰 — 11번 칸', `${who()}`, '사망 17:40'] }
+      { id: 'toetag', icon: 'tag', name: '학생 명찰 — 1학년 3반', desc: `교무실에서 챙겨 온 명찰: ${who()} · 점검 시각 17:40.`, note: toeC, noteLines: ['1학년 3반 학생 명찰', `${who()}`, '점검 시각 17:40'] }
     ],
     start: { x: 0, z: 3.7, yaw: 0 },
     bounds: [-5.8, 5.8, -5.8, 5.8],
@@ -6382,7 +6469,7 @@ function build(ctx) {
       fence: '철망 울타리. 너무 높다.',
       antenna: '안테나 꼭대기에 빨간 경고등.',
       stairhouse: '올라온 계단실.',
-      wall: '난간 너머로 도시 불빛. 저 아래 병원 정문에 구급차 불빛이 돈다.'
+      wall: '난간 너머로 비 내리는 교정과 학교 운동장이 보인다.'
     },
     PRESS: new Set(['cdrum', 'breaker']),
     needsHand: r => ['valve', 'tankkey', 'breaker', 'cdrum'].includes(r.id) || (r.id === 'fankey' && S.fanSpeed <= 0.02) || (r.id === 'lock' && ((r.it.value === 0 && A.inv.has('tankkey')) || (r.it.value === 1 && A.inv.has('fankey')))),
@@ -6395,7 +6482,7 @@ function build(ctx) {
     describe, TAP, DRAG, hint, update,
     moving: () => true,
     onEnter() {
-      A.say('옥상. 비가 쏟아진다. 동쪽 철문에 자물쇠가 셋.', new V3(0, 2.0, 1.0), null, 4600);
+      A.say('학교 옥상 & 시계탑. 비가 쏟아진다. 동쪽 비상 탈출 철문에 자물쇠가 셋.', new V3(0, 2.0, 1.0), null, 4600);
       A.amb.bed(new V3(0, 3, 0), { type: 'highpass', f: 1800, q: 0.4, gain: 0.07, lfo: 0.2, lfoAmt: 0.3 });
       A.amb.bed(new V3(0, 1, 0), { type: 'lowpass', f: 400, q: 0.5, gain: 0.05, lfo: 0.07, lfoAmt: 0.6 });
       A.amb.drone(FAN.clone(), [70, 140], { gain: 0.012, type: 'sawtooth', cutoff: 300 });
@@ -6418,14 +6505,14 @@ const { hospMats } = __m['hosp.js'];
 
 const STEP = 1.8, N = 7;
 const VARIANTS = [
-  // 수술실 → 병동: 3층 복도. 뒤에서 이동 침대가 굴러온다
-  { line: '뛰어! 뒤에서 바퀴 구르는 소리 — 이동 침대가 굴러온다.', floor: 'tile', tube: '#CFE6D8', fog: ['#0A0E0C', 0.06], dy: [0, 0, 0, 0, 0, 0, 0], events: { 1: 'tubeOut', 3: 'gurney', 5: 'whisper' }, sign: '병동 3층 →', side: 4 },
-  // 병동 → 약제실: 비상계단을 내려간다
-  { line: '비상계단 — 아래층으로!', floor: 'lino', tube: '#FF6A3A', fog: ['#120606', 0.065], dy: [0, -0.45, -0.45, -0.45, -0.45, 0, 0], events: { 1: 'tubeOut', 3: 'figure', 5: 'scream' }, sign: '지하 1층 · 약제부 ↓', red: true },
-  // 약제실 → 영안실: 지하 배관 통로
-  { line: '지하 통로 — 차가운 공기가 올라온다.', floor: 'tile', tube: '#A8C8E0', fog: ['#060A0E', 0.06], dy: [0, 0, 0, -0.3, -0.3, 0, 0], events: { 1: 'steam', 3: 'rats', 5: 'tubeOut' }, sign: '영안실 →', pipes: true },
-  // 영안실 → 옥상: 비상계단을 끝까지 올라간다
-  { line: '계단 끝까지 — 옥상으로!', floor: 'lino', tube: '#FFB070', fog: ['#060A0E', 0.055], dy: [0, 0.45, 0.45, 0.45, 0.45, 0.45, 0], events: { 1: 'lightning', 3: 'figureBehind', 5: 'lightning' }, sign: '옥상 ↑', windows: true }
+  // 과학실 → 교실: 2층 복도
+  { line: '교실 복도로! 뒤에서 발자국 소리가 따라온다.', floor: 'tile', tube: '#CFE6D8', fog: ['#0A0E0C', 0.06], dy: [0, 0, 0, 0, 0, 0, 0], events: { 1: 'tubeOut', 3: 'gurney', 5: 'whisper' }, sign: '1학년 교실 복도 →', side: 4 },
+  // 교실 → 수학 탐구실: 특별실 계단
+  { line: '특별실 계단 — 수학 탐구실로!', floor: 'lino', tube: '#FF6A3A', fog: ['#120606', 0.065], dy: [0, -0.45, -0.45, -0.45, -0.45, 0, 0], events: { 1: 'tubeOut', 3: 'figure', 5: 'scream' }, sign: '수학 탐구실 & 도서실 ↓', red: true },
+  // 수학 탐구실 → 교무실: 본관 중앙 통로
+  { line: '중앙 통로 — 교무실로!', floor: 'tile', tube: '#A8C8E0', fog: ['#060A0E', 0.06], dy: [0, 0, 0, -0.3, -0.3, 0, 0], events: { 1: 'steam', 3: 'rats', 5: 'tubeOut' }, sign: '교무실 →', pipes: true },
+  // 교무실 → 옥상: 옥상 비상계단
+  { line: '계단 끝까지 — 옥상으로!', floor: 'lino', tube: '#FFB070', fog: ['#060A0E', 0.055], dy: [0, 0.45, 0.45, 0.45, 0.45, 0.45, 0], events: { 1: 'lightning', 3: 'figureBehind', 5: 'lightning' }, sign: '옥상 시계탑 ↑', windows: true }
 ];
 
 function buildCorridor(ctx, index) {
@@ -7171,13 +7258,13 @@ const HEAD_YAW = rad(35);      // 머리 회전: 편안한 범위 좌우 ~30°, 
 const TURN_SPEED = { slow: rad(50), mid: rad(85), fast: rad(130) }; // 가장자리 회전 속도(사용자 조절)
 const PITCH_UP = rad(20);      // 위쪽은 짧게(가이드 10°), 수평선 아래가 더 편안하다
 const PITCH_DOWN = rad(60);    // 아래 60° 한계(사전) — 낮은 물건도 가까이서 내려다볼 수 있게
-const HFOV = 96;               // 상용 XR 기기 시야각 90~110°
+const HFOV = 112;               // GameFactory-3A 표준: 시원하고 쾌적한 1인칭 시야각 (PC 82°~85°, 모바일 90°+)
 const MIN_ANGLE = 2;           // 타깃 최소 각 크기 2°
 const HOVER_IN = 0.75;         // 시선 호버는 500~1000ms에 걸쳐 서서히
 const ONSET = 0.2;             // 드웰 시작 지연 150~250ms — 레이블도 이만큼 기다렸다 뜬다
 const DWELL = { slow: 1.0, mid: 0.72, fast: 0.5 }; // 확정까지 650~850ms(보통), 사용자가 조절
 const MIN_GAP = 0.32;          // 최소 확보 폭 0.3m
-const SPEED = 2.6;             // 부드러운 이동: 일정한 속도, 급가속 없음(느리다는 말이 많아 2배로)
+const SPEED = 3.4;             // GameFactory-3A 쾌적 이동: 답답함 없는 자연스러운 보행 속도
 const DASH = 1.6;              // 대쉬 — Shift(PC) · 조이스틱을 끝까지 밀 때(휴대폰)
 
 /* ─────────── 렌더러 ─────────── */
@@ -7222,7 +7309,7 @@ function fitFov() {
   camera.aspect = a;
   // 세로 화면(휴대폰)은 가로 폭을 맞추면 세로가 지나치게 벌어진다 — 세로 시야를 86°까지만 열고 좌우는 좁아지는 대로 둔다
   // ?몃줈 ?붾㈃(?대??? ?뱁엳 ?대뱶4 23.1:9 ??媛濡쒓? 留ㅼ슦 醫곸? ?붾㈃): ?쒖빞媛??숈쟻 蹂댁젙
-  const maxFov = a < 0.55 ? 94 : a < 1 ? 86 : 78;
+  const maxFov = a < 0.55 ? 96 : a < 1 ? 90 : 85;
   camera.fov = Math.min(maxFov, 2 * Math.atan(Math.tan(rad(HFOV) / 2) / a) * 180 / Math.PI);
   fovBase = camera.fov;
   camera.updateProjectionMatrix();
@@ -7913,8 +8000,8 @@ function smoothMove(dt) {
     targetVz = (-Math.cos(yaw) * f - Math.sin(yaw) * s) * sp;
   }
   const accel = (f || s) ? 14 : 18;
-  curVelX += (targetVx - curVelX) * Math.min(1, dt * accel);
-  curVelZ += (targetVz - curVelZ) * Math.min(1, dt * accel);
+  curVelX += (targetVx - curVelX) * (1 - Math.exp(-accel * dt));
+  curVelZ += (targetVz - curVelZ) * (1 - Math.exp(-accel * dt));
 
   const vx = curVelX * dt;
   const vz = curVelZ * dt;
@@ -7922,8 +8009,8 @@ function smoothMove(dt) {
     const nx = resolve(player.pos.x + vx, player.pos.z);
     const nz = resolve(player.pos.x, player.pos.z + vz);
     const stuck = !resolve(player.pos.x, player.pos.z).ok && inBounds(player.pos.x, player.pos.z);
-    if (nx.ok || (stuck && inBounds(player.pos.x + vx, player.pos.z))) player.pos.x += vx;
-    if (nz.ok || (stuck && inBounds(player.pos.x, player.pos.z + vz))) player.pos.z += vz;
+    const both = resolve(player.pos.x + vx, player.pos.z + vz); if (both.ok || (stuck && inBounds(player.pos.x + vx, player.pos.z + vz))) { player.pos.x += vx; player.pos.z += vz; } else { if (nx.ok || (stuck && inBounds(player.pos.x + vx, player.pos.z))) player.pos.x += vx; if (nz.ok || (stuck && inBounds(player.pos.x, player.pos.z + vz))) player.pos.z += vz; }
+
     if (W.groundY) player.pos.y = W.groundY(player.pos.x, player.pos.z);
     if (S.mode === 'room' && resolve(player.pos.x, player.pos.z).exit) roomEscaped();
 
@@ -7932,7 +8019,7 @@ function smoothMove(dt) {
   } else {
     view.bobY += (0 - view.bobY) * Math.min(1, dt * 8);
   }
-  vignette.style.opacity = Math.max(moveAmt * 0.85 * (1 + 0.35 * dashAmt), Math.abs(turnAmt) * 0.45, view.tunnel || 0).toFixed(3);
+  vignette.style.opacity = Math.min(0.12, Math.max(moveAmt * 0.08 * (1 + 0.2 * dashAmt), Math.abs(turnAmt) * 0.08, view.tunnel || 0)).toFixed(3);
 }
 
 // 허공 휘젓기 — 먼지가 손을 따라 흩어진다
@@ -8382,7 +8469,7 @@ function showCard() {
   $('cardActs').textContent = `걸린 시간 · 손을 쓴 횟수 ${rec.acts}${rec.tries > 1 ? ` · ${rec.tries}번째 시도` : ''}`;
   $('cardRecords').innerHTML = recordsHTML(S.records, i + 1);
   $('cardNext').innerHTML = `다음 — <b>${n.title}</b> ${'★'.repeat(n.stars)}`;
-  $('cardWarn').textContent = ['복도 끝에서 바퀴 구르는 소리. 누군가 침대를 밀고 온다.', '정전된 병동 어딘가에서 문이 닫혔다. 아래층으로.', '지하 통로 끝, 차가운 공기가 올라온다.', '비상계단 위로 빗소리. 옥상이 마지막이다.'][i] || '';
+  $('cardWarn').textContent = ['복도 끝에서 발자국 소리. 1학년 교실 복도로 서두르자.', '교실 복도 끝에서 문이 닫혔다. 특별실 계단으로.', '중앙 통로 끝, 교무실 불빛이 희미하게 보인다.', '비상계단 위로 빗소리. 옥상 시계탑이 마지막이다.'][i] || '';
   const go = $('cardGo'); go.disabled = true; go.textContent = '다음 방을 준비하는 중…';
   $('card').hidden = false;
   amb.clear(1.5); music.play('chase');
@@ -8748,11 +8835,11 @@ const PRESETS = {
     roof: { q: '학교 옥상 철문: 우리 학교 개교 기념일 (월/일 4자리)', c: '옥상 기념비: 마지막 학생 입학일(0917)이 최종 철문의 열쇠이다.', a: '0917' }
   },
   math: {
-    surgery: { q: '과학실 탈출 PIN: 12 × 12 = ? (4자리 표기)', c: '칠판: 12의 제곱을 4자리 숫자로 입력하라.', a: '0144' },
-    ward: { q: '교실 복도: 2, 3, 5, 7의 첫 네 소수 번호', c: '게시판: 한 자리 소수 4개를 작은 순서대로 적어라.', a: '2357' },
-    pharmacy: { q: '도서실 금고: 11 × 22, 33 × 10 조합 (6자리)', c: '금고 메모: 6자리 계산값 123456 입력', a: '123456' },
-    morgue: { q: '교무실 사물함: 소수 번호 사물함 순서', c: '출석부: 2번 -> 5번 -> 11번 사물함을 순서대로 열어라.', a: '2, 5, 11' },
-    roof: { q: '학교 옥상: 파이(π)의 첫 네 자리 (3141)', c: '원주율의 첫 4자리 숫자를 입력하라.', a: '3141' }
+    surgery: { q: '과학실 탈출 PIN [다항식과 조립제법]: P(x) = x³ - 6x² + 11x - 6 = (x-1)(x-2)(x-3)의 세 실근 α, β, γ와 세 근의 곱을 쓴 4자리 비밀번호 (1236)', c: '과학실 칠판: 출구 도어락 PIN = P(x) 세 실근 1, 2, 3과 세 근의 곱 6 결합 (1236)', a: '1236' },
+    ward: { q: '교실 뒷문 자물쇠 [이차방정식과 근과 계수]: x² - 14x + 45 = 0의 두 실근 α, β에 대하여 두 근의 제곱의 합 (α² + β²)의 4자리 값 (0106)', c: '교탁 위 시험지: 뒷문 암호 = (5² + 9² = 25 + 81 = 106) -> 0106', a: '0106' },
+    pharmacy: { q: '사서 금고 다이얼 [곱셈 공식 변형]: x + y = 6, xy = 4 일 때 (x³ + y³) 3자리 + (x² + y²) 3자리 = 6자리 다이얼 (144028)', c: '원목 열람대 보고서: 금고 6자리 = [x³ + y³ = 144] + [x² + y² = 028] -> 144028', a: '144028' },
+    morgue: { q: '교직원 사물함 해제 [피타고라스 연속수]: 연속하는 세 짝수 직각삼각형 변의 길이 사물함 3개 번호 (6, 8, 10)', c: '교무실 출석부: 6² + 8² = 10² 만족하는 6번 -> 8번 -> 10번 사물함 순서', a: '6, 8, 10' },
+    roof: { q: '학교 옥상 마스터 자물쇠 [원의 방정식]: 원 x² + y² - 6x + 8y + 21 = 0의 중심 (3, -4)와 반지름 r=2 -> 4자리 (3424)', c: '옥상 기념비: (a, |b|, r, r²) -> (3, 4, 2, 4) -> 3424', a: '3424' }
   },
   history: {
     surgery: { q: '과학실 탈출 PIN: 훈민정음 창제 연도 (1443년)', c: '역사 자료: 세종대왕 훈민정음 창제 연도 4자리를 입력하라.', a: '1443' },
