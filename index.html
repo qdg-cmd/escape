@@ -3454,6 +3454,150 @@ function sheetTex(seed = 7) {
   });
 }
 
+// 학교 교실 나무 마룻바닥 — 판자 이음매와 결이 살아있는 원목 플로어링
+function schoolWoodTex(W = 512, seed = 42) {
+  return cached(`wood${W}.${seed}`, () => {
+    const c = cv(W, W), g = c.getContext('2d'), img = g.createImageData(W, W), d = img.data;
+    const plankH = 32;
+    for (let y = 0; y < W; y++) {
+      const pIdx = Math.floor(y / plankH);
+      const isSeamY = (y % plankH) === 0 || (y % plankH) === plankH - 1;
+      const xShift = (pIdx * 137) % 256;
+      for (let x = 0; x < W; x++) {
+        const isSeamX = ((x + xShift) % 256) < 2;
+        const woodGrain = Math.sin((x + fbm(x / 30, y / 8, seed, 3) * 20) * 0.15) * 12;
+        const tone = (hash(pIdx, Math.floor((x + xShift) / 256), seed) - 0.5) * 36;
+        const dirt = (fbm(x / 50, y / 50, seed + 4, 3) - 0.5) * 16;
+        const i = (y * W + x) * 4;
+        let R = 175 + tone + woodGrain - dirt;
+        let G = 135 + tone * 0.8 + woodGrain * 0.7 - dirt;
+        let B = 90 + tone * 0.5 + woodGrain * 0.4 - dirt;
+        if (isSeamY || isSeamX) { R *= 0.45; G *= 0.45; B *= 0.45; }
+        d[i] = Math.max(0, Math.min(255, R));
+        d[i + 1] = Math.max(0, Math.min(255, G));
+        d[i + 2] = Math.max(0, Math.min(255, B));
+        d[i + 3] = 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  });
+}
+
+// 학교 복도 / 교무실 도끼다시 (테라조) 연마 바닥 — 알록달록 자갈과 황동 줄눈
+function terrazzoTex(W = 512, seed = 55) {
+  return cached(`terrazzo${W}.${seed}`, () => {
+    const c = cv(W, W), g = c.getContext('2d'), img = g.createImageData(W, W), d = img.data;
+    for (let y = 0; y < W; y++) {
+      const seamY = y % 256 < 3;
+      for (let x = 0; x < W; x++) {
+        const seamX = x % 256 < 3;
+        const i = (y * W + x) * 4;
+        if (seamY || seamX) {
+          d[i] = 165; d[i + 1] = 130; d[i + 2] = 70; d[i + 3] = 255;
+        } else {
+          const n = (hash(x, y, seed) - 0.5) * 45;
+          const speckle = hash(Math.floor(x / 3), Math.floor(y / 3), seed + 1);
+          let R = 158 + n, G = 154 + n, B = 144 + n;
+          if (speckle > 0.82) { R = 220; G = 215; B = 205; }
+          else if (speckle < 0.18) { R = 55; G = 50; B = 45; }
+          else if (speckle > 0.45 && speckle < 0.52) { R = 180; G = 120; B = 80; }
+          d[i] = Math.max(0, Math.min(255, R));
+          d[i + 1] = Math.max(0, Math.min(255, G));
+          d[i + 2] = Math.max(0, Math.min(255, B));
+          d[i + 3] = 255;
+        }
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  });
+}
+
+// 과학실 바닥 — 은은한 반사가 있는 청회색 에폭시 타일
+function labEpoxyTex(W = 512, seed = 63) {
+  return cached(`labEpoxy${W}.${seed}`, () => {
+    const c = cv(W, W), g = c.getContext('2d'), img = g.createImageData(W, W), d = img.data;
+    for (let y = 0; y < W; y++) {
+      const seamY = y % 128 < 2;
+      for (let x = 0; x < W; x++) {
+        const seamX = x % 128 < 2;
+        const i = (y * W + x) * 4;
+        const n = (fbm(x / 40, y / 40, seed, 3) - 0.5) * 16 + (hash(x, y, seed) - 0.5) * 8;
+        let R = 138 + n, G = 152 + n, B = 156 + n;
+        if (seamY || seamX) { R *= 0.65; G *= 0.65; B *= 0.65; }
+        d[i] = Math.max(0, Math.min(255, R));
+        d[i + 1] = Math.max(0, Math.min(255, G));
+        d[i + 2] = Math.max(0, Math.min(255, B));
+        d[i + 3] = 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  });
+}
+
+// 학교 옥상 — 대한민국 고유의 초록색 방수 우레탄 바닥 (비에 젖은 광택)
+function urethaneGreenTex(W = 512, seed = 77) {
+  return cached(`urethane${W}.${seed}`, () => {
+    const c = cv(W, W), g = c.getContext('2d'), img = g.createImageData(W, W), d = img.data;
+    for (let y = 0; y < W; y++) {
+      for (let x = 0; x < W; x++) {
+        const seam = (x % 256 < 2 || y % 256 < 2) ? -18 : 0;
+        const n = (fbm(x / 35, y / 35, seed, 4) - 0.5) * 20 + (hash(x, y, seed) - 0.5) * 6;
+        const wetPuddle = fbm(x / 75, y / 75, seed + 2, 3) > 0.58 ? -12 : 0;
+        const i = (y * W + x) * 4;
+        let R = 28 + n + wetPuddle + seam;
+        let G = 92 + n * 1.2 + wetPuddle + seam;
+        let B = 52 + n + wetPuddle + seam;
+        d[i] = Math.max(0, Math.min(255, R));
+        d[i + 1] = Math.max(0, Math.min(255, G));
+        d[i + 2] = Math.max(0, Math.min(255, B));
+        d[i + 3] = 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  });
+}
+
+// 학교 교실 벽 — 따뜻한 상아색/크림색 페인트 벽 (병원 곰팡이/얼룩 제거, 학교 특유의 깔끔한 질감)
+function schoolPlasterTex(tint = [228, 222, 206], seed = 31) {
+  return cached(`schoolPlaster${tint}.${seed}`, () => {
+    const W = 512, c = cv(W, W), g = c.getContext('2d'), img = g.createImageData(W, W), d = img.data;
+    for (let y = 0; y < W; y++) for (let x = 0; x < W; x++) {
+      const n = (fbm(x / 25, y / 25, seed, 3) - 0.5) * 16 + (hash(x, y, seed) - 0.5) * 6;
+      const i = (y * W + x) * 4;
+      d[i] = Math.max(0, Math.min(255, tint[0] + n));
+      d[i + 1] = Math.max(0, Math.min(255, tint[1] + n));
+      d[i + 2] = Math.max(0, Math.min(255, tint[2] + n));
+      d[i + 3] = 255;
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  });
+}
+
+// 교실 하단 투톤 페인트 / 루바 (학교 특유의 차분한 딥그린 또는 원목 루바)
+function schoolWainscotTex(W = 512, base = [48, 88, 64], seed = 22) {
+  return cached(`wainscot${W}.${base}.${seed}`, () => {
+    const c = cv(W, W), g = c.getContext('2d'), img = g.createImageData(W, W), d = img.data;
+    for (let y = 0; y < W; y++) {
+      const rib = (y % 16 < 2) ? -12 : 0;
+      for (let x = 0; x < W; x++) {
+        const n = (fbm(x / 40, y / 40, seed, 3) - 0.5) * 14;
+        const i = (y * W + x) * 4;
+        d[i] = Math.max(0, Math.min(255, base[0] + n + rib));
+        d[i + 1] = Math.max(0, Math.min(255, base[1] + n + rib));
+        d[i + 2] = Math.max(0, Math.min(255, base[2] + n + rib));
+        d[i + 3] = 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return c;
+  });
+}
+
 /* 7세그먼트 LED — 붉은 카운트다운(수술실) · 초록 숫자(금고 · 자물쇠 화면) */
 const SEG = { 0: 'abcdef', 1: 'bc', 2: 'abged', 3: 'abgcd', 4: 'fgbc', 5: 'afgcd', 6: 'afgedc', 7: 'abc', 8: 'abcdefg', 9: 'abcdfg', '-': 'g', ' ': '' };
 function drawLED(c, text, colon, on = '#FF2A1C', off = 'rgba(90,16,12,.35)', bg = '#0C0303') {
@@ -3559,17 +3703,48 @@ function labelTex(text, { w = 256, h = 96, bg = '#E8E4D8', ink = '#1A1A1A', font
   return toTex(c, { wrap: false });
 }
 
-/* 공통 재질 */
-function hospMats(K, { floor = 'tile', wall = [166, 190, 176], plaster = [178, 176, 160] } = {}) {
+/* 학교 / 공간 공통 재질 */
+function hospMats(K, { floor = 'wood', wall = [48, 88, 64], plaster = [230, 225, 210] } = {}) {
   const { std, phys } = K;
-  const floorC = floor === 'lino' ? linoTex() : tileTex(512, 8, [128, 150, 138], [40, 48, 44], 21, 1.2);
+  let floorC, repeat;
+  if (floor === 'wood') {
+    floorC = schoolWoodTex();
+    repeat = [1 / 2, 1 / 2];
+  } else if (floor === 'terrazzo') {
+    floorC = terrazzoTex();
+    repeat = [1 / 2.5, 1 / 2.5];
+  } else if (floor === 'lab') {
+    floorC = labEpoxyTex();
+    repeat = [1 / 2, 1 / 2];
+  } else if (floor === 'urethane') {
+    floorC = urethaneGreenTex();
+    repeat = [1 / 3, 1 / 3];
+  } else if (floor === 'lino') {
+    floorC = linoTex();
+    repeat = [1 / 2, 1 / 2];
+  } else {
+    floorC = tileTex(512, 8, [128, 150, 138], [40, 48, 44], 21, 1.2);
+    repeat = [1 / 1.6, 1 / 1.6];
+  }
   return {
-    floor: phys({ map: toTex(floorC, { repeat: floor === 'lino' ? [1 / 2, 1 / 2] : [1 / 1.6, 1 / 1.6] }), roughness: 0.62, clearcoat: 0.25, clearcoatRoughness: 0.5 }),
-    tile: std({ map: toTex(tileTex(512, 6, wall, [70, 82, 76], 22, 0.8), { repeat: [1 / 1.5, 1 / 1.5] }), roughness: 0.5 }),
-    plaster: std({ map: toTex(plasterTex(plaster), { repeat: [1 / 2.4, 1 / 2.4] }), roughness: 0.95 }),
-    ceil: std({ color: '#A8A89C', roughness: 0.95 }),
+    floor: phys({ map: toTex(floorC, { repeat }), roughness: floor === 'urethane' ? 0.28 : 0.45, clearcoat: floor === 'urethane' || floor === 'lab' ? 0.45 : 0.2, clearcoatRoughness: 0.35 }),
+    tile: std({ map: toTex(schoolWainscotTex(512, wall), { repeat: [1 / 2, 1 / 2] }), roughness: 0.55 }),
+    plaster: std({ map: toTex(schoolPlasterTex(plaster), { repeat: [1 / 3, 1 / 3] }), roughness: 0.92 }),
+    ceil: std({ color: '#D2D0C6', roughness: 0.9 }),
     steel: std({ color: '#9AA0A4', metalness: 0.9, roughness: 0.38 }),
-    rustSteel: std({ color: '#6E645A', metalness: 0.6, roughness: 0.75 }),
+    rustSteel: std({ color: '#5A544E', metalness: 0.5, roughness: 0.7 }),
+    rust: std({ color: '#5A3A2A', metalness: 0.4, roughness: 0.9 }),
+    dark: std({ color: '#121414', roughness: 0.9 }),
+    sheet: std({ map: toTex(sheetTex(), { wrap: false }), color: '#9A9890', roughness: 0.95 }),
+    vinyl: std({ color: '#2E4A3C', roughness: 0.6 }),
+    green: std({ color: '#2E5E3E', roughness: 0.85, side: THREE.DoubleSide }),
+    glass: phys({ color: '#C8D8D0', roughness: 0.08, transparent: true, opacity: 0.28 }),
+    paper: std({ color: '#D8D2C0', roughness: 0.9 }),
+    glaze: std({ color: '#3A5E44', roughness: 0.3 }),
+    paint: std({ color: '#C8C4B6', roughness: 0.5, metalness: 0.1 }),
+    black: std({ color: '#070707', roughness: 0.6 })
+  };
+}
     rust: std({ color: '#5A3A2A', metalness: 0.4, roughness: 0.9 }),
     dark: std({ color: '#121414', roughness: 0.9 }),
     sheet: std({ map: toTex(sheetTex(), { wrap: false }), color: '#9A9890', roughness: 0.95 }),
@@ -3698,7 +3873,7 @@ function keypad(K, parent, M, x, y, z, ry = 0, { id = 'kpkey', plateId = 'keypad
   return { g, keys, draw, led };
 }
 
-return { tileTex, plasterTex, linoTex, sheetTex, drawLED, fitText, docCanvas, bandCanvas, BAND_ITEM, signTex, paperTex, monitorTex, labelTex, hospMats, shell, tube, floatText, beyond, drumRow, rollDrum, keypad };
+return { tileTex, plasterTex, linoTex, sheetTex, schoolWoodTex, terrazzoTex, labEpoxyTex, urethaneGreenTex, schoolPlasterTex, schoolWainscotTex, drawLED, fitText, docCanvas, bandCanvas, BAND_ITEM, signTex, paperTex, monitorTex, labelTex, hospMats, shell, tube, floatText, beyond, drumRow, rollDrum, keypad };
 })();
 
 // ─────────── rooms/surgery.js ───────────
@@ -3734,7 +3909,7 @@ function build(ctx) {
     readRecord: false, cardTaken: false, mirrorOpen: false, keyTaken: false, panelUnlocked: false, coverOpen: false, drawerOpen: false, fuseIn: false, burnt: new Set(), holding: null,
     power: false, cardOk: false, code: '', checking: false, doorOpen: false, busyPanel: false
   };
-  const M = hospMats(K);
+  const M = hospMats(K, { floor: 'lab', wall: [45, 80, 65], plaster: [235, 230, 218] });
   const wallIt = { id: 'wall', name: '벽' };
 
   /* ─── 방: 8 × 10 × 3.4, 북쪽 벽 가운데 양여닫이 문(x −0.9..0.9) ─── */
@@ -4485,7 +4660,7 @@ function build(ctx) {
     torch: false, on: false, batt: 1, dead: false, boardSeen: false, boardK: 0, read: new Set(), chairMoved: false,
     drawer: false, code: '', checking: false, unlocked: false, doorOpen: false, said: new Set(), spare: 0
   };
-  const M = hospMats(K, { floor: 'lino', wall: [150, 170, 160], plaster: [168, 170, 158] });
+  const M = hospMats(K, { floor: 'wood', wall: [42, 85, 58], plaster: [236, 230, 215] });
   const MARKS = {};
   Object.keys(ROOMS).forEach(no => {
     const r = rng(+no * 7), cells = Array(9).fill(' '), n = ROOMS[no];
@@ -4615,6 +4790,42 @@ function build(ctx) {
     }
     return c;
   }
+
+  /* ─── 1학년 3반 급훈 및 주간 시간표 액자 — 동쪽 벽 ─── */
+  const mottoC = cv(512, 256); {
+    const g = mottoC.getContext('2d');
+    g.fillStyle = '#FAF7EE'; g.fillRect(0, 0, 512, 256);
+    g.strokeStyle = '#6A4A28'; g.lineWidth = 14; g.strokeRect(7, 7, 498, 242);
+    g.fillStyle = '#1A1A1A'; g.font = '700 36px "Gowun Batang", serif'; g.textAlign = 'center';
+    g.fillText('【 급  훈 】', 256, 70);
+    g.font = '700 52px "Gowun Batang", serif'; g.fillStyle = '#1B5E20';
+    g.fillText('피할 수 없으면 즐겨라', 256, 145);
+    g.font = '500 28px "IBM Plex Sans KR", sans-serif'; g.fillStyle = '#555';
+    g.fillText('— 청운고등학교 1학년 3반 —', 256, 210);
+  }
+  const mottoIt = { id: 'motto', name: '1학년 3반 급훈 액자' };
+  const mottoG = K.group(root, 2.47, 1.85, 2.0, -Math.PI / 2);
+  bx(0.9, 0.45, 0.03, 0.008, std({ color: '#5A3E28', roughness: 0.6 }), mottoG, 0, 0, 0.015, { it: mottoIt });
+  mesh(new THREE.PlaneGeometry(0.84, 0.39), std({ map: toTex(mottoC, { wrap: false }), roughness: 0.8 }), mottoG, 0, 0, 0.032, { it: mottoIt, cast: false });
+  K.hitbox(mottoG, 0.9, 0.45, 0.05, mottoIt, 0, 0, 0.02);
+
+  const schedC = cv(512, 384); {
+    const g = schedC.getContext('2d');
+    g.fillStyle = '#F8F6F0'; g.fillRect(0, 0, 512, 384);
+    g.strokeStyle = '#3A4E3A'; g.lineWidth = 10; g.strokeRect(5, 5, 502, 374);
+    g.fillStyle = '#1B5E20'; g.font = '700 34px "IBM Plex Sans KR", sans-serif'; g.textAlign = 'center';
+    g.fillText('1학년 3반 주간 수업 시간표', 256, 50);
+    g.fillStyle = '#1A1A1A'; g.font = '600 24px "IBM Plex Sans KR", sans-serif';
+    const days = ['월: 국어 / 수학 / 영어 / 과학', '화: 수학 / 사회 / 체육 / 미술', '수: 영어 / 수학 / 한국사 / 진로', '목: 과학 / 수학 / 음악 / 기술', '금: 자율 / 국어 / 영어 / 수학탐구'];
+    days.forEach((d, i) => g.fillText(d, 256, 110 + i * 48));
+    g.fillStyle = '#B71C1C'; g.font = '700 26px "IBM Plex Sans KR", sans-serif';
+    g.fillText('★ 8~9교시: 방과후 공통수학1 심화탐구 ★', 256, 350);
+  }
+  const schedIt = { id: 'classSched', name: '학급 시간표' };
+  const schedG = K.group(root, 2.47, 1.85, 0.0, -Math.PI / 2);
+  bx(0.9, 0.68, 0.03, 0.008, std({ color: '#3A4E3A', roughness: 0.6 }), schedG, 0, 0, 0.015, { it: schedIt });
+  mesh(new THREE.PlaneGeometry(0.84, 0.62), std({ map: toTex(schedC, { wrap: false }), roughness: 0.8 }), schedG, 0, 0, 0.032, { it: schedIt, cast: false });
+  K.hitbox(schedG, 0.9, 0.68, 0.05, schedIt, 0, 0, 0.02);
 
   /* ─── 교실 문 네 개 — 번호판 · 수행평가표 꽂이 ─── */
   const CLASS_NAMES = { 301: '1-1반', 302: '1-2반', 303: '1-3반', 304: '1-4반' };
@@ -4837,6 +5048,8 @@ function build(ctx) {
       return A.rattle(new V3(0.2, 1.0, -7.9), n, direct, S.unlocked ? '잠금이 풀리는 중이다.' : '잠겨 있다. 오른쪽에 숫자 키패드.', () => tween(300, e => { dpiv.rotation.y = 0.01 * Math.sin(e * Math.PI * 4); }));
     },
     roomDoor(r, direct, n) { return A.rattle(r.point.clone(), n, direct, `교실 문 — 잠겨 있다. 옆에 수행평가표가 꽂혀 있다.`, null); },
+    motto(r) { return A.inspect(r, '급훈: "피할 수 없으면 즐겨라 — 1학년 1반".'); },
+    sched(r) { return A.inspect(r, '주간 시간표: 월(국어,수학,영어), 화(한국사,통합과학,수학), 수(체육,음악,진로), 목(영어,수학,미술), 금(동아리,자율).'); },
     southDoor(r, direct, n) { return A.rattle(r.point.clone(), n, direct, '들어온 문. 뒤에서 잠겼다.', null); }
   };
   function composite() { const c = cv(1024, 564), g = c.getContext('2d'); g.drawImage(wbC, 0, 0); g.globalAlpha = 0.9; g.drawImage(wbGhost, 0, 0); return c; }
@@ -4862,6 +5075,8 @@ function build(ctx) {
       board: () => ({ verb: '읽기', icon: 'look' }),
       wheelchair: () => S.chairMoved ? { verb: '살펴보기', icon: 'look' } : { verb: direct ? '끌어서 치우기' : '밀어 치우기', icon: 'grab' },
       kpkey: () => ({ verb: '누르기', icon: 'press' }),
+      motto: () => ({ verb: '급훈 읽기', icon: 'look' }),
+      sched: () => ({ verb: '시간표 읽기', icon: 'look' }),
       door: () => S.doorOpen ? { verb: '살펴보기', icon: 'look' } : { verb: '열어 보기', icon: 'grab', state: '잠김', tone: 'bad' },
       roomDoor: () => ({ verb: '열어 보기', icon: 'grab', state: '잠김', tone: 'bad' })
     };
@@ -4994,7 +5209,7 @@ function build(ctx) {
     presc: false, codeRead: false, carry: null, pan: null, count: 0, weighed: new Set(), log: [], safeOpen: false, keyTaken: false, maskTaken: false,
     unlocked: false, doorOpen: false, knock: 5, said: new Set(), busySafe: false
   };
-  const M = hospMats(K, { wall: [168, 182, 176], plaster: [176, 174, 164] });
+  const M = hospMats(K, { floor: 'wood', wall: [60, 48, 38], plaster: [238, 232, 220] });
   const wallIt = { id: 'wall', name: '벽' };
 
   /* ─── 방 6 × 5 × 2.8. 서쪽 벽에 뒷문(z −1.5..−0.3), 남쪽은 들어온 문 ─── */
@@ -5446,7 +5661,7 @@ function build(ctx) {
     log: false, flyers: 0, listRead: false, tags: new Set(), inserted: new Set(), step: 0, open: new Set(), dark: false, event: false,
     brass: false, band2: false, akey: false, freq: 885, tuned: false, rulesRead: false, unlocked: false, doorOpen: false, said: new Set(), lightsK: 1, tubeT: 2, wrong: 0
   };
-  const M = hospMats(K, { wall: [150, 170, 172], plaster: [160, 166, 166] });
+  const M = hospMats(K, { floor: 'terrazzo', wall: [48, 72, 60], plaster: [236, 230, 218] });
 
   /* ─── 방 7 × 7 × 3.0. 동쪽 벽 가운데 부검실 문(z −0.6..0.6) ─── */
   shell(K, root, M, { w: 7, d: 7, h: 3.0, holes: { E: [[2.9, 0, 1.2, 2.1]] }, gaps: [[2.0, 2.0]], drop: [[-2.0, -1.0]] });
@@ -5989,7 +6204,7 @@ __m['rooms/roof.js'] = (() => {
 const { who } = __m['who.js'];
 const { cv, rng, toTex, fbm, hash } = __m['tex.js'];
 const { bevelBox, key: keyGeo } = __m['models.js'];
-const { hospMats, docCanvas, signTex, labelTex, drumRow, rollDrum, floatText, BAND_ITEM, fitText } = __m['hosp.js'];
+const { hospMats, urethaneGreenTex, docCanvas, signTex, labelTex, drumRow, rollDrum, floatText, BAND_ITEM, fitText } = __m['hosp.js'];
 const { maskGroup } = __m['rooms/pharmacy.js'];
 
 const __default = { id: 'roof', title: '학교 옥상 & 시계탑', stars: 5, build };
@@ -6025,23 +6240,24 @@ function build(ctx) {
     mask: false, seq: [], drained: false, tankKey: false, fanOn: true, fanSpeed: 1, fumes: 1, lampsOn: true, fanKey: false,
     locks: [false, false, false], doorOpen: false, notice: false, said: new Set(), coughT: 0, choke: 0, busyV: false, flash: 0, thunderT: 14
   };
-  const M = hospMats(K);
-  const conc = std({ map: toTex(concreteTex(), { repeat: [1 / 3, 1 / 3] }), roughness: 0.3, metalness: 0.05, color: '#9AA0A8' });
-  const wallM = std({ map: toTex(concreteTex(), { repeat: [1 / 2, 1 / 2] }), roughness: 0.8, color: '#A8AAB0' });
+  const M = hospMats(K, { floor: 'urethane' });
+  // 학교 옥상 초록색 방수 우레탄 바닥 (비에 젖은 광택 반사)
+  const conc = phys({ map: toTex(urethaneGreenTex(), { repeat: [1 / 3, 1 / 3] }), roughness: 0.28, metalness: 0.1, clearcoat: 0.5, clearcoatRoughness: 0.3 });
+  const wallM = std({ map: toTex(concreteTex(), { repeat: [1 / 2, 1 / 2] }), roughness: 0.8, color: '#88988E' });
   const steel = std({ color: '#7A8084', metalness: 0.8, roughness: 0.4 });
   const wallIt = { id: 'wall', name: '난간' };
 
   /* ─── 옥상 바닥 12 × 12 · 난간 1.1m · 동쪽은 철망 울타리(2.3m)와 철문 ─── */
-  plane(12, 12, conc, root, 0, 0, 0, -Math.PI / 2, { cast: false, it: { id: 'floor', name: '옥상 바닥' } });
+  plane(12, 12, conc, root, 0, 0, 0, -Math.PI / 2, { cast: false, it: { id: 'floor', name: '옥상 우레탄 바닥' } });
   [[0, -6, 12, 0], [0, 6, 12, 0], [-6, 0, 12, Math.PI / 2]].forEach(([x, z, L, ry]) => { const g = K.group(root, x, 0, z, ry); bx(L + 0.5, 1.1, 0.25, 0.02, wallM, g, 0, 0.55, 0, { it: wallIt }); box(L + 0.6, 0.06, 0.34, std({ color: '#8A8C90', roughness: 0.6 }), g, 0, 1.13, 0, { it: wallIt }); });
   const fenceM = std({ map: toTex(fenceTex(), { repeat: [6, 1.2] }), transparent: true, alphaTest: 0.4, side: THREE.DoubleSide, metalness: 0.6, roughness: 0.5 });
   const fenceIt = { id: 'fence', name: '철망 울타리' };
   [[-6, 0.9], [2.1, 6]].forEach(([z0, z1]) => { const L = z1 - z0; const f = plane(L, 2.3, fenceM, root, 6, 1.15, (z0 + z1) / 2, 0, { it: fenceIt, cast: false }); f.rotation.y = Math.PI / 2; });
   for (let z = -6; z <= 6; z += 1.5) cyl(0.03, 0.03, 2.4, steel, root, 6, 1.2, z, { it: fenceIt }, 8);
   box(0.05, 0.05, 12, steel, root, 6, 2.32, 0, { it: fenceIt });
-  // 헬리포트 H
-  const hC = cv(512, 512); { const g = hC.getContext('2d'); g.clearRect(0, 0, 512, 512); g.strokeStyle = 'rgba(230,220,180,.8)'; g.lineWidth = 26; g.beginPath(); g.arc(256, 256, 220, 0, 7); g.stroke(); g.fillStyle = 'rgba(230,220,180,.85)'; g.fillRect(150, 110, 50, 292); g.fillRect(312, 110, 50, 292); g.fillRect(150, 230, 212, 52); }
-  decal(5, 5, std({ map: toTex(hC, { wrap: false }), transparent: true, roughness: 0.4, depthWrite: false }), root, 0.2, 0.005, 0.4, -Math.PI / 2, { it: { id: 'heli', name: '헬리포트' }, cast: false });
+  // 학교 옥상 안전 구역 노란색 테두리선
+  const hC = cv(512, 512); { const g = hC.getContext('2d'); g.clearRect(0, 0, 512, 512); g.strokeStyle = 'rgba(235,190,40,.8)'; g.lineWidth = 20; g.strokeRect(60, 60, 392, 392); g.fillStyle = 'rgba(235,190,40,.75)'; g.font = '700 48px "IBM Plex Sans KR", sans-serif'; g.textAlign = 'center'; g.fillText('안전 구역', 256, 268); }
+  decal(4, 4, std({ map: toTex(hC, { wrap: false }), transparent: true, roughness: 0.4, depthWrite: false }), root, 0.2, 0.005, 0.4, -Math.PI / 2, { it: { id: 'heli', name: '옥상 안전 구역' }, cast: false });
 
   /* ─── 계단실(들어온 곳) — 남쪽 ─── */
   const stIt = { id: 'stairhouse', name: '계단실' };
@@ -6531,13 +6747,13 @@ const { hospMats } = __m['hosp.js'];
 const STEP = 1.8, N = 7;
 const VARIANTS = [
   // 과학실 → 교실: 2층 복도
-  { line: '교실 복도로! 뒤에서 발자국 소리가 따라온다.', floor: 'tile', tube: '#CFE6D8', fog: ['#0A0E0C', 0.06], dy: [0, 0, 0, 0, 0, 0, 0], events: { 1: 'tubeOut', 3: 'gurney', 5: 'whisper' }, sign: '1학년 교실 복도 →', side: 4 },
+  { line: '교실 복도로! 뒤에서 발자국 소리가 따라온다.', floor: 'terrazzo', tube: '#CFE6D8', fog: ['#0A0E0C', 0.06], dy: [0, 0, 0, 0, 0, 0, 0], events: { 1: 'tubeOut', 3: 'gurney', 5: 'whisper' }, sign: '1학년 교실 복도 →', side: 4 },
   // 교실 → 수학 탐구실: 특별실 계단
-  { line: '특별실 계단 — 수학 탐구실로!', floor: 'lino', tube: '#FF6A3A', fog: ['#120606', 0.065], dy: [0, -0.45, -0.45, -0.45, -0.45, 0, 0], events: { 1: 'tubeOut', 3: 'figure', 5: 'scream' }, sign: '수학 탐구실 & 도서실 ↓', red: true },
+  { line: '특별실 계단 — 수학 탐구실로!', floor: 'wood', tube: '#FF6A3A', fog: ['#120606', 0.065], dy: [0, -0.45, -0.45, -0.45, -0.45, 0, 0], events: { 1: 'tubeOut', 3: 'figure', 5: 'scream' }, sign: '수학 탐구실 & 도서실 ↓', red: true },
   // 수학 탐구실 → 교무실: 본관 중앙 통로
-  { line: '중앙 통로 — 교무실로!', floor: 'tile', tube: '#A8C8E0', fog: ['#060A0E', 0.06], dy: [0, 0, 0, -0.3, -0.3, 0, 0], events: { 1: 'steam', 3: 'rats', 5: 'tubeOut' }, sign: '교무실 →', pipes: true },
+  { line: '중앙 통로 — 교무실로!', floor: 'terrazzo', tube: '#A8C8E0', fog: ['#060A0E', 0.06], dy: [0, 0, 0, -0.3, -0.3, 0, 0], events: { 1: 'steam', 3: 'rats', 5: 'tubeOut' }, sign: '교무실 →', pipes: true },
   // 교무실 → 옥상: 옥상 비상계단
-  { line: '계단 끝까지 — 옥상으로!', floor: 'lino', tube: '#FFB070', fog: ['#060A0E', 0.055], dy: [0, 0.45, 0.45, 0.45, 0.45, 0.45, 0], events: { 1: 'lightning', 3: 'figureBehind', 5: 'lightning' }, sign: '옥상 시계탑 ↑', windows: true }
+  { line: '계단 끝까지 — 옥상으로!', floor: 'terrazzo', tube: '#FFB070', fog: ['#060A0E', 0.055], dy: [0, 0.45, 0.45, 0.45, 0.45, 0.45, 0], events: { 1: 'lightning', 3: 'figureBehind', 5: 'lightning' }, sign: '옥상 시계탑 ↑', windows: true }
 ];
 
 function buildCorridor(ctx, index) {
@@ -6546,7 +6762,7 @@ function buildCorridor(ctx, index) {
   const V = VARIANTS[index % VARIANTS.length];
   const root = new THREE.Group();
   const { std, mesh, box, cyl } = K;
-  const M = hospMats(K, { floor: V.floor });
+  const M = hospMats(K, { floor: V.floor, wall: [45, 75, 58], plaster: [235, 230, 218] });
 
   const ys = [0]; V.dy.forEach(d => ys.push(ys[ys.length - 1] + d));
   const upperM = M.plaster, tileM = M.tile, ceilM = std({ color: '#6A6C66', roughness: 0.95 });
