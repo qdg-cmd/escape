@@ -436,7 +436,6 @@
 
 <div id="mhud" hidden>
   <button id="mMenu" type="button" aria-label="설정">☰<span class="t"> 설정</span></button>
-  <button id="mQuizBtn" type="button" aria-label="문제 편집">📝<span class="t"> 문제</span></button>
   <button id="mFpsBtn" type="button" aria-label="시점 고정(FPS)">🎯<span class="t"> 시점</span></button>
   <div id="mBar">
     <div id="mTime"><small id="mTimeRoom">방 1/5</small><b id="mTimeVal">00:00</b></div>
@@ -451,95 +450,6 @@
 </div>
 
 <section id="mSet" hidden role="dialog" aria-label="설정"><div class="sheet"><div class="head"><b>설정</b><button type="button" id="mSetClose">닫기</button></div><div class="rows"></div></div></section>
-
-<!-- 관리자 비밀번호 확인 모달 -->
-<section class="overlay" id="quizAuthModal" hidden style="z-index: 35; align-items: center; justify-content: center; background: rgba(6,4,3,.88);">
-  <div class="card win" style="max-width: 360px; text-align: center; padding: 22px 18px;">
-    <div style="font-size: 32px; margin-bottom: 6px;">🔒</div>
-    <h3 style="margin: 0 0 8px; font-family: var(--serif); font-size: 21px; color: var(--acc);">관리자 인증</h3>
-    <p style="color: var(--ink-2); font-size: 13.5px; margin: 0 0 16px; line-height: 1.5;">
-      문제 및 해답 편집은 관리자 전용입니다.<br>비밀번호를 입력해 주세요.
-    </p>
-    <form id="quizAuthForm" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 10px;">
-      <input id="quizAuthInput" type="password" placeholder="비밀번호 입력" autocomplete="off"
-        style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--rim); background: rgba(0,0,0,0.55); color: #fff; font-size: 16px; text-align: center; letter-spacing: 2px;">
-      <div id="quizAuthErr" style="color: var(--bad); font-size: 13px; min-height: 18px; font-weight: 600;"></div>
-      <div style="display: flex; gap: 8px; margin-top: 4px;">
-        <button type="button" id="quizAuthCancel" class="ghost" style="flex: 1; padding: 10px; font-size: 14px;">취소</button>
-        <button type="submit" id="quizAuthSubmit" class="primary" style="flex: 1; padding: 10px; font-size: 14px;">확인</button>
-      </div>
-    </form>
-  </div>
-</section>
-
-<!-- 퀴즈/문제 관리자 모달 -->
-<section class="overlay" id="quizModal" hidden style="z-index: 30; align-items: center; justify-content: center; background: rgba(6,4,3,.88);">
-  <div class="card win">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-      <h2 style="margin:0; font-family:var(--serif); font-size:24px; color:var(--acc);">🏫 학교 탈출 문제 출제기</h2>
-      <button type="button" id="quizModalClose" class="ghost" style="padding:6px 14px; font-size:14px;">닫기 ✕</button>
-    </div>
-    <p style="color:var(--ink-2); font-size:13.5px; margin:0 0 14px; line-height:1.5;">
-      방탈출의 문제를 자유롭게 편집할 수 있습니다. <b>[저장 및 전체 기기 적용]</b>을 누르면 서버에 저장되어 접속하는 모든 기기에 즉시 반영되며, <b>[공유 링크]</b>로 다른 기기에 배포할 수도 있습니다.
-    </p>
-
-    <!-- 프리셋 선택 버튼 -->
-    <div style="margin-bottom:14px; display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
-      <span style="font-size:13px; font-weight:600; color:var(--acc); margin-right:4px;">템플릿:</span>
-      <button type="button" class="ghost btn-preset" data-preset="science" style="font-size:12.5px; padding:5px 12px;">🧪 과학/상식</button>
-      <button type="button" class="ghost btn-preset" data-preset="math" style="font-size:12.5px; padding:5px 12px;">📐 수학/연산</button>
-      <button type="button" class="ghost btn-preset" data-preset="history" style="font-size:12.5px; padding:5px 12px;">📜 역사/사회</button>
-      <button type="button" class="ghost btn-preset" data-preset="english" style="font-size:12.5px; padding:5px 12px;">🔤 영어/단어</button>
-    </div>
-
-    <!-- 1번 방 (과학실) -->
-    <div class="quiz-section">
-      <h3><span>방 1: 과학실 (실험대와 출구 PIN)</span> <small style="font-size:12px; color:var(--acc);">4자리 숫자</small></h3>
-      <label class="quiz-field"><span>문제 질문</span><input id="q_surg_q" type="text"></label>
-      <label class="quiz-field"><span>단서 문구 (실험 일지에 적힘)</span><input id="q_surg_c" type="text"></label>
-      <label class="quiz-field"><span>정답 PIN 번호 (4자리)</span><input id="q_surg_a" type="text" maxlength="4" style="letter-spacing:4px; font-weight:700; width:140px;"></label>
-    </div>
-
-    <!-- 2번 방 (교실 복도) -->
-    <div class="quiz-section">
-      <h3><span>방 2: 교실 복도 (도어락 암호)</span> <small style="font-size:12px; color:var(--acc);">4자리 숫자</small></h3>
-      <label class="quiz-field"><span>문제 질문</span><input id="q_ward_q" type="text"></label>
-      <label class="quiz-field"><span>단서 문구 (화이트보드 메모)</span><input id="q_ward_c" type="text"></label>
-      <label class="quiz-field"><span>정답 도어락 번호 (4자리)</span><input id="q_ward_a" type="text" maxlength="4" style="letter-spacing:4px; font-weight:700; width:140px;"></label>
-    </div>
-
-    <!-- 3번 방 (도서실) -->
-    <div class="quiz-section">
-      <h3><span>방 3: 도서실 (금고 다이얼)</span> <small style="font-size:12px; color:var(--acc);">6자리 숫자</small></h3>
-      <label class="quiz-field"><span>문제 질문</span><input id="q_phar_q" type="text"></label>
-      <label class="quiz-field"><span>단서 문구 (사서 일지 메모)</span><input id="q_phar_c" type="text"></label>
-      <label class="quiz-field"><span>금고 정답 다이얼 (6자리)</span><input id="q_phar_a" type="text" maxlength="6" style="letter-spacing:4px; font-weight:700; width:180px;"></label>
-    </div>
-
-    <!-- 4번 방 (교무실 사물함) -->
-    <div class="quiz-section">
-      <h3><span>방 4: 교무실 (사물함 개방 순서)</span> <small style="font-size:12px; color:var(--acc);">1~12번 중 3개</small></h3>
-      <label class="quiz-field"><span>문제 질문</span><input id="q_morg_q" type="text"></label>
-      <label class="quiz-field"><span>단서 문구 (출석부 공지)</span><input id="q_morg_c" type="text"></label>
-      <label class="quiz-field"><span>사물함 순서 (쉼표로 구분 예: 4, 9, 11)</span><input id="q_morg_a" type="text" style="font-weight:700; width:180px;"></label>
-    </div>
-
-    <!-- 5번 방 (학교 옥상) -->
-    <div class="quiz-section">
-      <h3><span>방 5: 학교 옥상 (철문 자물쇠)</span> <small style="font-size:12px; color:var(--acc);">4자리 숫자</small></h3>
-      <label class="quiz-field"><span>문제 질문</span><input id="q_roof_q" type="text"></label>
-      <label class="quiz-field"><span>단서 문구 (옥상 기념비 글)</span><input id="q_roof_c" type="text"></label>
-      <label class="quiz-field"><span>최종 자물쇠 번호 (4자리)</span><input id="q_roof_a" type="text" maxlength="4" style="letter-spacing:4px; font-weight:700; width:140px;"></label>
-    </div>
-
-    <!-- 모달 하단 버튼 -->
-    <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
-      <button type="button" id="btnSaveQuiz" class="primary" style="flex:1; min-width:200px;">💾 저장 및 전체 기기 적용</button>
-      <button type="button" id="btnCopyQuizLink" class="ghost" style="flex:1; min-width:200px;">🔗 공유 링크 복사 (URL)</button>
-    </div>
-    <div id="quizStatusMsg" style="margin-top:12px; font-size:13.5px; color:var(--ok); text-align:center; min-height:20px;"></div>
-  </div>
-</section>
 
 <div id="stick" hidden><div id="stickKnob"></div><span class="lbl">이동</span></div>
 <div id="stickR" hidden><div id="stickRKnob"></div><span class="lbl">시야</span></div>
@@ -568,11 +478,9 @@
       <li class="pc"><b>시선</b><span><b>마우스 우클릭 드래그</b>로 화면 어디서든 자유롭게 360도 회전할 수 있으며, <b>🎯 시점(FPS)</b> 모드를 켜면 마우스 이동만으로 부드럽게 시야가 회전합니다.</span></li>
       <li class="pc"><b>이동</b><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>로 부드럽게 걷습니다. <kbd>Shift</kbd>를 누르면 대쉬. 바닥 클릭으로도 걸어갑니다.</span></li>
       <li class="pc"><b>상호작용</b><span>사물을 클릭하여 관찰하거나 조작합니다. <kbd>Space</kbd> 설정, <kbd>H</kbd> 힌트.</span></li>
-      <li class="pc"><b>문제 출제</b><span>[📝 문제 출제 / 퀴즈 편집] 버튼으로 모든 방의 문제를 직접 수정하고 다른 기기에 동기화할 수 있습니다.</span></li>
     </ul>
     <div class="actions">
       <button class="primary" id="enter" type="button" disabled>학교를 짓는 중…</button>
-      <button class="ghost" id="btnQuizEdit" type="button">📝 퀴즈/문제 편집</button>
       <button class="ghost" id="resume" type="button" hidden>이어하기</button>
     </div>
   </div>
@@ -732,29 +640,22 @@ __m['quiz.js'] = (() => {
     } catch (e) {}
   }
 
-  // 3. 서버 API(/api/quiz) 또는 정적 데이터(quiz_data.json)에서 실시간 동기화
+  // 3. 서버 정적 데이터(quiz_data.json)에서 문제 동기화 (깃허브 직접 편집 즉시 반영)
   async function syncFromServer() {
     try {
-      let res = await fetch('./api/quiz', { cache: 'no-store' }).catch(() => null);
-      if (!res || !res.ok) {
-        res = await fetch('./quiz_data.json', { cache: 'no-store' }).catch(() => null);
-      }
+      let res = await fetch('./quiz_data.json?t=' + Date.now(), { cache: 'no-store' }).catch(() => null);
       if (res && res.ok) {
         const data = await res.json();
         if (data && data.rooms && Object.keys(data.rooms).length > 0) {
-          const localTime = new Date(currentQuiz.updatedAt || 0).getTime();
-          const serverTime = new Date(data.updatedAt || 0).getTime();
-          // 서버 데이터가 로컬보다 최신이거나 로컬에 저장된 수정 시간이 없을 때만 갱신
-          if (!currentQuiz.updatedAt || serverTime > localTime) {
-            currentQuiz = Object.assign({}, DEFAULT_QUIZ, data);
-            saveToLocal();
-            console.log('[Quiz] Synchronized quiz from server/json successfully.');
-          }
+          currentQuiz = Object.assign({}, DEFAULT_QUIZ, data);
+          saveToLocal();
+          console.log('[Quiz] Synchronized quiz from GitHub quiz_data.json successfully.');
+          try { window.dispatchEvent(new CustomEvent('quizUpdated')); } catch (e) {}
           return true;
         }
       }
     } catch (e) {
-      // 오프라인이거나 정적 호스팅일 경우 로컬/URL 데이터 유지
+      // 오프라인이거나 정적 호스팅일 경우 로컬/기본 데이터 유지
     }
     return false;
   }
@@ -3742,18 +3643,6 @@ function hospMats(K, { floor = 'wood', wall = [48, 88, 64], plaster = [230, 225,
     paper: std({ color: '#D8D2C0', roughness: 0.9 }),
     glaze: std({ color: '#3A5E44', roughness: 0.3 }),
     paint: std({ color: '#C8C4B6', roughness: 0.5, metalness: 0.1 }),
-    black: std({ color: '#070707', roughness: 0.6 })
-  };
-}
-    rust: std({ color: '#5A3A2A', metalness: 0.4, roughness: 0.9 }),
-    dark: std({ color: '#121414', roughness: 0.9 }),
-    sheet: std({ map: toTex(sheetTex(), { wrap: false }), color: '#9A9890', roughness: 0.95 }),
-    vinyl: std({ color: '#2E4A3C', roughness: 0.6 }),
-    green: std({ color: '#7FA48E', roughness: 0.85, side: THREE.DoubleSide }),
-    glass: phys({ color: '#C8D8D0', roughness: 0.08, transparent: true, opacity: 0.28 }),
-    paper: std({ color: '#D8D2C0', roughness: 0.9 }),
-    glaze: std({ color: '#7F958A', roughness: 0.28 }),
-    paint: std({ color: '#B9C2B4', roughness: 0.5, metalness: 0.2 }),
     black: std({ color: '#070707', roughness: 0.6 })
   };
 }
@@ -7465,6 +7354,17 @@ if (QUIZ) {
   morgue.title = QUIZ.get('morgue').name;
   roof.title = QUIZ.get('roof').name;
 }
+window.addEventListener('quizUpdated', () => {
+  if (QUIZ) {
+    surgery.title = QUIZ.get('surgery').name;
+    ward.title = QUIZ.get('ward').name;
+    pharmacy.title = QUIZ.get('pharmacy').name;
+    morgue.title = QUIZ.get('morgue').name;
+    roof.title = QUIZ.get('roof').name;
+    const rEl = $('route');
+    if (rEl) rEl.innerHTML = ROOMS.map((d, i) => `<li><span class="n">${i + 1}</span><b>${d.title}</b><i>${'★'.repeat(d.stars)}</i></li>`).join('');
+  }
+});
 const { buildCorridor } = __m['corridor.js'];
 const { buildEnding } = __m['ending.js'];
 const { loadModels } = __m['models.js'];
@@ -7716,7 +7616,7 @@ addEventListener('mouseup', () => { isMouseDragging = false; isRightClick = fals
 
 addEventListener('pointermove', e => {
   if (e.pointerType === 'touch') { if (drag) onDragMove(e); return; }
-  overUI = !!(e.target && e.target.closest && e.target.closest('#mhud, #mSet, #mNote, #mHintCard, .final-card, #skip, .escape, .teaser-card, #quizModal'));
+  overUI = !!(e.target && e.target.closest && e.target.closest('#mhud, #mSet, #mNote, #mHintCard, .final-card, #skip, .escape, .teaser-card'));
   
   if (document.pointerLockElement === canvas) {
     const sens = { slow: 0.0018, mid: 0.0028, fast: 0.0042 }[settings.turn] || 0.0028;
@@ -9057,189 +8957,8 @@ if (prog) {
   [...$('route').children].forEach((li, i) => { if (i < prog.room) li.classList.add('done'); });
 }
 
-// ─────────── 퀴즈/문제 관리자 UI & 동기화 ───────────
-const quizModal = $('quizModal');
-const btnQuizEdit = $('btnQuizEdit');
-const mQuizBtn = $('mQuizBtn');
-const quizModalClose = $('quizModalClose');
-const btnSaveQuiz = $('btnSaveQuiz');
-const btnCopyQuizLink = $('btnCopyQuizLink');
-const quizStatusMsg = $('quizStatusMsg');
+// ─────────── FPS 시점 고정 (Pointer Lock) 토글 ───────────
 const mFpsBtn = $('mFpsBtn');
-
-// 관리자 비밀번호 검증 (SHA-256 해시 비교)
-// 비밀번호 단어는 소스코드에 일체 노출되지 않으며 해시값으로만 일치 여부를 대조합니다.
-const AUTH_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
-let isQuizAuth = false;
-
-const quizAuthModal = $('quizAuthModal');
-const quizAuthInput = $('quizAuthInput');
-const quizAuthErr = $('quizAuthErr');
-const quizAuthCancel = $('quizAuthCancel');
-const quizAuthForm = $('quizAuthForm');
-
-async function verifyAuth(pwd) {
-  try {
-    const enc = new TextEncoder().encode(pwd);
-    const buf = await crypto.subtle.digest('SHA-256', enc);
-    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    return hash === AUTH_HASH;
-  } catch (e) {
-    return false;
-  }
-}
-
-function requestQuizAuth() {
-  if (isQuizAuth) {
-    openQuizModal();
-    return;
-  }
-  if (quizAuthModal) {
-    quizAuthModal.hidden = false;
-    if (quizAuthInput) {
-      quizAuthInput.value = '';
-      setTimeout(() => quizAuthInput.focus(), 50);
-    }
-    if (quizAuthErr) quizAuthErr.textContent = '';
-  }
-  sfx.ui(camera.position);
-}
-
-if (quizAuthCancel) {
-  quizAuthCancel.addEventListener('click', () => {
-    if (quizAuthModal) quizAuthModal.hidden = true;
-    sfx.ui(camera.position);
-  });
-}
-
-if (quizAuthForm) {
-  quizAuthForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const val = quizAuthInput ? quizAuthInput.value : '';
-    const ok = await verifyAuth(val);
-    if (ok) {
-      isQuizAuth = true;
-      if (quizAuthModal) quizAuthModal.hidden = true;
-      openQuizModal();
-    } else {
-      if (quizAuthErr) quizAuthErr.textContent = '비밀번호가 일치하지 않습니다.';
-      if (quizAuthInput) {
-        quizAuthInput.value = '';
-        quizAuthInput.focus();
-      }
-    }
-  });
-}
-
-function openQuizModal() {
-  populateQuizForm();
-  if (quizModal) quizModal.hidden = false;
-  sfx.ui(camera.position);
-}
-function closeQuizModal() {
-  if (quizModal) quizModal.hidden = true;
-  sfx.ui(camera.position);
-}
-
-if (btnQuizEdit) btnQuizEdit.addEventListener('click', requestQuizAuth);
-if (mQuizBtn) mQuizBtn.addEventListener('click', requestQuizAuth);
-if (quizModalClose) quizModalClose.addEventListener('click', closeQuizModal);
-
-const PRESETS = {
-  science: {
-    surgery: { q: '과학실 탈출 PIN: 물의 끓는점(°C)은 얼마인가? (4자리: 100도 -> 0100)', c: '실험 보고서: 출구 PIN은 물의 끓는점(100도 -> 0100)이다.', a: '0100' },
-    ward: { q: '교실 복도 탈출: 1반부터 4반까지 퀴즈 정답 번호 순서', c: '복도 화이트보드: 3반(2) -> 1반(7) -> 4반(9) -> 2반(5)', a: '2795' },
-    pharmacy: { q: '도서실 금고: 3개 도서의 분류 기호 총량 (6자리)', c: '사서 일지: 대출 순서대로 총량 계산 (08시 30, 13시 24, 21시 24)', a: '302424' },
-    morgue: { q: '교무실 사물함: 출석부 명단 순서 (3개 번호)', c: '당직 일지: 오세진 4번 -> 윤미라 9번 -> 한지우 11번', a: '4, 9, 11' },
-    roof: { q: '학교 옥상 철문: 우리 학교 개교 기념일 (월/일 4자리)', c: '옥상 기념비: 마지막 학생 입학일(0917)이 최종 철문의 열쇠이다.', a: '0917' }
-  },
-  math: {
-    surgery: { q: '과학실 탈출 PIN [다항식과 조립제법]: P(x) = x³ - 6x² + 11x - 6 = (x-1)(x-2)(x-3)의 세 실근 α, β, γ와 세 근의 곱을 쓴 4자리 비밀번호 (1236)', c: '과학실 칠판: 출구 도어락 PIN = P(x) 세 실근 1, 2, 3과 세 근의 곱 6 결합 (1236)', a: '1236' },
-    ward: { q: '교실 뒷문 자물쇠 [이차방정식과 근과 계수]: x² - 14x + 45 = 0의 두 실근 α, β에 대하여 두 근의 제곱의 합 (α² + β²)의 4자리 값 (0106)', c: '교탁 위 시험지: 뒷문 암호 = (5² + 9² = 25 + 81 = 106) -> 0106', a: '0106' },
-    pharmacy: { q: '사서 금고 다이얼 [곱셈 공식 변형]: x + y = 6, xy = 4 일 때 (x³ + y³) 3자리 + (x² + y²) 3자리 = 6자리 다이얼 (144028)', c: '원목 열람대 보고서: 금고 6자리 = [x³ + y³ = 144] + [x² + y² = 028] -> 144028', a: '144028' },
-    morgue: { q: '교직원 사물함 해제 [피타고라스 연속수]: 연속하는 세 짝수 직각삼각형 변의 길이 사물함 3개 번호 (6, 8, 10)', c: '교무실 출석부: 6² + 8² = 10² 만족하는 6번 -> 8번 -> 10번 사물함 순서', a: '6, 8, 10' },
-    roof: { q: '학교 옥상 마스터 자물쇠 [원의 방정식]: 원 x² + y² - 6x + 8y + 21 = 0의 중심 (3, -4)와 반지름 r=2 -> 4자리 (3424)', c: '옥상 기념비: (a, |b|, r, r²) -> (3, 4, 2, 4) -> 3424', a: '3424' }
-  },
-  history: {
-    surgery: { q: '과학실 탈출 PIN: 훈민정음 창제 연도 (1443년)', c: '역사 자료: 세종대왕 훈민정음 창제 연도 4자리를 입력하라.', a: '1443' },
-    ward: { q: '교실 복도: 3·1 운동 일어난 연도 (1919년)', c: '역사 연표: 대한민국 3·1 만세운동 연도 4자리.', a: '1919' },
-    pharmacy: { q: '도서실 금고: 광복 연도와 일자 (450815)', c: '사서 메모: 1945년 8월 15일 광복의 날 (450815)', a: '450815' },
-    morgue: { q: '교무실 사물함: 3인의 독립운동가 사물함 순서', c: '명단: 1번 -> 7번 -> 11번 사물함 순서', a: '1, 7, 11' },
-    roof: { q: '학교 옥상 철문: 서울올림픽 개최 연도 (1988)', c: '기념비: 대한민국 88 올림픽 연도를 입력하라.', a: '1988' }
-  },
-  english: {
-    surgery: { q: '과학실 탈출 PIN: OPEN 단어 암호 (1234)', c: '영어 단어 퀴즈 암호: 4자리 패스코드 1234', a: '1234' },
-    ward: { q: '교실 복도: PASS 단어 암호 (7277)', c: '도어락 메모: 키패드 비밀번호 7277 입력.', a: '7277' },
-    pharmacy: { q: '도서실 금고: BOOK & READ 6자리 다이얼 (102030)', c: '도서관 규칙: 10 20 30 다이얼을 회전하라.', a: '102030' },
-    morgue: { q: '교무실 사물함: A, B, C 학생의 사물함 번호', c: '출석부: 3번 -> 6번 -> 11번 사물함 순서', a: '3, 6, 11' },
-    roof: { q: '학교 옥상: EXIT 단어 번호 2026', c: '비상 탈출 철문 비밀번호 2026 입력.', a: '2026' }
-  }
-};
-
-function populateQuizForm() {
-  if (!QUIZ) return;
-  const q = QUIZ.getAll().rooms;
-  if (q.surgery) { $('q_surg_q').value = q.surgery.question; $('q_surg_c').value = q.surgery.clue; $('q_surg_a').value = q.surgery.code; }
-  if (q.ward) { $('q_ward_q').value = q.ward.question; $('q_ward_c').value = q.ward.clue; $('q_ward_a').value = q.ward.code; }
-  if (q.pharmacy) { $('q_phar_q').value = q.pharmacy.question; $('q_phar_c').value = q.pharmacy.clue; $('q_phar_a').value = q.pharmacy.code; }
-  if (q.morgue) { $('q_morg_q').value = q.morgue.question; $('q_morg_c').value = q.morgue.clue; $('q_morg_a').value = (q.morgue.order || [4,9,11]).join(', '); }
-  if (q.roof) { $('q_roof_q').value = q.roof.question; $('q_roof_c').value = q.roof.clue; $('q_roof_a').value = q.roof.code; }
-  $('quizStatusMsg').textContent = '';
-}
-
-
-
-document.querySelectorAll('.btn-preset').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const p = PRESETS[btn.dataset.preset];
-    if (!p) return;
-    $('q_surg_q').value = p.surgery.q; $('q_surg_c').value = p.surgery.c; $('q_surg_a').value = p.surgery.a;
-    $('q_ward_q').value = p.ward.q; $('q_ward_c').value = p.ward.c; $('q_ward_a').value = p.ward.a;
-    $('q_phar_q').value = p.pharmacy.q; $('q_phar_c').value = p.pharmacy.c; $('q_phar_a').value = p.pharmacy.a;
-    $('q_morg_q').value = p.morgue.q; $('q_morg_c').value = p.morgue.c; $('q_morg_a').value = p.morgue.a;
-    $('q_roof_q').value = p.roof.q; $('q_roof_c').value = p.roof.c; $('q_roof_a').value = p.roof.a;
-    $('quizStatusMsg').textContent = `템플릿 [${btn.textContent}]이(가) 적용되었습니다. [저장]을 눌러 적용하세요.`;
-  });
-});
-
-if (btnSaveQuiz) {
-  btnSaveQuiz.addEventListener('click', async () => {
-    const orderArr = $('q_morg_a').value.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
-    const newQuiz = {
-      version: 1,
-      schoolName: "버려진 학교 (폐교)",
-      rooms: {
-        surgery: { id: 'surgery', name: '과학실', question: $('q_surg_q').value, clue: $('q_surg_c').value, code: $('q_surg_a').value, hint: $('q_surg_c').value },
-        ward: { id: 'ward', name: '교실 복도', question: $('q_ward_q').value, clue: $('q_ward_c').value, code: $('q_ward_a').value, hint: $('q_ward_c').value },
-        pharmacy: { id: 'pharmacy', name: '도서실 / 준비실', question: $('q_phar_q').value, clue: $('q_phar_c').value, code: $('q_phar_a').value, hint: $('q_phar_c').value },
-        morgue: { id: 'morgue', name: '교무실 / 사물함', question: $('q_morg_q').value, clue: $('q_morg_c').value, order: orderArr.length ? orderArr : [4,9,11], hint: $('q_morg_c').value },
-        roof: { id: 'roof', name: '학교 옥상', question: $('q_roof_q').value, clue: $('q_roof_c').value, code: $('q_roof_a').value, valveSeq: [1,7,4,0], fanBreaker: 'F-2', hint: $('q_roof_c').value }
-      }
-    };
-    btnSaveQuiz.disabled = true;
-    $('quizStatusMsg').textContent = '저장 및 동기화 중…';
-    const res = await QUIZ.saveAndSync(newQuiz);
-    btnSaveQuiz.disabled = false;
-    if (res.serverOk) {
-      $('quizStatusMsg').textContent = '✅ 서버에 저장되었습니다! 접속하는 모든 기기에 즉시 반영됩니다.';
-    } else {
-      $('quizStatusMsg').textContent = '✅ 저장되었습니다! [공유 링크 복사]로 다른 기기에 전달할 수 있습니다.';
-    }
-  });
-}
-
-if (btnCopyQuizLink) {
-  btnCopyQuizLink.addEventListener('click', () => {
-    const url = QUIZ.getShareUrl();
-    navigator.clipboard.writeText(url).then(() => {
-      $('quizStatusMsg').textContent = '📋 링크가 클립보드에 복사되었습니다! 카톡이나 다른 기기의 브라우저에 붙여넣기 하세요.';
-    }).catch(() => {
-      prompt('아래 공유 링크를 복사하세요:', url);
-    });
-  });
-}
-
-// 🎯 FPS 시점 고정 (Pointer Lock) 토글
 if (mFpsBtn) {
   mFpsBtn.addEventListener('click', () => {
     if (document.pointerLockElement === canvas) {
